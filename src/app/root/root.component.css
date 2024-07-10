@@ -1,0 +1,39 @@
+/* Definisco style titolo */
+h3{
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+  }
+  
+  /* Definisco style container */
+  .container {
+    background-color: rgb(219, 239, 255);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  /* Definisco style dei due bottoni in home */
+  .Home_button {
+    margin-top: 10px; 
+    padding: 10px 20px;
+    background-color: lightblue;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 120px; 
+  }
+  
+  /* Definisco style dei due bottoni in home al passaggio del cursore*/
+  .Home_button:hover {
+    background-color: darkblue;
+    color: whitesmoke
+  }
+  
+   /*come visualizzare i bottoni nel caso di riduzione dimensioni*/
+  @media (max-width: 768px) {
+    .Home_button{
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }

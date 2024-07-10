@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RootComponent } from './root.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { RoutingModule } from '../routing.module';
 
 @NgModule({
   declarations: [RootComponent],
-  imports: [CommonModule],
+  imports: [BrowserModule, RoutingModule],
   bootstrap: [RootComponent],
 })
 

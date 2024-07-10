@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import 'jasmine'
-import { RootComponent } from './root.component';
 
-describe('RootComponent', () => {
-  let component: RootComponent;
-  let fixture: ComponentFixture<RootComponent>;
+import { HomestudenteComponent } from './homestudente.component';
+
+describe('HomestudenteComponent', () => {
+  let component: HomestudenteComponent;
+  let fixture: ComponentFixture<HomestudenteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RootComponent]
+      imports: [HomestudenteComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RootComponent);
+    fixture = TestBed.createComponent(HomestudenteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
