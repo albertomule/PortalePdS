@@ -2,9 +2,15 @@ import { NgModule } from '@angular/core';
 import { RootComponent } from './root.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RoutingModule } from '../routing.module';
+import { LoginComponent } from '../componenti/login/login.component';
+import { HomestudenteComponent } from '../componenti/homestudente/homestudente.component';
+import { HomecommissioneComponent } from '../componenti/homecommissione/homecommissione.component';
+import { PdsComponent } from '../componenti/pds/pds.component';
+import { RegolamentiComponent } from '../componenti/regolamenti/regolamenti.component';
+import { EsamiComponent } from '../componenti/esami/esami.component';
 
 @NgModule({
-  declarations: [RootComponent],
+  declarations: [RootComponent, LoginComponent, HomestudenteComponent, HomecommissioneComponent, PdsComponent, RegolamentiComponent, EsamiComponent],
   imports: [BrowserModule, RoutingModule],
   bootstrap: [RootComponent],
 })
