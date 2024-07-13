@@ -8,10 +8,21 @@ import { HomecommissioneComponent } from '../componenti/homecommissione/homecomm
 import { PdsComponent } from '../componenti/pds/pds.component';
 import { RegolamentiComponent } from '../componenti/regolamenti/regolamenti.component';
 import { EsamiComponent } from '../componenti/esami/esami.component';
+import { NuovoregolamentoComponent } from '../componenti/nuovoregolamento/nuovoregolamento.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [RootComponent, LoginComponent, HomestudenteComponent, HomecommissioneComponent, PdsComponent, RegolamentiComponent, EsamiComponent],
-  imports: [BrowserModule, RoutingModule],
+  declarations: [
+    RootComponent, 
+    LoginComponent, 
+    HomestudenteComponent, 
+    HomecommissioneComponent, 
+    PdsComponent, 
+    RegolamentiComponent, 
+    EsamiComponent, 
+    NuovoregolamentoComponent
+  ],
+  imports: [BrowserModule, RoutingModule, FormsModule],
   bootstrap: [RootComponent],
 })
 

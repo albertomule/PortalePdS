@@ -1,0 +1,16 @@
+<h3>Anno accademico</h3>
+
+<div class="container">
+    <div class="wrap">
+        <h2>Esami primo anno</h2>
+        <button class="add" (click)="addValue()">&plus;</button>
+    </div>
+    <div #inpgroup class="inpgroup" *ngFor="let value of values; let i = index">
+        <input type="text" [(ngModel)]="value.valueOf" #name="ngModel" name="value{{i}}">
+        <button class="delete" (click)="removeValue(i)">&times;</button>
+    </div>
+</div>
+
+<a routerLink="/regolamenti">
+    <button id="bottone_commissione_nuovoregolamento_indietro" class="Home_button">Indietro</button>
+</a>

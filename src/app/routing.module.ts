@@ -8,6 +8,7 @@ import { LoginComponent } from './componenti/login/login.component';
 import { PdsComponent } from './componenti/pds/pds.component';
 import { RegolamentiComponent } from './componenti/regolamenti/regolamenti.component';
 import { EsamiComponent } from './componenti/esami/esami.component';
+import { NuovoregolamentoComponent } from './componenti/nuovoregolamento/nuovoregolamento.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/start'},
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'pds', component: PdsComponent},
   { path: 'regolamenti', component: RegolamentiComponent},
   { path: 'esami', component: EsamiComponent},
-   
+  { path: 'nuovoregolamento', component: NuovoregolamentoComponent}, 
    
   // { path: '404', component: NotfoundComponent},
   // { path: '**', redirectTo: '/404'}
