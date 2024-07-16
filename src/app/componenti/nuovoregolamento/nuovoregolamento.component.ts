@@ -8,6 +8,20 @@ import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/f
 })
 export class NuovoregolamentoComponent{
 
+
+  yearStart = 2000
+  yearsAfter = 5
+  currentYear: number
+  years: number[] = []
+  selectVal: number = 0
+
+  constructor(){
+    this.currentYear = new Date().getFullYear()
+    for(let year = this.yearStart; year <= this.currentYear + this.yearsAfter; year++) {
+      this.years.push(year);
+    }
+  }
+
   exam1Form: FormGroup = new FormGroup({
     exam1List: new FormArray([this.getExamFields()])
   })
@@ -57,63 +71,10 @@ export class NuovoregolamentoComponent{
   }
 
   getAllFormData(){
+    console.log(this.selectVal)
     console.log(this.exam1Form.value)
     console.log(this.exam2Form.value)
     console.log(this.exam3Form.value)
     console.log(this.exam4Form.value)
   }
-
-  // @ViewChild('inpgroup')
-  // inp!: ElementRef;
-
-  // @ViewChild('inpgroup', { static: false })
-  // divElem!: ElementRef;
-
-  // ngAfterViewInit() {
-  //   var div = this.inp.nativeElement.querySelector(".inpgroup")
-  //   console.log(div);
-  // }
-
-//   addBtn = document.querySelector(".add")
-//  // input = document.querySelector(".inpgroup")
-
-//   addInput(){
-//     console.log(this.inp)
-//     console.log(this.addBtn)
-//    const name = document.createElement("input")
-//    name.type="text"
-//    name.placeholder="Enter your name"
-
-//    const email = document.createElement("input")
-//    email.type="email"
-//    email.placeholder="Enter your email"
-
-//    const btn = document.createElement("a")
-//    btn.className = "delete"
-//    btn.innerHTML = "&times"
-
-//    const flex = document.createElement("div")
-//    flex.className = "flex"
-//    console.log(flex)
-
-//    this.inp.nativeElement.querySelector("div").appendChild(flex)
-//    flex.appendChild(name)
-//    flex.appendChild(email)
-//    flex.appendChild(btn)
-   
-//   }
-
-values: string[] = []
-
-  addValue(){
-    this.values.push("")
-  }
-
-  removeValue(i: number){
-    this.values.splice(i,1)
-  }
-
- 
-
-  // this.addBtn?.addEventListener("click", addInput())
 }

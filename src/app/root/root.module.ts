@@ -10,6 +10,9 @@ import { RegolamentiComponent } from '../componenti/regolamenti/regolamenti.comp
 import { EsamiComponent } from '../componenti/esami/esami.component';
 import { NuovoregolamentoComponent } from '../componenti/nuovoregolamento/nuovoregolamento.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EsamiComponent, 
     NuovoregolamentoComponent
   ],
-  imports: [BrowserModule, RoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    RoutingModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    MatSelectModule, 
+    BrowserAnimationsModule, 
+    MatPaginatorModule
+  ],
   bootstrap: [RootComponent],
 })
 
