@@ -30,6 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 /* Dynamic class creation */
@@ -51,9 +52,13 @@
     margin-left: auto;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: right;
     cursor: pointer;
 }
 .inpgroup{
-    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
 }
+input::placeholder{
+    text-align: center;
+ }

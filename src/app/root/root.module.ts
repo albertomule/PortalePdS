@@ -9,7 +9,7 @@ import { PdsComponent } from '../componenti/pds/pds.component';
 import { RegolamentiComponent } from '../componenti/regolamenti/regolamenti.component';
 import { EsamiComponent } from '../componenti/esami/esami.component';
 import { NuovoregolamentoComponent } from '../componenti/nuovoregolamento/nuovoregolamento.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { FormsModule } from '@angular/forms';
     EsamiComponent, 
     NuovoregolamentoComponent
   ],
-  imports: [BrowserModule, RoutingModule, FormsModule],
+  imports: [BrowserModule, RoutingModule, FormsModule, ReactiveFormsModule],
   bootstrap: [RootComponent],
 })
 

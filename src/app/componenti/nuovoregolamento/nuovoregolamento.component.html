@@ -1,6 +1,6 @@
-<h3>Anno accademico</h3>
+<h3 style="text-align:center">Anno accademico 20XX-20XX</h3>
 
-<div class="container">
+<!-- <div class="container">
     <div class="wrap">
         <h2>Esami primo anno</h2>
         <button class="add" (click)="addValue()">&plus;</button>
@@ -9,8 +9,85 @@
         <input type="text" [(ngModel)]="value.valueOf" #name="ngModel" name="value{{i}}">
         <button class="delete" (click)="removeValue(i)">&times;</button>
     </div>
+</div> -->
+<div class="container">
+    <form [formGroup]="exam1Form">
+        <div formArrayName="exam1List">
+            <div class="wrap">
+                <h2 style="padding-left: 27%">Esami primo anno</h2>
+                <button class="add" (click)="addExam(1)">&plus;</button>
+            </div>
+            <div *ngFor="let exam of examListArray(1).controls; let i = index;" class="inpgroup">
+                <div [formGroupName]="i">
+                    <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
+                    <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
+                    <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
+                    <button class="delete" (click)="removeExam(1,i)">&times;</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
+<div class="container">
+    <form [formGroup]="exam2Form">
+        <div formArrayName="exam2List">
+            <div class="wrap">
+                <h2 style="padding-left: 27%">Esami secondo anno</h2>
+                <button class="add" (click)="addExam(2)">&plus;</button>
+            </div>
+            <div *ngFor="let exam of examListArray(2).controls; let i = index;" class="inpgroup">
+                <div [formGroupName]="i">
+                    <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
+                    <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
+                    <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
+                    <button class="delete" (click)="removeExam(2,i)">&times;</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <form [formGroup]="exam3Form">
+        <div formArrayName="exam3List">
+            <div class="wrap">
+                <h2 style="padding-left: 27%">Esami terzo anno</h2>
+                <button class="add" (click)="addExam(3)">&plus;</button>
+            </div>
+            <div *ngFor="let exam of examListArray(3).controls; let i = index;" class="inpgroup">
+                <div [formGroupName]="i">
+                    <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
+                    <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
+                    <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
+                    <button class="delete" (click)="removeExam(3,i)">&times;</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <form [formGroup]="exam4Form">
+        <div formArrayName="exam4List">
+            <div class="wrap">
+                <h2 style="padding-left: 27%">Esami complementari</h2>
+                <button class="add" (click)="addExam(4)">&plus;</button>
+            </div>
+            <div *ngFor="let exam of examListArray(4).controls; let i = index;" class="inpgroup">
+                <div [formGroupName]="i">
+                    <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
+                    <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
+                    <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
+                    <button class="delete" (click)="removeExam(4,i)">&times;</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<button id="bottone_commissione_nuovoregolamento_invia" class="Home_button" (click)="getAllFormData()">Invia</button>
 <a routerLink="/regolamenti">
     <button id="bottone_commissione_nuovoregolamento_indietro" class="Home_button">Indietro</button>
 </a>
