@@ -1,4 +1,42 @@
 <h3>Loggato come studente</h3>
+<br>
+<h4>La carriera è stata iniziata a informatica senza riconoscimenti di carriere precedenti?</h4>
+
+<form [formGroup]="form" #signupForm="ngForm" (ngSubmit)="submit(signupForm)">
+  <div>
+      <input type="radio" name="fresh" [value]=true formControlName="fresh" (click)="test()"> <label style="font-size: 20px;"> Sì</label>
+      <input type="radio" name="fresh" [value]=false formControlName="fresh" (click)="test()"> <label style="font-size: 20px;"> No</label>
+  </div>
+    <div *ngIf="isFresh()">
+        <div><p style="font-size: 20px;">Anno di immatricolazione: </p></div>
+        <input type="text" formControlName="anno" [ngClass]="signupForm.submitted && anno?.invalid ? 'field-error' : ''">
+        <div class="error" *ngIf="(anno?.touched || anno?.dirty || signupForm.submitted) && anno?.invalid">
+            <div *ngIf="anno?.errors?.['required']">Anno richiesto</div>
+            <div *ngIf="anno?.errors?.['pattern']">Solo valori numerici di 4 cifre ammessi</div>
+            <!-- <div *ngIf="(anno?.errors?.['minlength'] || anno?.errors?.['maxlength'])">
+              Anno deve essere di 4 cifre
+            </div> -->
+          </div>
+    </div>
+    <div *ngIf="isFresh()==false">
+        <div><p style="font-size: 20px;">Anno di immissione a informatica: </p></div>
+        <input type="text" formControlName="anno" [ngClass]="signupForm.submitted && anno?.invalid ? 'field-error' : ''">
+        <div class="error" *ngIf="(anno?.touched || anno?.dirty || signupForm.submitted) && anno?.invalid">
+            <div *ngIf="anno?.errors?.['required']">Anno richiesto</div>
+            <div *ngIf="anno?.errors?.['pattern']">Solo valori numerici di 4 cifre ammessi</div>
+            <!-- <div *ngIf="(anno?.errors?.['minlength'] || anno?.errors?.['maxlength'])">
+              Anno deve essere di 4 cifre
+            </div> -->
+          </div>
+    </div>
+    <!-- <div><input type="submit" value="Save"></div> -->
+</form>
+
+<pre>{{ form.value | json }}</pre>
+
+<div *ngIf="isFresh()!=null">
+    <button id="bottone_studente_avanti" class="Home_button">Avanti</button>
+</div>
 
 <a routerLink="/start">
     <button id="bottone_logout_studente" class="Home_button">Logout</button>

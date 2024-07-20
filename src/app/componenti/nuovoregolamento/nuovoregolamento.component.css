@@ -1,8 +1,8 @@
 .container{
-    /* max-width: 600px; */
+    max-width: 500px;
     background: #fff;
     border-radius: 5px;
-    /* width: 600px; */
+    width: 500px;
     padding: 20px;
     box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.1);
 
@@ -38,6 +38,7 @@
 .flex{
     display: flex;
     gap: 1.5em;
+    margin-bottom: 2px;
 }
 .delete{
     text-decoration: none;
@@ -52,7 +53,7 @@
     margin-left: auto;
     display: flex;
     justify-content: center;
-    align-items: right;
+    align-items: center;
     cursor: pointer;
 }
 .inpgroup{

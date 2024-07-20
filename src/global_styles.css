@@ -3,8 +3,11 @@
 /* Definisco style titolo */
 h3{
     color: rgb(0, 0, 0);
-    font-size: 25px;
+    font-size: 30px;
   }
+h4{
+  font-size: 25px;
+}
   
   /* Definisco style container */
   .container {
@@ -12,6 +15,11 @@ h3{
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 20px;
+    width: 600px;
+    max-width: 600px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
   }
   
   /* Definisco style dei due bottoni in home */

@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatRadioModule} from '@angular/material/radio'
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ReactiveFormsModule, 
     MatSelectModule, 
     BrowserAnimationsModule, 
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatRadioModule
   ],
   bootstrap: [RootComponent],
 })

@@ -13,7 +13,7 @@
                 <button class="add" (click)="addExam(1)">&plus;</button>
             </div>
             <div *ngFor="let exam of examListArray(1).controls; let i = index;">
-                <div [formGroupName]="i">
+                <div [formGroupName]="i" class="flex">
                     <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
                     <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
                     <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
@@ -32,7 +32,7 @@
                 <button class="add" (click)="addExam(2)">&plus;</button>
             </div>
             <div *ngFor="let exam of examListArray(2).controls; let i = index;" class="inpgroup">
-                <div [formGroupName]="i">
+                <div [formGroupName]="i" class="flex">
                     <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
                     <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
                     <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
@@ -51,7 +51,7 @@
                 <button class="add" (click)="addExam(3)">&plus;</button>
             </div>
             <div *ngFor="let exam of examListArray(3).controls; let i = index;" class="inpgroup">
-                <div [formGroupName]="i">
+                <div [formGroupName]="i" class="flex">
                     <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
                     <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
                     <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
@@ -70,7 +70,7 @@
                 <button class="add" (click)="addExam(4)">&plus;</button>
             </div>
             <div *ngFor="let exam of examListArray(4).controls; let i = index;" class="inpgroup">
-                <div [formGroupName]="i">
+                <div [formGroupName]="i" class="flex">
                     <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
                     <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
                     <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
