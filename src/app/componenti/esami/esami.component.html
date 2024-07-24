@@ -1,4 +1,35 @@
-<h3>esami works!</h3>
+<h3>Esami a libera scelta</h3>
+<br>
+<h2>Lista esami dal db</h2>
+
+<form [formGroup]="examForm">
+    <div formArrayName="examList">
+        <div class="container">
+            <!-- <div class="wrap">
+                <h2 style="padding-left: 27%">Esami primo anno</h2>
+                <button class="add" (click)="addExam()">&plus;</button>
+            </div> -->
+            <div *ngFor="let esame of esami; index as i">
+                <div>
+                    <p> {{ esame.nome }} {{ esame.codice }} {{ esame.cfu }} </p>
+                    <br>
+                    
+                </div>
+                
+            </div>
+        </div>
+        <div *ngFor="let exam of examListArray().controls; let i = index;">
+            <div [formGroupName]="i" class="flex">
+                <input type="text" name="" id="examName" formControlName="exam_name" placeholder="Nome esame">
+                <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
+                <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
+                <button class="add" (click)="addExam()">&plus;</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<pre>{{ examForm.value | json }}</pre>
 
 <a routerLink="/homec">
     <button id="bottone_commissione_esami_indietro" class="Home_button">Indietro</button>

@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio'
+import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {MatRadioModule} from '@angular/material/radio'
     MatSelectModule, 
     BrowserAnimationsModule, 
     MatPaginatorModule,
-    MatRadioModule
+    MatRadioModule,
+    HttpClientModule
   ],
   bootstrap: [RootComponent],
 })
