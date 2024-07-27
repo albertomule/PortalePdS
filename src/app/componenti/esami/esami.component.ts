@@ -11,7 +11,6 @@ export class EsamiComponent implements OnInit{
 
   esami: any
   submongo: any
-  submongo2: any
 
   constructor(private mongo: MongoService){}
 
@@ -22,13 +21,13 @@ export class EsamiComponent implements OnInit{
       data[key]['id'] = key
       return data[key]
     })
+    console.log(this.esami)
   })
 
   }
 
   ngOnDestroy(): void {
     this.submongo.unsubscribe()
-    this.submongo2.unsubscribe()
   }
 
   examForm: FormGroup = new FormGroup({
@@ -61,9 +60,11 @@ export class EsamiComponent implements OnInit{
     var str = "?n=" + nome + "&c=" + code + "&cfu=" + cfu
     console.log(str)
     
-    this.submongo2 = this.mongo.insertEsame(str).subscribe((data: any) => {
+    this.mongo.insertEsame(str).subscribe((data: any) => {
       console.log(data)
     })
+
+    window.location.reload()
   }
 
   // removeExam(i: number){

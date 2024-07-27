@@ -9,14 +9,10 @@
                 <h2 style="padding-left: 27%">Esami primo anno</h2>
                 <button class="add" (click)="addExam()">&plus;</button>
             </div> -->
-            <div *ngFor="let esame of esami; index as i">
-                <div>
-                    <p> {{ esame.nome }} {{ esame.codice }} {{ esame.cfu }} </p>
-                    <br>
-                    
-                </div>
-                
-            </div>
+            <ng-container *ngFor="let esame of esami; index as i">
+                {{ esame.nome }} {{ esame.codice }} {{ esame.cfu }}
+                <br/>
+            </ng-container>
         </div>
         <div *ngFor="let exam of examListArray().controls; let i = index;">
             <div [formGroupName]="i" class="flex">
@@ -29,7 +25,7 @@
     </div>
 </form>
 
-<pre>{{ examForm.value | json }}</pre>
+<!-- <pre>{{ examForm.value | json }}</pre> -->
 
 <a routerLink="/homec">
     <button id="bottone_commissione_esami_indietro" class="Home_button">Indietro</button>
