@@ -15,20 +15,22 @@ export class EsamiComponent implements OnInit{
   constructor(private mongo: MongoService){}
 
   ngOnInit(): void {
-
-  this.submongo = this.mongo.getEsami().subscribe((data: any) => {
-    this.esami = Object.keys(data).map((key) => { 
-      data[key]['id'] = key
-      return data[key]
+    this.submongo = this.mongo.getEsami().subscribe((data: any) => {
+      this.esami = Object.keys(data).map((key) => { 
+        data[key]['id'] = key
+        return data[key]
+      })
+      console.log(this.esami)
     })
-    console.log(this.esami)
-  })
-
   }
 
   ngOnDestroy(): void {
     this.submongo.unsubscribe()
   }
+
+  examRForm: FormGroup = new FormGroup({
+    exam_code: new FormControl('')
+  })
 
   examForm: FormGroup = new FormGroup({
     examList: new FormArray([this.getExamFields()])
@@ -47,9 +49,6 @@ export class EsamiComponent implements OnInit{
   }
 
   addExam(){
-    // this.examListArray().push(this.getExamFields())
-    // console.log(this.examListArray().controls[0].value)
-    
     var nome = this.examListArray().at(0).value.exam_name
     var code = this.examListArray().at(0).value.exam_code
     var cfu = this.examListArray().at(0).value.exam_cfu
@@ -57,19 +56,23 @@ export class EsamiComponent implements OnInit{
     console.log(nome)
     console.log(code)
     console.log(cfu)
-    var str = "?n=" + nome + "&c=" + code + "&cfu=" + cfu
-    console.log(str)
     
-    this.mongo.insertEsame(str).subscribe((data: any) => {
+    this.mongo.insertEsame(nome,code,cfu).subscribe((data: any) => {
       console.log(data)
     })
 
     window.location.reload()
   }
 
-  // removeExam(i: number){
-  //   this.examListArray().removeAt(i)
-  // }
+  removeExam(){
+    var code = this.examRForm.value.exam_code
+    console.log(code)
+    this.mongo.removeEsame(code).subscribe((data: any) => {
+      console.log(data)
+    })
+
+    window.location.reload()
+  }
 
   // getFormData(l: number){
   //  console.log(this.examForm.value)

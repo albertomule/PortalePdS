@@ -1,19 +1,16 @@
-<h3>Esami a libera scelta</h3>
+<h3 class="title">Esami a libera scelta</h3>
 <br>
-<h2>Lista esami dal db</h2>
+<h2 class="title">Esami a libera scelta automaticamente approvati:</h2>
+
+<div class="container">
+    <ng-container *ngFor="let esame of esami; index as i">
+        {{ esame.nome }} {{ esame.codice }} {{ esame.cfu }}
+        <br/>
+    </ng-container>
+</div>
 
 <form [formGroup]="examForm">
     <div formArrayName="examList">
-        <div class="container">
-            <!-- <div class="wrap">
-                <h2 style="padding-left: 27%">Esami primo anno</h2>
-                <button class="add" (click)="addExam()">&plus;</button>
-            </div> -->
-            <ng-container *ngFor="let esame of esami; index as i">
-                {{ esame.nome }} {{ esame.codice }} {{ esame.cfu }}
-                <br/>
-            </ng-container>
-        </div>
         <div *ngFor="let exam of examListArray().controls; let i = index;">
             <div [formGroupName]="i" class="flex">
                 <input type="text" name="" id="examName" formControlName="exam_name" placeholder="Nome esame">
@@ -25,7 +22,14 @@
     </div>
 </form>
 
-<!-- <pre>{{ examForm.value | json }}</pre> -->
+<form [formGroup]="examRForm">
+    <div class="flex" style="margin-top: 15px;">
+        <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
+        <button class="delete" (click)="removeExam()">&times;</button>
+    </div>
+</form>
+
+<!-- <pre>{{ examRForm.value | json }}</pre> -->
 
 <a routerLink="/homec">
     <button id="bottone_commissione_esami_indietro" class="Home_button">Indietro</button>

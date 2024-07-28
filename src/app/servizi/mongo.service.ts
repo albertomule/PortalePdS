@@ -14,8 +14,16 @@ export class MongoService {
   //   this.http.post(url,body)
   // }
 
-  insertEsame(url: string){
-    return this.http.get(this.mongoEndPoint + 'insertesame' + url)
+  insertEsame(nome: string, code: string, cfu: string){
+    var str = "?n=" + nome + "&c=" + code + "&cfu=" + cfu
+    console.log(str)
+    return this.http.get(this.mongoEndPoint + 'insertesame' + str)
+  }
+
+  removeEsame(code: string){
+    var str = "?c=" + code
+    console.log(str)
+    return this.http.get(this.mongoEndPoint + 'removeesame' + str)
   }
 
   getEsami(){

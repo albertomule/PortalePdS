@@ -8,7 +8,6 @@ import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/f
 })
 export class NuovoregolamentoComponent{
 
-
   yearStart = 2000
   yearsAfter = 5
   currentYear: number
@@ -50,7 +49,6 @@ export class NuovoregolamentoComponent{
       case 3: return this.exam3Form.get('exam3List') as FormArray
       default: return this.exam4Form.get('exam4List') as FormArray
     }
-    
   }
 
   addExam(l: number){
