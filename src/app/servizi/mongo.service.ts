@@ -10,9 +10,10 @@ export class MongoService {
 
   constructor(private http: HttpClient) { }
 
-  // insertEsame(url: string, body: {}){
-  //   this.http.post(url,body)
-  // }
+  insertRegolamento(anno: string, body: {}){
+    var str = "?a=" + anno
+    return this.http.post(this.mongoEndPoint + 'insertregolamento' + str, JSON.stringify(body))
+  }
 
   insertEsame(nome: string, code: string, cfu: string){
     var str = "?n=" + nome + "&c=" + code + "&cfu=" + cfu

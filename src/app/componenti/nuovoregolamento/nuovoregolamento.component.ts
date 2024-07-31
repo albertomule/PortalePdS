@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild, viewChild } from '@angular/core';
 import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms'
+import { MongoService } from '../../servizi/mongo.service';
 
 @Component({
   selector: 'app-nuovoregolamento',
@@ -14,7 +15,7 @@ export class NuovoregolamentoComponent{
   years: number[] = []
   selectVal: number = 0
 
-  constructor(){
+  constructor(private mongo: MongoService){
     this.currentYear = new Date().getFullYear()
     for(let year = this.yearStart; year <= this.currentYear + this.yearsAfter; year++) {
       this.years.push(year);
@@ -69,10 +70,41 @@ export class NuovoregolamentoComponent{
   }
 
   getAllFormData(){
-    console.log(this.selectVal)
-    console.log(this.exam1Form.value)
-    console.log(this.exam2Form.value)
-    console.log(this.exam3Form.value)
-    console.log(this.exam4Form.value)
+    // console.log(this.selectVal)
+    // console.log(JSON.stringify(this.exam1Form.value)) 
+    // console.log(this.exam1Form.value)
+    // console.log(this.examListArray(1).at(0).value.exam_name)
+    // console.log(this.examListArray(1).at(1).value.exam_name)
+    // console.log(this.exam1Form.value.exam_code)
+    // console.log(this.exam1Form.value.exam_cfu)
+    // console.log(this.exam2Form.value)
+    // console.log(this.exam3Form.value)
+    // console.log(this.exam4Form.value)
+  }
+
+  invia(){
+    //const formData = new FormData();
+   // formData.append('primo', this.exam1Form.value);
+    // formData.append('secondo', this.exam2Form.value);
+    // formData.append('terzo', this.exam3Form.value);
+    // formData.append('complementari', this.exam4Form.value);
+   // console.log(formData)
+    //{"exam1List":[{"exam_name":"sdassaaa","exam_code":"asasd12","exam_cfu":"12"}]}
+    // var str = "{'esami':[" + 
+    //   JSON.stringify(this.exam1Form.value) + 
+    //   JSON.stringify(this.exam2Form.value) +
+    //   JSON.stringify(this.exam3Form.value) +
+    //   JSON.stringify(this.exam4Form.value) +
+    //   "]}"
+    
+    
+    this.mongo.insertRegolamento(this.selectVal.toString(), [this.exam1Form.value, this.exam2Form.value, this.exam3Form.value, this.exam4Form.value]).subscribe((data: any) => {
+      console.log(data)
+    })
+    // this.mongo.insertRegolamento(this.selectVal.toString(), this.exam1Form.value).subscribe((data: any) => {
+    //   console.log(data)
+    // })
+
+    
   }
 }
