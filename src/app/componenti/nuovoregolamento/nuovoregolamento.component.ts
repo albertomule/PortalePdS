@@ -107,4 +107,16 @@ export class NuovoregolamentoComponent{
 
     
   }
+
+  getReg(){
+    this.mongo.getRegolamento(this.selectVal.toString()).subscribe((data: any) => {
+      console.log(data)
+    })
+  }
+
+  removeReg(){
+    this.mongo.removeRegolamento(this.selectVal.toString()).subscribe((data: any) => {
+      console.log(data)
+    })
+  }
 }

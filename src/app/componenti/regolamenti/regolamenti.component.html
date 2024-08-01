@@ -1,6 +1,13 @@
-<h3>Regolamenti</h3>
+<h3 class="title">Regolamenti</h3>
 <br>
-<h2>Lista dei regolamenti dal db</h2>
+<h2 class="title">Regolamenti annuali salvati:</h2>
+
+<div class="container">
+    <ng-container *ngFor="let regolamento of regolamenti; index as i">
+        {{ regolamento.anno }}
+        <br/>
+    </ng-container>
+</div>
 
 <a routerLink="/nuovoregolamento">
     <button id="bottone_commissione_regolamenti_nuovoregolamento" class="Home_button">Nuovo regolamento</button>

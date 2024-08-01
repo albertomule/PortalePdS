@@ -15,6 +15,18 @@ export class MongoService {
     return this.http.post(this.mongoEndPoint + 'insertregolamento' + str, JSON.stringify(body))
   }
 
+  getRegolamento(anno: string){
+    var str = "?a=" + anno
+    console.log(str)
+    return this.http.get(this.mongoEndPoint + 'getregolamento' + str)
+  }
+
+  removeRegolamento(anno: string){
+    var str = "?a=" + anno
+    console.log(str)
+    return this.http.get(this.mongoEndPoint + 'removeregolamento' + str)
+  }
+
   insertEsame(nome: string, code: string, cfu: string){
     var str = "?n=" + nome + "&c=" + code + "&cfu=" + cfu
     console.log(str)
@@ -29,5 +41,9 @@ export class MongoService {
 
   getEsami(){
     return this.http.get(this.mongoEndPoint + 'esami')
+  }
+
+  getRegolamenti(){
+    return this.http.get(this.mongoEndPoint + 'regolamenti')
   }
 }
