@@ -3,10 +3,15 @@
 <h2 class="title">Regolamenti annuali salvati:</h2>
 
 <div class="container">
-    <ng-container *ngFor="let regolamento of regolamenti; index as i">
-        {{ regolamento.anno }}
-        <br/>
-    </ng-container>
+    <ul>
+        <br/><br/>
+        <ng-container *ngFor="let regolamento of regolamenti; index as i">
+                <li>
+                    <a routerLink="/regolamento/{{regolamento.anno}}">{{ regolamento.anno }}</a>
+                    <br/><br/>
+                </li>       
+        </ng-container>
+    </ul>
 </div>
 
 <a routerLink="/nuovoregolamento">

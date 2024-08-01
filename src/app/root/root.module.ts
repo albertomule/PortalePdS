@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio'
 import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { RegolamentoComponent } from '../componenti/regolamento/regolamento.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common
     PdsComponent, 
     RegolamentiComponent, 
     EsamiComponent, 
-    NuovoregolamentoComponent
+    NuovoregolamentoComponent,
+    RegolamentoComponent
   ],
   imports: [
     BrowserModule,

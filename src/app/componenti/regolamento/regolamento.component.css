@@ -1,0 +1,24 @@
+.title{
+    text-align: center;
+}
+
+.container{
+    max-width: 500px;
+    background: #fff;
+    border-radius: 5px;
+    width: 500px;
+    padding: 20px;
+    box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.1);
+
+}
+
+.wrap{
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 40px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e4e1e1;
+}

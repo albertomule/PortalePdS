@@ -9,6 +9,7 @@ import { PdsComponent } from './componenti/pds/pds.component';
 import { RegolamentiComponent } from './componenti/regolamenti/regolamenti.component';
 import { EsamiComponent } from './componenti/esami/esami.component';
 import { NuovoregolamentoComponent } from './componenti/nuovoregolamento/nuovoregolamento.component';
+import { RegolamentoComponent } from './componenti/regolamento/regolamento.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/start'},
@@ -16,9 +17,13 @@ const routes: Routes = [
   { path: 'homes', component: HomestudenteComponent},
   { path: 'homec', component: HomecommissioneComponent},
   { path: 'pds', component: PdsComponent},
+  // { path: 'regolamenti', component: RegolamentiComponent, children: [
+  //   { path: ':id', component: RegolamentoComponent}
+  // ]},
   { path: 'regolamenti', component: RegolamentiComponent},
   { path: 'esami', component: EsamiComponent},
-  { path: 'nuovoregolamento', component: NuovoregolamentoComponent}, 
+  { path: 'nuovoregolamento', component: NuovoregolamentoComponent},
+  { path: 'regolamento/:id', component: RegolamentoComponent}
    
   // { path: '404', component: NotfoundComponent},
   // { path: '**', redirectTo: '/404'}
