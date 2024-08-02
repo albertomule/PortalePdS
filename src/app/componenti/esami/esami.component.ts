@@ -59,9 +59,11 @@ export class EsamiComponent implements OnInit{
     
     this.mongo.insertEsame(nome,code,cfu).subscribe((data: any) => {
       console.log(data)
+
+      window.location.reload()
     })
 
-    window.location.reload()
+    
   }
 
   removeExam(){
@@ -69,9 +71,11 @@ export class EsamiComponent implements OnInit{
     console.log(code)
     this.mongo.removeEsame(code).subscribe((data: any) => {
       console.log(data)
+
+      window.location.reload()
     })
 
-    window.location.reload()
+    
   }
 
   // getFormData(l: number){

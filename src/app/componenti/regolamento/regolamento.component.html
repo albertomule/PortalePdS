@@ -1,11 +1,22 @@
 <h3 class="title">Regolamento anno accademico {{anno}}-{{nextYear(anno)}}</h3>
 <br>
-<!-- <h2 class="title">Regolamenti annuali salvati:</h2> -->
 
 <div class="container">
     <div class="wrap">
         <h2>Esami primo anno</h2>
     </div>
+    <!-- <br/><br/> -->
+    <ng-container *ngFor="let esame of primo[0]; index as i" >
+        <div class="content">
+            <!-- <br/><br/> -->
+            <ul>
+                <li>
+                    <p>{{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}</p>
+                </li>
+            </ul>
+            <!-- <br/> -->
+        </div>
+    </ng-container>
 </div>
 <div class="container">
     <div class="wrap">
