@@ -10,9 +10,17 @@ import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/sign
 })
 export class RegolamentoComponent implements OnInit, OnDestroy{
 
+  primoIndex: number = 3
+  secondoIndex: number = 4
+  terzoIndex: number = 5
+  compIndex: number = 6
+
   anno: string = ""
   regolamento: any
   primo : any[] = []
+  secondo : any[] = []
+  terzo : any[] = []
+  comp : any[] = []
 
   sottoscrizione: any
   submongo: any
@@ -23,20 +31,21 @@ export class RegolamentoComponent implements OnInit, OnDestroy{
     this.sottoscrizione = this.route.paramMap.subscribe((params: ParamMap)=>{
       this.anno = params.get('id')!
        this.submongo = this.mongo.getRegolamento(this.anno).subscribe((data: any) => {
-        // this.regolamento = data
-        // console.log(this.regolamento)
         this.regolamento = Object.values(data)
-        console.log(this.regolamento)
-        // console.log(this.getPrimo())
+        
         this.getPrimo()
+        this.getSecondo()
+        this.getTerzo()
+        this.getComp()
+        
+        console.log(this.regolamento)
         console.log(this.primo)
-       // console.log(Object.keys(this.primo))
-       // console.log(Object.values(this.primo))
-        //console.log(this.primo)
+        console.log(this.secondo)
+        console.log(this.terzo)
+        console.log(this.comp)
       })
     })
     console.log(this.anno)
-    // setTimeout(() => {  console.log(this.regolamento); }, 5000);
   }
 
   ngOnDestroy(): void {
@@ -51,14 +60,23 @@ export class RegolamentoComponent implements OnInit, OnDestroy{
   }
 
   getPrimo(){
-    var str = this.regolamento[3]
+    var str = this.regolamento[this.primoIndex]
     console.log(str)
-    // str = str.replace(/\\/g, '')
-    // console.log(str)
     this.primo = Object.values(JSON.parse(str))
-    // console.log(json)
-    // const arr = Object.keys(str).map((key) => [key, str[key]])
-    // console.log(arr)
-    // return arr
+  }
+  getSecondo(){
+    var str = this.regolamento[this.secondoIndex]
+    console.log(str)
+    this.secondo = Object.values(JSON.parse(str))
+  }
+  getTerzo(){
+    var str = this.regolamento[this.terzoIndex]
+    console.log(str)
+    this.terzo = Object.values(JSON.parse(str))
+  }
+  getComp(){
+    var str = this.regolamento[this.compIndex]
+    console.log(str)
+    this.comp = Object.values(JSON.parse(str))
   }
 }

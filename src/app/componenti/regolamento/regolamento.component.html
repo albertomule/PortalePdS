@@ -5,33 +5,57 @@
     <div class="wrap">
         <h2>Esami primo anno</h2>
     </div>
-    <!-- <br/><br/> -->
-    <ng-container *ngFor="let esame of primo[0]; index as i" >
-        <div class="content">
-            <!-- <br/><br/> -->
-            <ul>
+    <ul>
+        <ng-container *ngFor="let esame of primo[0]; index as i" >
+            <div class="content">
                 <li>
                     <p>{{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}</p>
                 </li>
-            </ul>
-            <!-- <br/> -->
-        </div>
-    </ng-container>
+            </div>
+        </ng-container>
+    </ul>
 </div>
 <div class="container">
     <div class="wrap">
         <h2>Esami secondo anno</h2>
     </div>
+    <ul>
+        <ng-container *ngFor="let esame of secondo[0]; index as i" >
+            <div class="content">
+                <li>
+                    <p>{{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}</p>
+                </li>
+            </div>
+        </ng-container>
+    </ul>
 </div>
 <div class="container">
     <div class="wrap">
         <h2>Esami terzo anno</h2>
     </div>
+    <ul>
+        <ng-container *ngFor="let esame of terzo[0]; index as i" >
+            <div class="content">
+                <li>
+                    <p>{{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}</p>
+                </li>
+            </div>
+        </ng-container>
+    </ul>
 </div>
 <div class="container">
     <div class="wrap">
         <h2>Esami complementari</h2>
     </div>
+    <ul>
+        <ng-container *ngFor="let esame of comp[0]; index as i" >
+            <div class="content">
+                <li>
+                    <p>{{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}</p>
+                </li>
+            </div>
+        </ng-container>
+    </ul>
 </div>
 
 <a routerLink="/regolamenti">
