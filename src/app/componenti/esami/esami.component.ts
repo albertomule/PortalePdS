@@ -62,8 +62,6 @@ export class EsamiComponent implements OnInit{
 
       window.location.reload()
     })
-
-    
   }
 
   removeExam(){
@@ -74,8 +72,6 @@ export class EsamiComponent implements OnInit{
 
       window.location.reload()
     })
-
-    
   }
 
   // getFormData(l: number){

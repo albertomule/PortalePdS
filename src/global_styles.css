@@ -47,3 +47,11 @@ h4{
       margin-bottom: 10px;
     }
   }
+
+.title{
+    text-align: center;
+}
+
+input::placeholder{
+    text-align: center;
+ }

@@ -16,6 +16,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio'
 import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { RegolamentoComponent } from '../componenti/regolamento/regolamento.component';
+import { NuovopianoComponent } from '../componenti/nuovopiano/nuovopiano.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RegolamentoComponent } from '../componenti/regolamento/regolamento.comp
     RegolamentiComponent, 
     EsamiComponent, 
     NuovoregolamentoComponent,
-    RegolamentoComponent
+    RegolamentoComponent,
+    NuovopianoComponent
   ],
   imports: [
     BrowserModule,

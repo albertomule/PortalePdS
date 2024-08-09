@@ -10,6 +10,7 @@ import { RegolamentiComponent } from './componenti/regolamenti/regolamenti.compo
 import { EsamiComponent } from './componenti/esami/esami.component';
 import { NuovoregolamentoComponent } from './componenti/nuovoregolamento/nuovoregolamento.component';
 import { RegolamentoComponent } from './componenti/regolamento/regolamento.component';
+import { NuovopianoComponent } from './componenti/nuovopiano/nuovopiano.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/start'},
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'regolamenti', component: RegolamentiComponent},
   { path: 'esami', component: EsamiComponent},
   { path: 'nuovoregolamento', component: NuovoregolamentoComponent},
-  { path: 'regolamento/:id', component: RegolamentoComponent}
+  { path: 'regolamento/:id', component: RegolamentoComponent},
+  { path: 'nuovopiano/:id', component: NuovopianoComponent}
    
   // { path: '404', component: NotfoundComponent},
   // { path: '**', redirectTo: '/404'}

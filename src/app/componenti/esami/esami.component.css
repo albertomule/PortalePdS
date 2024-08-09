@@ -13,8 +13,6 @@
     cursor: pointer;
 }
 
-/* Dynamic class creation */
-
 .flex{
     display: flex;
     gap: 1.5em;
@@ -23,15 +21,12 @@
 }
 .delete{
     text-decoration: none;
-    /* display: inline-block; */
     background: #f44336;
     color: #fff;
     font-size: 1.5rem;
     font-weight: bold;
     width: 30px;
     height: 30px;
-    /* color: #fff; */
-    /* margin-left: auto; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +43,6 @@
     padding: 20px;
     box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
-
 }
 
 .wrap{
@@ -59,8 +53,4 @@
     margin-bottom: 40px;
     padding-bottom: 15px;
     border-bottom: 2px solid #e4e1e1;
-}
-
-.title{
-    text-align: center;
 }

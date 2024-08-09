@@ -1,4 +1,4 @@
-<h3>Loggato come studente</h3>
+<h3 class="title">Loggato come studente</h3>
 <br>
 <h4>La carriera è stata iniziata a informatica senza riconoscimenti di carriere precedenti?</h4>
 
@@ -32,10 +32,12 @@
     <!-- <div><input type="submit" value="Save"></div> -->
 </form>
 
-<pre>{{ form.value | json }}</pre>
+<!-- <pre>{{ form.value | json }}</pre> -->
 
 <div *ngIf="isFresh()!=null">
+  <a routerLink="/nuovopiano/{{getAnno()}}">
     <button id="bottone_studente_avanti" class="Home_button">Avanti</button>
+  </a>
 </div>
 
 <a routerLink="/start">

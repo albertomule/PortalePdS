@@ -8,10 +8,6 @@ import {MatRadioModule} from '@angular/material/radio'
   styleUrl: './homestudente.component.css'
 })
 export class HomestudenteComponent {
-  // form: FormGroup = new FormGroup({
-  //   fresh: new FormControl(''),
-  //   anno: new FormControl('')
-  // })
 
   form: FormGroup = this.fb.group({
     fresh: null,
@@ -19,24 +15,12 @@ export class HomestudenteComponent {
   })
 
   constructor(private fb: FormBuilder) {}
-
-  // get allControlNames() {
-  //   return Object.keys(this.form.controls);
-  // }
-  // fresh: boolean = false
-  // dirty: boolean = false
-
-  // isFresh(){
-  //   return this.fresh
-  // }
-  // isDirty(){
-  //   return this.dirty
-  // }
-  // setFresh(b: boolean){
-  //   this.fresh = b
-  //   this.dirty = true
-  // }
+  
   get anno() { return this.form.get("anno") }
+
+  getAnno(){
+    return this.form.get("anno")!.value
+  }
 
   isFresh(){ 
     return this.form.get("fresh")?.value 
