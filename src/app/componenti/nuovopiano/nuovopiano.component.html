@@ -5,22 +5,26 @@
         <h2>Esami primo anno</h2>
     </div>
     <ul>
-        <ng-container *ngFor="let esame of primo[0]; index as i" >
-            <div class="content">
-                <li>
-                    <p>
-                        {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Pianificato:
-                        <input type="checkbox" name="option" value="1" disabled="disabled" checked="checked">
-                        <input type="hidden" name="option" value="1">
-                        &nbsp;&nbsp;&nbsp;
-                        Conseguito:
-                        <input type="checkbox">
-                    </p>
-                </li>
+        <form [formGroup]="exam1Form">
+            <div formArrayName="exam1List">
+                <ng-container *ngFor="let esame of primo[0]; index as i" >
+                    <div class="content" [formGroupName]="i">
+                        <li>
+                            <p>
+                                {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Pianificato:
+                                <input type="checkbox" name="option" value="true" disabled="disabled" checked="checked">
+                                <input type="hidden" name="option" value="1">
+                                &nbsp;&nbsp;&nbsp;
+                                Conseguito:
+                                <input type="checkbox" formControlName="conseguito">
+                            </p>
+                        </li>
+                    </div>
+                </ng-container>
             </div>
-        </ng-container>
+        </form>
     </ul>
 </div>
 <div class="container">
@@ -28,22 +32,26 @@
         <h2>Esami secondo anno</h2>
     </div>
     <ul>
-        <ng-container *ngFor="let esame of secondo[0]; index as i" >
-            <div class="content">
-                <li>
-                    <p>
-                        {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Pianificato:
-                        <input type="checkbox" name="option" value="1" disabled="disabled" checked="checked">
-                        <input type="hidden" name="option" value="1">
-                        &nbsp;&nbsp;&nbsp;
-                        Conseguito:
-                        <input type="checkbox">
-                    </p>
-                </li>
+        <form [formGroup]="exam2Form">
+            <div formArrayName="exam2List">
+                <ng-container *ngFor="let esame of secondo[0]; index as i" >
+                    <div class="content" [formGroupName]="i">
+                        <li>
+                            <p>
+                                {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Pianificato:
+                                <input type="checkbox" name="option" value="1" disabled="disabled" checked="checked">
+                                <input type="hidden" name="option" value="1">
+                                &nbsp;&nbsp;&nbsp;
+                                Conseguito:
+                                <input type="checkbox" formControlName="conseguito">
+                            </p>
+                        </li>
+                    </div>
+                </ng-container>
             </div>
-        </ng-container>
+        </form>
     </ul>
 </div>
 <div class="container">
@@ -51,22 +59,26 @@
         <h2>Esami terzo anno</h2>
     </div>
     <ul>
-        <ng-container *ngFor="let esame of terzo[0]; index as i" >
-            <div class="content">
-                <li>
-                    <p>
-                        {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Pianificato:
-                        <input type="checkbox" name="option" value="1" disabled="disabled" checked="checked">
-                        <input type="hidden" name="option" value="1">
-                        &nbsp;&nbsp;&nbsp;
-                        Conseguito:
-                        <input type="checkbox">
-                    </p>
-                </li>
+        <form [formGroup]="exam3Form">
+            <div formArrayName="exam3List">
+                <ng-container *ngFor="let esame of terzo[0]; index as i" >
+                    <div class="content" [formGroupName]="i">
+                        <li>
+                            <p>
+                                {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Pianificato:
+                                <input type="checkbox" name="option" value="1" disabled="disabled" checked="checked">
+                                <input type="hidden" name="option" value="1">
+                                &nbsp;&nbsp;&nbsp;
+                                Conseguito:
+                                <input type="checkbox" formControlName="conseguito">
+                            </p>
+                        </li>
+                    </div>
+                </ng-container>
             </div>
-        </ng-container>
+        </form>
     </ul>
 </div>
 <div class="container">
@@ -74,21 +86,25 @@
         <h2>Esami complementari</h2>
     </div>
     <ul>
-        <ng-container *ngFor="let esame of comp[0]; index as i" >
-            <div class="content">
-                <li>
-                    <p>
-                        {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Pianificato:
-                        <input type="checkbox">
-                        &nbsp;&nbsp;&nbsp;
-                        Conseguito:
-                        <input type="checkbox">
-                    </p>
-                </li>
+        <form [formGroup]="examcForm">
+            <div formArrayName="examcList">
+                <ng-container *ngFor="let esame of comp[0]; index as i" >
+                    <div class="content" [formGroupName]="i">
+                        <li>
+                            <p>
+                                {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Pianificato:
+                                <input type="checkbox" formControlName="pianificato">
+                                &nbsp;&nbsp;&nbsp;
+                                Conseguito:
+                                <input type="checkbox" formControlName="conseguito">
+                            </p>
+                        </li>
+                    </div>
+                </ng-container>
             </div>
-        </ng-container>
+        </form>
     </ul>
 </div>
 <div class="container">
@@ -105,14 +121,14 @@
                     <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
                     <button class="delete" (click)="removeExam(i)">&times;</button>
                     Conseguito:
-                    <input type="checkbox">
+                    <input type="checkbox" formControlName="conseguito">
                 </div>
             </div>
         </div>
     </form>
 </div>
 
-<button id="bottone_logout_studente" class="Home_button">Invia</button>
+<button id="bottone_logout_studente" class="Home_button" (click)="getAllFormData()">Invia</button>
 
 <a routerLink="/homes">
     <button id="bottone_logout_studente" class="Home_button">Indietro</button>

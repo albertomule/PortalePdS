@@ -42,6 +42,20 @@ export class NuovopianoComponent {
         console.log(this.secondo)
         console.log(this.terzo)
         console.log(this.comp)
+
+        for(let i of this.primo[0]){
+          this.add1Exam(i.exam_name,i.exam_code,i.exam_cfu)
+        }
+        for(let i of this.secondo[0]){
+          this.add2Exam(i.exam_name,i.exam_code,i.exam_cfu)
+        }
+        for(let i of this.terzo[0]){
+          this.add3Exam(i.exam_name,i.exam_code,i.exam_cfu)
+        }
+        for(let i of this.comp[0]){
+          this.addcExam(i.exam_name,i.exam_code,i.exam_cfu)
+        }
+
       })
     })
     console.log(this.anno)
@@ -83,13 +97,88 @@ export class NuovopianoComponent {
     examList: new FormArray([this.getExamFields()])
   })
 
+  exam1Form: FormGroup = new FormGroup({
+    exam1List: new FormArray([])
+  })
+
+  exam2Form: FormGroup = new FormGroup({
+    exam2List: new FormArray([])
+  })
+
+  exam3Form: FormGroup = new FormGroup({
+    exam3List: new FormArray([])
+  })
+
+  examcForm: FormGroup = new FormGroup({
+    examcList: new FormArray([])
+  })
+
   getExamFields(){
     return new FormGroup({
       exam_name: new FormControl(''),
       exam_code: new FormControl(''),
-      exam_cfu: new FormControl('')
+      exam_cfu: new FormControl(''),
+      conseguito: new FormControl(false)
     })
   }
+
+  getFullFields(a: string, b: string, c: string, p: boolean){
+    return new FormGroup({
+      exam_name: new FormControl(a),
+      exam_code: new FormControl(b),
+      exam_cfu: new FormControl(c),
+      pianificato: new FormControl(p),
+      conseguito: new FormControl(false)
+    })
+  }
+
+  exam1ListArray(){
+    return this.exam1Form.get('exam1List') as FormArray
+   }
+ 
+  add1Exam(a: string, b: string, c: string){
+    this.exam1ListArray().push(this.getFullFields(a,b,c,true))
+  }
+
+  exam2ListArray(){
+  return this.exam2Form.get('exam2List') as FormArray
+  }
+
+  add2Exam(a: string, b: string, c: string){
+    this.exam2ListArray().push(this.getFullFields(a,b,c,true))
+  }
+
+  exam3ListArray(){
+  return this.exam3Form.get('exam3List') as FormArray
+  }
+
+  add3Exam(a: string, b: string, c: string){
+    this.exam3ListArray().push(this.getFullFields(a,b,c,true))
+  }
+
+  examcListArray(){
+  return this.examcForm.get('examcList') as FormArray
+  }
+
+  addcExam(a: string, b: string, c: string){
+    this.examcListArray().push(this.getFullFields(a,b,c,false))
+  }
+
+  // setFullFields(f: FormGroup, a: string, b: string, c: string){
+    
+  //     f.exam_name: new FormControl(a),
+  //     exam_code: new FormControl(b),
+  //     exam_cfu: new FormControl(c),
+  //     pianificato: new FormControl(false),
+  //     conseguito: new FormControl(false)
+    
+  // }
+
+  // generateForm(a: any[]){
+  //   for(let i in a){
+          
+  //   }
+  // }
 
   examListArray(){
    return this.examForm.get('examList') as FormArray
@@ -101,5 +190,19 @@ export class NuovopianoComponent {
 
   removeExam(i: number){
     this.examListArray().removeAt(i)
+  }
+
+  // invia(){
+  //   this.mongo.insertRegolamento(this.selectVal.toString(), [this.exam1Form.value, this.exam2Form.value, this.exam3Form.value, this.exam4Form.value]).subscribe((data: any) => {
+  //     console.log(data)
+  //   })
+  // }
+
+  getAllFormData(){
+    console.log(this.examForm.value)
+    console.log(this.exam1Form.value)
+    console.log(this.exam2Form.value)
+    console.log(this.exam3Form.value)
+    console.log(this.examcForm.value)
   }
 }
