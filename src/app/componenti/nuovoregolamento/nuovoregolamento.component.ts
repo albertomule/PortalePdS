@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild, viewChild } from '@angular/core';
 import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms'
 import { MongoService } from '../../servizi/mongo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nuovoregolamento',
@@ -15,7 +16,7 @@ export class NuovoregolamentoComponent{
   years: number[] = []
   selectVal: number = 0
 
-  constructor(private mongo: MongoService){
+  constructor(private mongo: MongoService, private router: Router){
     this.currentYear = new Date().getFullYear()
     for(let year = this.yearStart; year <= this.currentYear + this.yearsAfter; year++) {
       this.years.push(year);
@@ -85,18 +86,20 @@ export class NuovoregolamentoComponent{
   invia(){
     this.mongo.insertRegolamento(this.selectVal.toString(), [this.exam1Form.value, this.exam2Form.value, this.exam3Form.value, this.exam4Form.value]).subscribe((data: any) => {
       console.log(data)
+      alert('Il regolamento è stato inserito con successo')
+      this.router.navigate(['/regolamenti'])
     })
   }
 
-  getReg(){
-    this.mongo.getRegolamento(this.selectVal.toString()).subscribe((data: any) => {
-      console.log(data)
-    })
-  }
+  // getReg(){
+  //   this.mongo.getRegolamento(this.selectVal.toString()).subscribe((data: any) => {
+  //     console.log(data)
+  //   })
+  // }
 
-  removeReg(){
-    this.mongo.removeRegolamento(this.selectVal.toString()).subscribe((data: any) => {
-      console.log(data)
-    })
-  }
+  // removeReg(){
+  //   this.mongo.removeRegolamento(this.selectVal.toString()).subscribe((data: any) => {
+  //     console.log(data)
+  //   })
+  // }
 }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MongoService } from '../../servizi/mongo.service';
 import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
 
@@ -25,7 +25,7 @@ export class RegolamentoComponent implements OnInit, OnDestroy{
   sottoscrizione: any
   submongo: any
 
-  constructor(private route: ActivatedRoute, private mongo: MongoService){}
+  constructor(private route: ActivatedRoute, private mongo: MongoService, private router: Router){}
 
   ngOnInit(): void {
     this.sottoscrizione = this.route.paramMap.subscribe((params: ParamMap)=>{
@@ -78,5 +78,15 @@ export class RegolamentoComponent implements OnInit, OnDestroy{
     var str = this.regolamento[this.compIndex]
     console.log(str)
     this.comp = Object.values(JSON.parse(str))
+  }
+
+  elimina(){
+    if(confirm('Sei sicuro di voler eliminare questo regolamento?')){
+      this.mongo.removeRegolamento(this.anno).subscribe((data: any) => {
+        console.log(data)
+        alert('Il regolamento è stato eliminato con successo')
+        this.router.navigate(['/regolamenti'])
+      })
+    }
   }
 }
