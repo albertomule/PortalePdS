@@ -59,7 +59,7 @@ export class EsamiComponent implements OnInit{
     
     this.mongo.insertEsame(nome,code,cfu).subscribe((data: any) => {
       console.log(data)
-
+      alert('L\'esame è stato inserito con successo')
       window.location.reload()
     })
   }
@@ -67,11 +67,13 @@ export class EsamiComponent implements OnInit{
   removeExam(){
     var code = this.examRForm.value.exam_code
     console.log(code)
-    this.mongo.removeEsame(code).subscribe((data: any) => {
-      console.log(data)
-
-      window.location.reload()
-    })
+    if(confirm('Sei sicuro di voler eliminare questo esame?')){
+      this.mongo.removeEsame(code).subscribe((data: any) => {
+        console.log(data)
+        alert('L\'esame è stato eliminato con successo')
+        window.location.reload()
+      })
+    }
   }
 
   // getFormData(l: number){

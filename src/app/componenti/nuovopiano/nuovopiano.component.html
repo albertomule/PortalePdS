@@ -95,10 +95,10 @@
                                 {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 Pianificato:
-                                <input type="checkbox" formControlName="pianificato">
+                                <input type="checkbox" formControlName="pianificato" [checked]="pianificatoCheck(i)" (change)="fixConseguito(i)">
                                 &nbsp;&nbsp;&nbsp;
                                 Conseguito:
-                                <input type="checkbox" formControlName="conseguito">
+                                <input type="checkbox" formControlName="conseguito" [checked]="conseguitoCheck(i)" (change)="fixPianificato(i)">
                             </p>
                         </li>
                     </div>

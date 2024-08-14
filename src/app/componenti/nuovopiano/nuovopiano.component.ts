@@ -121,7 +121,6 @@ export class NuovopianoComponent {
       conseguito: new FormControl(false)
     })
   }
-
   getFullFields(a: string, b: string, c: string, p: boolean){
     return new FormGroup({
       exam_name: new FormControl(a),
@@ -135,7 +134,6 @@ export class NuovopianoComponent {
   exam1ListArray(){
     return this.exam1Form.get('exam1List') as FormArray
    }
- 
   add1Exam(a: string, b: string, c: string){
     this.exam1ListArray().push(this.getFullFields(a,b,c,true))
   }
@@ -143,7 +141,6 @@ export class NuovopianoComponent {
   exam2ListArray(){
   return this.exam2Form.get('exam2List') as FormArray
   }
-
   add2Exam(a: string, b: string, c: string){
     this.exam2ListArray().push(this.getFullFields(a,b,c,true))
   }
@@ -151,7 +148,6 @@ export class NuovopianoComponent {
   exam3ListArray(){
   return this.exam3Form.get('exam3List') as FormArray
   }
-
   add3Exam(a: string, b: string, c: string){
     this.exam3ListArray().push(this.getFullFields(a,b,c,true))
   }
@@ -159,35 +155,16 @@ export class NuovopianoComponent {
   examcListArray(){
   return this.examcForm.get('examcList') as FormArray
   }
-
   addcExam(a: string, b: string, c: string){
     this.examcListArray().push(this.getFullFields(a,b,c,false))
   }
 
-  // setFullFields(f: FormGroup, a: string, b: string, c: string){
-    
-  //     f.exam_name: new FormControl(a),
-  //     exam_code: new FormControl(b),
-  //     exam_cfu: new FormControl(c),
-  //     pianificato: new FormControl(false),
-  //     conseguito: new FormControl(false)
-    
-  // }
-
-  // generateForm(a: any[]){
-  //   for(let i in a){
-          
-  //   }
-  // }
-
   examListArray(){
    return this.examForm.get('examList') as FormArray
   }
-
   addExam(){
     this.examListArray().push(this.getExamFields())
   }
-
   removeExam(i: number){
     this.examListArray().removeAt(i)
   }
@@ -204,5 +181,23 @@ export class NuovopianoComponent {
     console.log(this.exam2Form.value)
     console.log(this.exam3Form.value)
     console.log(this.examcForm.value)
+  }
+
+  fixPianificato(i: number){
+    if(this.examcListArray().at(i).value.conseguito)
+      this.examcListArray().at(i).value.pianificato = true
+    console.log(this.examcListArray().at(i).value)
+  }
+  fixConseguito(i: number){
+    if(!this.examcListArray().at(i).value.pianificato)
+      this.examcListArray().at(i).value.conseguito = false
+    console.log(this.examcListArray().at(i).value)
+  }
+
+  pianificatoCheck(i: number){
+    return this.examcListArray().at(i).value.pianificato
+  }
+  conseguitoCheck(i: number){
+    return this.examcListArray().at(i).value.conseguito
   }
 }
