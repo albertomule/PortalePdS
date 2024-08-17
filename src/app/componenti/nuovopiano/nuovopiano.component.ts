@@ -200,4 +200,21 @@ export class NuovopianoComponent {
   conseguitoCheck(i: number){
     return this.examcListArray().at(i).value.conseguito
   }
+  randomMatricola(){
+    return Math.floor(Math.random() * 999999)
+  }
+
+  invia(){
+    this.mongo.insertPiano(this.randomMatricola().toString(), [
+      this.exam1Form.value, 
+      this.exam2Form.value, 
+      this.exam3Form.value, 
+      this.examcForm.value, 
+      this.examForm.value
+    ]).subscribe((data: any) => {
+      console.log(data)
+      //alert('Il piano è stato inviato con successo')
+      //this.router.navigate(['/start'])
+    })
+  }
 }

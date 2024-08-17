@@ -10,6 +10,11 @@ export class MongoService {
 
   constructor(private http: HttpClient) { }
 
+  insertPiano(matricola: string, body: {}){
+    var str = "?m=" + matricola
+    return this.http.post(this.mongoEndPoint + 'insertpiano' + str, JSON.stringify(body))
+  }
+
   insertRegolamento(anno: string, body: {}){
     var str = "?a=" + anno
     return this.http.post(this.mongoEndPoint + 'insertregolamento' + str, JSON.stringify(body))
