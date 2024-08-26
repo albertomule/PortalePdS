@@ -1,0 +1,18 @@
+<h3 class="title">Piani in sospeso</h3>
+
+<div class="container">
+    <ul>
+        <br/><br/>
+        <br/><br/>
+        <ng-container *ngFor="let piano of pianiinsospeso; index as i">
+                <li>
+                    <a routerLink="/piano/{{piano.matricola}}">{{ piano.matricola }}</a>
+                    <br/><br/>
+                </li>       
+        </ng-container>
+    </ul>
+</div>
+
+<a routerLink="/pds">
+    <button id="bottone_commissione_pds_indietro" class="Home_button">Indietro</button>
+</a>

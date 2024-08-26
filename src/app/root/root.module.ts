@@ -17,6 +17,9 @@ import {MatRadioModule} from '@angular/material/radio'
 import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { RegolamentoComponent } from '../componenti/regolamento/regolamento.component';
 import { NuovopianoComponent } from '../componenti/nuovopiano/nuovopiano.component';
+import { PianiapprovatiComponent } from '../componenti/pianiapprovati/pianiapprovati.component';
+import { PianiinsospesoComponent } from '../componenti/pianiinsospeso/pianiinsospeso.component';
+import { PianoComponent } from '../componenti/piano/piano.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { NuovopianoComponent } from '../componenti/nuovopiano/nuovopiano.compone
     EsamiComponent, 
     NuovoregolamentoComponent,
     RegolamentoComponent,
-    NuovopianoComponent
+    NuovopianoComponent,
+    PianiapprovatiComponent,
+    PianiinsospesoComponent,
+    PianoComponent
   ],
   imports: [
     BrowserModule,

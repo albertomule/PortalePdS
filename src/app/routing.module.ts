@@ -11,6 +11,9 @@ import { EsamiComponent } from './componenti/esami/esami.component';
 import { NuovoregolamentoComponent } from './componenti/nuovoregolamento/nuovoregolamento.component';
 import { RegolamentoComponent } from './componenti/regolamento/regolamento.component';
 import { NuovopianoComponent } from './componenti/nuovopiano/nuovopiano.component';
+import { PianiapprovatiComponent } from './componenti/pianiapprovati/pianiapprovati.component';
+import { PianiinsospesoComponent } from './componenti/pianiinsospeso/pianiinsospeso.component';
+import { PianoComponent } from './componenti/piano/piano.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/start'},
@@ -25,7 +28,10 @@ const routes: Routes = [
   { path: 'esami', component: EsamiComponent},
   { path: 'nuovoregolamento', component: NuovoregolamentoComponent},
   { path: 'regolamento/:id', component: RegolamentoComponent},
-  { path: 'nuovopiano/:id', component: NuovopianoComponent}
+  { path: 'nuovopiano/:id', component: NuovopianoComponent},
+  { path: 'pianiapprovati', component: PianiapprovatiComponent},
+  { path: 'pianiinsospeso', component: PianiinsospesoComponent},
+  { path: 'piano/:id', component: PianoComponent}
    
   // { path: '404', component: NotfoundComponent},
   // { path: '**', redirectTo: '/404'}

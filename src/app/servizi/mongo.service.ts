@@ -51,4 +51,8 @@ export class MongoService {
   getRegolamenti(){
     return this.http.get(this.mongoEndPoint + 'regolamenti')
   }
+
+  getPianiinSospeso(){
+    return this.http.get(this.mongoEndPoint + 'pianiinsospeso')
+  }
 }

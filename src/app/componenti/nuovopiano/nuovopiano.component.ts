@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MongoService } from '../../servizi/mongo.service';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 
@@ -24,7 +24,7 @@ export class NuovopianoComponent {
   sottoscrizione: any
   submongo: any
 
-  constructor(private route: ActivatedRoute, private mongo: MongoService){}
+  constructor(private route: ActivatedRoute, private mongo: MongoService, private router: Router){}
 
   ngOnInit(): void {
     this.sottoscrizione = this.route.paramMap.subscribe((params: ParamMap)=>{
@@ -213,8 +213,8 @@ export class NuovopianoComponent {
       this.examForm.value
     ]).subscribe((data: any) => {
       console.log(data)
-      //alert('Il piano è stato inviato con successo')
-      //this.router.navigate(['/start'])
+      alert('Il piano è stato inviato con successo')
+      this.router.navigate(['/start'])
     })
   }
 }
