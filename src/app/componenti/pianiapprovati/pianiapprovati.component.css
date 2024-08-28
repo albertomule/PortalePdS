@@ -1,0 +1,24 @@
+.error {
+    font-size: 18px;
+    color: red;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.field-error, input.ng-invalid.ng-touched, input.ng-invalid.ng-dirty,
+select.ng-invalid.ng-touched, select.ng-invalid.ng-dirty {
+    outline: 0.1rem solid red
+}
+
+/* .center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+.center-block {
+    margin: auto;
+    display: block;
+    height: 30px;
+    margin-top: -17px;
+  }

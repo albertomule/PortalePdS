@@ -1,4 +1,19 @@
 <h3 class="title">Piani approvati</h3>
+<h4 class="title">Inserire il numero di matricola</h4>
+
+<form [formGroup]="form" #signupForm="ngForm" (ngSubmit)="submit(signupForm)">
+    <input type="text" formControlName="matricola" class="center-block" [ngClass]="signupForm.submitted && matricola?.invalid ? 'field-error' : ''">
+    <div class="error" *ngIf="(matricola?.touched || matricola?.dirty || signupForm.submitted) && matricola?.invalid">
+        <div *ngIf="matricola?.errors?.['required']">Numero di matricola richiesto</div>
+        <div *ngIf="matricola?.errors?.['pattern']">Solo valori numerici di 6 cifre ammessi</div>
+    </div>
+</form>
+
+<!-- <pre>{{ form.value | json }}</pre> -->
+
+<a routerLink="/piano/{{getMatricola()}}a">
+<button id="bottone_studente_avanti" class="Home_button">Cerca</button>
+</a>
 
 <a routerLink="/pds">
     <button id="bottone_commissione_pds_indietro" class="Home_button">Indietro</button>

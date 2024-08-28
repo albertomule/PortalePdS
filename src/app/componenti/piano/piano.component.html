@@ -1,6 +1,15 @@
-<h3 class="title">Piano</h3>
+<h3 class="title">Piano matricola: {{matricola}}</h3>
 
 <!-- da cambiare il routerlink in base a se accedo da pianiapprovati o pianiinsospeso -->
-<a routerLink="/pianiinsospeso">
-    <button id="bottone_commissione_pds_indietro" class="Home_button">Indietro</button>
-</a>
+
+<div *ngIf="getA()">
+    <a routerLink="/pianiapprovati">
+        <button id="bottone_commissione_pds_indietro" class="Home_button">Indietro</button>
+    </a>
+</div>
+
+<div *ngIf="!getA()">
+    <a routerLink="/pianiinsospeso">
+        <button id="bottone_commissione_pds_indietro" class="Home_button">Indietro</button>
+    </a>
+</div>
