@@ -205,7 +205,7 @@ export class NuovopianoComponent {
   }
 
   invia(){
-    this.mongo.insertPiano(this.randomMatricola().toString(), [
+    this.mongo.insertPiano(this.randomMatricola().toString(), this.anno, [
       this.exam1Form.value, 
       this.exam2Form.value, 
       this.exam3Form.value, 

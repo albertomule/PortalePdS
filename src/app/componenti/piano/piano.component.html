@@ -1,6 +1,205 @@
-<h3 class="title">Piano matricola: {{matricola}}</h3>
+<h3 class="title">Piano matricola: {{matricola}}, anno accademico {{anno}}-{{nextYear(anno)}}</h3>
 
-<!-- da cambiare il routerlink in base a se accedo da pianiapprovati o pianiinsospeso -->
+<br>
+
+<!-- <div class="container">
+    <div class="wrap">
+        <h2>Esami primo anno</h2>
+    </div>
+    <ul>
+        <ng-container *ngFor="let esame of primo[0]; index as i" >
+            <div class="content">
+                <li>
+                    <p>{{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}</p>
+                </li>
+            </div>
+        </ng-container>
+    </ul>
+</div>
+<div class="container">
+    <div class="wrap">
+        <h2>Esami secondo anno</h2>
+    </div>
+    <ul>
+        <ng-container *ngFor="let esame of secondo[0]; index as i" >
+            <div class="content">
+                <li>
+                    <p>{{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}</p>
+                </li>
+            </div>
+        </ng-container>
+    </ul>
+</div>
+<div class="container">
+    <div class="wrap">
+        <h2>Esami terzo anno</h2>
+    </div>
+    <ul>
+        <ng-container *ngFor="let esame of terzo[0]; index as i" >
+            <div class="content">
+                <li>
+                    <p>{{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}</p>
+                </li>
+            </div>
+        </ng-container>
+    </ul>
+</div>
+<div class="container">
+    <div class="wrap">
+        <h2>Esami complementari</h2>
+    </div>
+    <ul>
+        <ng-container *ngFor="let esame of comp[0]; index as i" >
+            <div class="content">
+                <li>
+                    <p>{{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}</p>
+                </li>
+            </div>
+        </ng-container>
+    </ul>
+</div> -->
+
+<div class="container">
+    <div class="wrap">
+        <h2>Esami primo anno</h2>
+    </div>
+    <ul>
+        <ng-container *ngFor="let esame of primo[0]; index as i" class="content">
+            <li>
+                <p>
+                    {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Pianificato:
+                    <input type="checkbox" name="option" value="{{esame.pianificato}}" disabled="disabled" [checked]="esame.pianificato == 'true'">
+                    <input type="hidden" name="option" value="{{esame.pianificato}}">
+                    &nbsp;&nbsp;&nbsp;
+                    Conseguito:
+                    <input type="checkbox" name="option" value="{{esame.conseguito}}" disabled="disabled" [checked]="esame.conseguito == 'true'">
+                    <input type="hidden" name="option" value="{{esame.conseguito}}">
+
+                    <!-- ----
+                    <div *ngIf="esame.pianificato">
+                        <input type="checkbox" name="option" value="{{esame.pianificato}}" disabled="disabled" checked="checked">
+                    </div>
+                    <ng-template #other>
+                        <input type="checkbox" name="option" value="{{esame.pianificato}}" disabled="disabled">
+                    </ng-template>
+                    <input type="hidden" name="option" value="{{esame.pianificato}}">
+                    
+                    &nbsp;&nbsp;&nbsp;
+                    Conseguito:
+                    <div *ngIf="esame.conseguito">
+                        <input type="checkbox" name="option" value="{{esame.conseguito}}" disabled="disabled" checked="checked">
+                    </div>
+                    <ng-template #other>
+                        <input type="checkbox" name="option" value="{{esame.conseguito}}" disabled="disabled" checked="unchecked">
+                    </ng-template>
+                    <input type="hidden" name="option" value="{{esame.conseguito}}"> -->
+                </p>
+            </li>
+        </ng-container>
+    </ul>
+</div>
+<!-- <div class="container">
+    <div class="wrap">
+        <h2>Esami secondo anno</h2>
+    </div>
+    <ul>
+        <form [formGroup]="exam2Form">
+            <div formArrayName="exam2List">
+                <ng-container *ngFor="let esame of secondo[0]; index as i" >
+                    <div class="content" [formGroupName]="i">
+                        <li>
+                            <p>
+                                {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Pianificato:
+                                <input type="checkbox" name="option" value="1" disabled="disabled" checked="checked">
+                                <input type="hidden" name="option" value="1">
+                                &nbsp;&nbsp;&nbsp;
+                                Conseguito:
+                                <input type="checkbox" formControlName="conseguito">
+                            </p>
+                        </li>
+                    </div>
+                </ng-container>
+            </div>
+        </form>
+    </ul>
+</div>
+<div class="container">
+    <div class="wrap">
+        <h2>Esami terzo anno</h2>
+    </div>
+    <ul>
+        <form [formGroup]="exam3Form">
+            <div formArrayName="exam3List">
+                <ng-container *ngFor="let esame of terzo[0]; index as i" >
+                    <div class="content" [formGroupName]="i">
+                        <li>
+                            <p>
+                                {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Pianificato:
+                                <input type="checkbox" name="option" value="1" disabled="disabled" checked="checked">
+                                <input type="hidden" name="option" value="1">
+                                &nbsp;&nbsp;&nbsp;
+                                Conseguito:
+                                <input type="checkbox" formControlName="conseguito">
+                            </p>
+                        </li>
+                    </div>
+                </ng-container>
+            </div>
+        </form>
+    </ul>
+</div>
+<div class="container">
+    <div class="wrap">
+        <h2>Esami complementari</h2>
+    </div>
+    <ul>
+        <form [formGroup]="examcForm">
+            <div formArrayName="examcList">
+                <ng-container *ngFor="let esame of comp[0]; index as i" >
+                    <div class="content" [formGroupName]="i">
+                        <li>
+                            <p>
+                                {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                Pianificato:
+                                <input type="checkbox" formControlName="pianificato" [checked]="pianificatoCheck(i)" (change)="fixConseguito(i)">
+                                &nbsp;&nbsp;&nbsp;
+                                Conseguito:
+                                <input type="checkbox" formControlName="conseguito" [checked]="conseguitoCheck(i)" (change)="fixPianificato(i)">
+                            </p>
+                        </li>
+                    </div>
+                </ng-container>
+            </div>
+        </form>
+    </ul>
+</div>
+<div class="container">
+    <form [formGroup]="examForm">
+        <div formArrayName="examList">
+            <div class="wrap2">
+                <h2 style="padding-left: 27%">Esami a libera scelta</h2>
+                <button class="add" (click)="addExam()">&plus;</button>
+            </div>
+            <div *ngFor="let exam of examListArray().controls; let i = index;">
+                <div [formGroupName]="i" class="flex">
+                    <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
+                    <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
+                    <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
+                    <button class="delete" (click)="removeExam(i)">&times;</button>
+                    Conseguito:
+                    <input type="checkbox" formControlName="conseguito">
+                </div>
+            </div>
+        </div>
+    </form>
+</div> -->
 
 <div *ngIf="getA()">
     <a routerLink="/pianiapprovati">

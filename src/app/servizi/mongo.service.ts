@@ -10,8 +10,8 @@ export class MongoService {
 
   constructor(private http: HttpClient) { }
 
-  insertPiano(matricola: string, body: {}){
-    var str = "?m=" + matricola
+  insertPiano(matricola: string, anno: string, body: {}){
+    var str = "?m=" + matricola + "&a=" + anno
     return this.http.post(this.mongoEndPoint + 'insertpiano' + str, JSON.stringify(body))
   }
 
@@ -54,5 +54,11 @@ export class MongoService {
 
   getPianiinSospeso(){
     return this.http.get(this.mongoEndPoint + 'pianiinsospeso')
+  }
+
+  getPiano(matricola: string){
+    var str = "?m=" + matricola
+    console.log(str)
+    return this.http.get(this.mongoEndPoint + 'getpiano' + str)
   }
 }
