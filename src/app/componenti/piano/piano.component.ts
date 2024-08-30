@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MongoService } from '../../servizi/mongo.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class PianoComponent implements OnInit, OnDestroy{
   terzoIndex: number = 5
   compIndex: number = 6
   esamiIndex: number = 7
+  approvatoIndex: number = 8
 
   matricola: string = ""
   a: boolean = false
@@ -29,7 +30,7 @@ export class PianoComponent implements OnInit, OnDestroy{
   sottoscrizione: any
   submongo: any
 
-  constructor(private route: ActivatedRoute, private mongo: MongoService){}
+  constructor(private route: ActivatedRoute, private mongo: MongoService, private router: Router){}
 
   ngOnInit(): void {
     this.sottoscrizione = this.route.paramMap.subscribe((params: ParamMap)=>{
@@ -39,7 +40,21 @@ export class PianoComponent implements OnInit, OnDestroy{
         this.a = true
       }
        this.submongo = this.mongo.getPiano(this.matricola).subscribe((data: any) => {
+        console.log("DATA: " + data)
+        if(data === null){
+          alert('Nessun piano trovato per la matricola ' + this.matricola)
+          this.router.navigate(['/pianiapprovati'])
+          return
+        }
+        
         this.piano = Object.values(data)
+        console.log("PIANO: " + this.piano)
+
+        if(this.a && !this.piano[this.approvatoIndex]){
+          alert('Il piano per la matricola ' + this.matricola + " non è stato ancora approvato. Controllare nella lista dei piani in sospeso")
+          this.router.navigate(['/pianiapprovati'])
+          return
+        }
         
         this.anno = this.piano[this.annoIndex]
         console.log("ANNO: " + this.anno)
@@ -47,12 +62,14 @@ export class PianoComponent implements OnInit, OnDestroy{
         this.getSecondo()
         this.getTerzo()
         this.getComp()
+        this.getEsami()
         
         console.log(this.piano)
         console.log(this.primo)
         console.log(this.secondo)
         console.log(this.terzo)
         console.log(this.comp)
+        console.log(this.esami)
       })
     })
     console.log(this.matricola)
