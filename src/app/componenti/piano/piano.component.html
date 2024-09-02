@@ -118,7 +118,7 @@
 </div>
 
 <div *ngIf="!piano[approvatoIndex]">
-    <button id="bottone_commissione_pds_indietro" class="Home_button">Approva</button>
+    <button id="bottone_commissione_pds_indietro" class="Home_button" (click)="approva()">Approva</button>
 </div>
 
 <div *ngIf="getA()">

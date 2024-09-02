@@ -117,4 +117,14 @@ export class PianoComponent implements OnInit, OnDestroy{
     var ny = y+1
     return ny.toString()
   }
+
+  approva(){
+    if(confirm('Sei sicuro di voler approvare questo piano?')){
+      this.mongo.approvaPiano(this.matricola).subscribe((data: any) => {
+        console.log(data)
+        alert('Il piano è stato approvato con successo')
+        this.router.navigate(['/pianiinsospeso'])
+      })
+    }
+  }
 }
