@@ -30,15 +30,18 @@
           </div>
     </div>
     <!-- <div><input type="submit" value="Save"></div> -->
+    <div *ngIf="isFresh()!=null">
+        <button type="submit" id="bottone_studente_avanti" class="Home_button">Avanti</button>
+    </div>
 </form>
 
 <!-- <pre>{{ form.value | json }}</pre> -->
 
-<div *ngIf="isFresh()!=null">
+<!-- <div *ngIf="isFresh()!=null">
   <a routerLink="/nuovopiano/{{getAnno()}}">
     <button id="bottone_studente_avanti" class="Home_button">Avanti</button>
   </a>
-</div>
+</div> -->
 
 <a routerLink="/start">
     <button id="bottone_logout_studente" class="Home_button">Logout</button>

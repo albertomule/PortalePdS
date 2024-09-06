@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pianiapprovati',
@@ -12,7 +13,7 @@ export class PianiapprovatiComponent {
     matricola: ['', [Validators.required, Validators.pattern('^[0-9]{6}$')]]
   })
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
   
   get matricola() { return this.form.get("matricola") }
 
@@ -24,6 +25,8 @@ export class PianiapprovatiComponent {
     if (form.valid) {
       console.log(JSON.stringify(this.form.value));
       // include code here to send form data to backend
+      this.router.navigate(['/piano/' + this.getMatricola() + 'a'])
+      
     }
   }
 }
