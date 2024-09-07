@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MongoService } from '../../servizi/mongo.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class EsamiComponent implements OnInit{
   }
 
   examRForm: FormGroup = new FormGroup({
-    exam_code: new FormControl('')
+    exam_code: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{5}$')])
   })
 
   examForm: FormGroup = new FormGroup({
@@ -38,9 +38,9 @@ export class EsamiComponent implements OnInit{
 
   getExamFields(){
     return new FormGroup({
-      exam_name: new FormControl(''),
-      exam_code: new FormControl(''),
-      exam_cfu: new FormControl('')
+      exam_name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{1,}$')]),
+      exam_code: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{5}$')]),
+      exam_cfu: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{1,2}$')])
     })
   }
 
@@ -75,6 +75,23 @@ export class EsamiComponent implements OnInit{
       })
     }
   }
+
+  submitRemove(form: FormGroupDirective) {
+    if (form.valid) {
+      this.removeExam()
+    }
+  }
+
+  submitAdd(form: FormGroupDirective) {
+    if (form.valid) {
+      this.addExam()
+    }
+  }
+
+  get exam_codeR() { return this.examRForm.get("exam_code") }
+  get exam_name() { return this.examForm.get("exam_name") }
+  get exam_code() { return this.examForm.get("exam_code") }
+  get exam_cfu() { return this.examForm.get("exam_cfu") }
 
   // getFormData(l: number){
   //  console.log(this.examForm.value)

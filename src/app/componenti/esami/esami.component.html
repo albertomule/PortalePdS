@@ -9,24 +9,28 @@
     </ng-container>
 </div>
 
-<form [formGroup]="examForm">
+<form [formGroup]="examForm" #addForm="ngForm" (ngSubmit)="submitAdd(addForm)">
     <div formArrayName="examList">
         <div *ngFor="let exam of examListArray().controls; let i = index;">
             <div [formGroupName]="i" class="flex">
-                <input type="text" name="" id="examName" formControlName="exam_name" placeholder="Nome esame">
-                <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
-                <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
-                <button class="add" (click)="addExam()">&plus;</button>
+                <input type="text" name="" id="examName" formControlName="exam_name" [ngClass]="addForm.submitted && exam_name?.invalid ? 'field-error' : ''" placeholder="Nome esame">
+                <input type="text" name="" id="" formControlName="exam_code" [ngClass]="addForm.submitted && exam_code?.invalid ? 'field-error' : ''" placeholder="Codice esame" size="10">
+                <input type="text" name="" id="" formControlName="exam_cfu" [ngClass]="addForm.submitted && exam_cfu?.invalid ? 'field-error' : ''" placeholder="CFU esame" size="7">
+                <button class="add" type="submit">&plus;</button>
             </div>
         </div>
     </div>
 </form>
 
-<form [formGroup]="examRForm">
+<form [formGroup]="examRForm" #removeForm="ngForm" (ngSubmit)="submitRemove(removeForm)">
     <div class="flex" style="margin-top: 15px;">
-        <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
-        <button class="delete" (click)="removeExam()">&times;</button>
+        <input type="text" name="" id="" formControlName="exam_code" [ngClass]="removeForm.submitted && exam_codeR?.invalid ? 'field-error' : ''" placeholder="Codice esame" size="10">
+        <button class="delete" type="submit">&times;</button>
     </div>
+    <!-- <div class="errorRemove" *ngIf="(exam_code?.touched || exam_code?.dirty || removeForm.submitted) && exam_code?.invalid">
+        <div *ngIf="exam_code?.errors?.['required']">Codice richiesto</div>
+        <div *ngIf="exam_code?.errors?.['pattern']">Formato codice errato</div>
+    </div> -->
 </form>
 
 <!-- <pre>{{ examRForm.value | json }}</pre> -->

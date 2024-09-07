@@ -54,3 +54,14 @@
     padding-bottom: 15px;
     border-bottom: 2px solid #e4e1e1;
 }
+
+.errorRemove {
+    font-size: 15px;
+    color: red;
+    text-align: center;
+}
+
+.field-error, input.ng-invalid.ng-touched, input.ng-invalid.ng-dirty,
+select.ng-invalid.ng-touched, select.ng-invalid.ng-dirty {
+    outline: 0.1rem solid red
+}
