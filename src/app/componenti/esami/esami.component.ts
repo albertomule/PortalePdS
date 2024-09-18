@@ -38,7 +38,7 @@ export class EsamiComponent implements OnInit{
 
   getExamFields(){
     return new FormGroup({
-      exam_name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{1,}$')]),
+      exam_name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]{1,}$')]),
       exam_code: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{5}$')]),
       exam_cfu: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{1,2}$')])
     })

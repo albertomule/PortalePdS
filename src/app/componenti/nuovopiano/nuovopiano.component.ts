@@ -24,6 +24,8 @@ export class NuovopianoComponent {
   sottoscrizione: any
   submongo: any
 
+  matricola: number = 0
+
   constructor(private route: ActivatedRoute, private mongo: MongoService, private router: Router){}
 
   ngOnInit(): void {
@@ -201,7 +203,8 @@ export class NuovopianoComponent {
     return this.examcListArray().at(i).value.conseguito
   }
   randomMatricola(){
-    return Math.floor(Math.random() * 999999)
+    this.matricola = Math.floor(Math.random() * 999999)
+    return this.matricola
   }
 
   invia(){
@@ -213,7 +216,7 @@ export class NuovopianoComponent {
       this.examForm.value
     ]).subscribe((data: any) => {
       console.log(data)
-      alert('Il piano è stato inviato con successo')
+      alert('Il piano è stato inviato con successo (Matricola: ' + this.matricola + ')')
       this.router.navigate(['/start'])
     })
   }
