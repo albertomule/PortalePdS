@@ -10,13 +10,22 @@ import { Router } from '@angular/router';
 })
 export class HomestudenteComponent {
 
+  date1 : Date = new Date()
+  localdate: String = new Date().toLocaleString()
+
   form: FormGroup = this.fb.group({
     fresh: null,
+    // nome: ['', [Validators.required, Validators.pattern('^[a-zA-Z]{1,}$')]],
+    // cognome: ['', [Validators.required, Validators.pattern('^[a-zA-Z]{1,}$')]],
+    // email: ['', [Validators.required, Validators.pattern('^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')]],
     anno: ['', [Validators.required, Validators.pattern('^[0-9]{4}$')]]
   })
 
   constructor(private fb: FormBuilder, private router: Router) {}
   
+  // get nome() { return this.form.get("nome") }
+  // get cognome() { return this.form.get("cognome") }
+  // get email() { return this.form.get("email") }
   get anno() { return this.form.get("anno") }
 
   getAnno(){

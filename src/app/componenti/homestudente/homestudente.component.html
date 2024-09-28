@@ -1,5 +1,7 @@
 <h3 class="title">Loggato come studente</h3>
 <br>
+<h4>TEST DATE: {{date1}}</h4>
+<h4>TEST LOCALDATE: {{localdate}}</h4>
 <h4>La carriera è stata iniziata a informatica senza riconoscimenti di carriere precedenti?</h4>
 
 <form [formGroup]="form" #signupForm="ngForm" (ngSubmit)="submit(signupForm)">
@@ -8,7 +10,7 @@
       <input type="radio" name="fresh" [value]=false formControlName="fresh" (click)="test()"> <label style="font-size: 20px;"> No</label>
   </div>
     <div *ngIf="isFresh()">
-        <div><p style="font-size: 20px;">Anno di immatricolazione: </p></div>
+        <div><p style="font-size: 20px;">Anno accademico di immatricolazione: </p></div>
         <input type="text" formControlName="anno" [ngClass]="signupForm.submitted && anno?.invalid ? 'field-error' : ''">
         <div class="error" *ngIf="(anno?.touched || anno?.dirty || signupForm.submitted) && anno?.invalid">
             <div *ngIf="anno?.errors?.['required']">Anno richiesto</div>
@@ -19,7 +21,7 @@
           </div>
     </div>
     <div *ngIf="isFresh()==false">
-        <div><p style="font-size: 20px;">Anno di immissione a informatica: </p></div>
+        <div><p style="font-size: 20px;">Anno accademico di immissione a informatica: </p></div>
         <input type="text" formControlName="anno" [ngClass]="signupForm.submitted && anno?.invalid ? 'field-error' : ''">
         <div class="error" *ngIf="(anno?.touched || anno?.dirty || signupForm.submitted) && anno?.invalid">
             <div *ngIf="anno?.errors?.['required']">Anno richiesto</div>
