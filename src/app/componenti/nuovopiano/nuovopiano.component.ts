@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MongoService } from '../../servizi/mongo.service';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { DatistudenteService } from '../../servizi/datistudente.service';
 
 @Component({
   selector: 'app-nuovopiano',
@@ -26,7 +27,12 @@ export class NuovopianoComponent {
 
   matricola: number = 0
 
-  constructor(private route: ActivatedRoute, private mongo: MongoService, private router: Router){}
+  // nome: string = ""
+  // cognome: string = ""
+  // email: string = ""
+  // fresh: boolean = false
+
+  constructor(private route: ActivatedRoute, private mongo: MongoService, private router: Router, private datistudente: DatistudenteService){}
 
   ngOnInit(): void {
     this.sottoscrizione = this.route.paramMap.subscribe((params: ParamMap)=>{
@@ -38,6 +44,11 @@ export class NuovopianoComponent {
         this.getSecondo()
         this.getTerzo()
         this.getComp()
+
+        console.log(this.datistudente.nome)
+        console.log(this.datistudente.cognome)
+        console.log(this.datistudente.email)
+        console.log(this.datistudente.fresh)
         
         console.log(this.regolamento)
         console.log(this.primo)
@@ -208,7 +219,13 @@ export class NuovopianoComponent {
   }
 
   invia(){
-    this.mongo.insertPiano(this.randomMatricola().toString(), this.anno, [
+    this.mongo.insertPiano(this.randomMatricola().toString(), this.anno, 
+    this.datistudente.nome, 
+    this.datistudente.cognome,
+    this.datistudente.email,
+    this.datistudente.fresh,
+    new Date().toLocaleString(),
+    [
       this.exam1Form.value, 
       this.exam2Form.value, 
       this.exam3Form.value, 

@@ -1,7 +1,7 @@
 <h3 class="title">Loggato come studente</h3>
 <br>
-<h4>TEST DATE: {{date1}}</h4>
-<h4>TEST LOCALDATE: {{localdate}}</h4>
+<!-- <h4>TEST DATE: {{date1}}</h4>
+<h4>TEST LOCALDATE: {{localdate}}</h4> -->
 <h4>La carriera è stata iniziata a informatica senza riconoscimenti di carriere precedenti?</h4>
 
 <form [formGroup]="form" #signupForm="ngForm" (ngSubmit)="submit(signupForm)">
@@ -10,7 +10,7 @@
       <input type="radio" name="fresh" [value]=false formControlName="fresh" (click)="test()"> <label style="font-size: 20px;"> No</label>
   </div>
     <div *ngIf="isFresh()">
-        <div><p style="font-size: 20px;">Anno accademico di immatricolazione: </p></div>
+      <div><p style="font-size: 20px;">Anno accademico di immatricolazione: </p></div>
         <input type="text" formControlName="anno" [ngClass]="signupForm.submitted && anno?.invalid ? 'field-error' : ''">
         <div class="error" *ngIf="(anno?.touched || anno?.dirty || signupForm.submitted) && anno?.invalid">
             <div *ngIf="anno?.errors?.['required']">Anno richiesto</div>
@@ -18,7 +18,7 @@
             <!-- <div *ngIf="(anno?.errors?.['minlength'] || anno?.errors?.['maxlength'])">
               Anno deve essere di 4 cifre
             </div> -->
-          </div>
+        </div>
     </div>
     <div *ngIf="isFresh()==false">
         <div><p style="font-size: 20px;">Anno accademico di immissione a informatica: </p></div>
@@ -33,6 +33,24 @@
     </div>
     <!-- <div><input type="submit" value="Save"></div> -->
     <div *ngIf="isFresh()!=null">
+      <div><p style="font-size: 20px;">Nome: </p></div>
+        <input type="text" formControlName="nome" [ngClass]="signupForm.submitted && nome?.invalid ? 'field-error' : ''">
+        <div class="error" *ngIf="(nome?.touched || nome?.dirty || signupForm.submitted) && nome?.invalid">
+            <div *ngIf="nome?.errors?.['required']">Nome richiesto</div>
+            <div *ngIf="nome?.errors?.['pattern']">Formato nome invalido</div>
+        </div>
+      <div><p style="font-size: 20px;">Cognome: </p></div>
+        <input type="text" formControlName="cognome" [ngClass]="signupForm.submitted && cognome?.invalid ? 'field-error' : ''">
+        <div class="error" *ngIf="(cognome?.touched || cognome?.dirty || signupForm.submitted) && cognome?.invalid">
+            <div *ngIf="cognome?.errors?.['required']">Cognome richiesto</div>
+            <div *ngIf="cognome?.errors?.['pattern']">Formato cognome invalido</div>
+        </div>
+      <div><p style="font-size: 20px;">Email: </p></div>
+        <input type="text" formControlName="email" [ngClass]="signupForm.submitted && email?.invalid ? 'field-error' : ''">
+        <div class="error" *ngIf="(email?.touched || email?.dirty || signupForm.submitted) && email?.invalid">
+            <div *ngIf="email?.errors?.['required']">Email richiesta</div>
+            <div *ngIf="email?.errors?.['pattern']">Formato email invalido</div>
+        </div>
         <button type="submit" id="bottone_studente_avanti" class="Home_button">Avanti</button>
     </div>
 </form>

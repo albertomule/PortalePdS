@@ -10,8 +10,8 @@ export class MongoService {
 
   constructor(private http: HttpClient) { }
 
-  insertPiano(matricola: string, anno: string, body: {}){
-    var str = "?m=" + matricola + "&a=" + anno
+  insertPiano(matricola: string, anno: string, nome: string, cognome: string, email: string, fresh: boolean, date: string, body: {}){
+    var str = "?m=" + matricola + "&a=" + anno + "&n=" + nome + "&c=" + cognome + "&e=" + email + "&f=" + fresh + "&d=" + date
     return this.http.post(this.mongoEndPoint + 'insertpiano' + str, JSON.stringify(body))
   }
 
