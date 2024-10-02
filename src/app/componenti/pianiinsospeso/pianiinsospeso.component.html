@@ -6,7 +6,7 @@
         <br/><br/>
         <ng-container *ngFor="let piano of pianiinsospeso; index as i">
                 <li>
-                    <a routerLink="/piano/{{piano.matricola}}">{{ piano.matricola }}</a>
+                    <a routerLink="/piano/{{piano.matricola}}">{{piano.matricola}} {{piano.nome}} {{piano.cognome}}</a>
                     <br/><br/>
                 </li>       
         </ng-container>

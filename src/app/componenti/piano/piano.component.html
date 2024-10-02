@@ -1,4 +1,21 @@
-<h3 class="title">Piano matricola: {{matricola}},<br>anno accademico {{anno}}-{{nextYear(anno)}}</h3>
+<div *ngIf="piano != undefined">
+    <div *ngIf="!piano[approvatoIndex]; else showApprovato">
+        <h1 class="title">Piano in sospeso</h1>
+    </div>
+    <ng-template #showApprovato>
+        <h1 class="title">Piano approvato</h1>
+    </ng-template>
+</div>
+<h3 class="title">Anno accademico {{anno}}-{{nextYear(anno)}}<br>
+    Matricola: {{matricola}}<br>
+    Nome: {{nome}} {{cognome}}<br>
+    Data di invio: {{datainvio}}
+    <div *ngIf="piano != undefined">
+        <div *ngIf="piano[approvatoIndex]">
+            Data di approvazione: {{dataapprovazione}}
+        </div>
+    </div>
+</h3>
 <br>
 
 <div class="container">

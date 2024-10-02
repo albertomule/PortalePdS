@@ -16,6 +16,12 @@ export class PianoComponent implements OnInit, OnDestroy{
   compIndex: number = 6
   esamiIndex: number = 7
   approvatoIndex: number = 8
+  nomeIndex: number = 9
+  cognomeIndex: number = 10
+  // emailIndex: number = 11
+  // freshIndex: number = 12
+  datainvioIndex: number = 13
+  dataapprovazioneIndex: number = 14
 
   matricola: string = ""
   a: boolean = false
@@ -26,6 +32,12 @@ export class PianoComponent implements OnInit, OnDestroy{
   terzo : any[] = []
   comp : any[] = []
   esami : any[] = []
+  nome: string = ""
+  cognome: string = ""
+  // email: string = ""
+  // fresh: boolean = false
+  datainvio: string = ""
+  dataapprovazione: string = ""
 
   sottoscrizione: any
   submongo: any
@@ -63,6 +75,10 @@ export class PianoComponent implements OnInit, OnDestroy{
         this.getTerzo()
         this.getComp()
         this.getEsami()
+        this.nome = this.piano[this.nomeIndex]
+        this.cognome = this.piano[this.cognomeIndex]
+        this.datainvio = this.piano[this.datainvioIndex]
+        this.dataapprovazione = this.piano[this.dataapprovazioneIndex]
         
         console.log(this.piano)
         console.log(this.primo)
@@ -120,7 +136,7 @@ export class PianoComponent implements OnInit, OnDestroy{
 
   approva(){
     if(confirm('Sei sicuro di voler approvare questo piano?')){
-      this.mongo.approvaPiano(this.matricola).subscribe((data: any) => {
+      this.mongo.approvaPiano(this.matricola,new Date().toLocaleString()).subscribe((data: any) => {
         console.log(data)
         alert('Il piano è stato approvato con successo')
         this.router.navigate(['/pianiinsospeso'])

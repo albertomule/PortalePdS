@@ -62,8 +62,8 @@ export class MongoService {
     return this.http.get(this.mongoEndPoint + 'getpiano' + str)
   }
 
-  approvaPiano(matricola: string){
-    var str = "?m=" + matricola
+  approvaPiano(matricola: string, data: string){
+    var str = "?m=" + matricola + "&d=" + data
     console.log(str)
     return this.http.get(this.mongoEndPoint + 'approvapiano' + str)
   }

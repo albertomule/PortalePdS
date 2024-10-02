@@ -1,6 +1,10 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 /* Definisco style titolo */
+h1{
+  color: rgb(0, 0, 0);
+  font-size: 35px;
+}
 h3{
     color: rgb(0, 0, 0);
     font-size: 30px;
