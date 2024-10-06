@@ -59,3 +59,9 @@ h4{
 input::placeholder{
     text-align: center;
  }
+
+.flexcenter{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
