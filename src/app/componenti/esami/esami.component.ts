@@ -29,7 +29,7 @@ export class EsamiComponent implements OnInit{
   }
 
   examRForm: FormGroup = new FormGroup({
-    exam_code: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9]{5}$')])
+    exam_name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9 ]{1,}$')])
   })
 
   examForm: FormGroup = new FormGroup({
@@ -65,10 +65,10 @@ export class EsamiComponent implements OnInit{
   }
 
   removeExam(){
-    var code = this.examRForm.value.exam_code
-    console.log(code)
+    var name = this.examRForm.value.exam_name
+    console.log(name)
     if(confirm('Sei sicuro di voler eliminare questo esame?')){
-      this.mongo.removeEsame(code).subscribe((data: any) => {
+      this.mongo.removeEsame(name).subscribe((data: any) => {
         console.log(data)
         alert('L\'esame è stato eliminato con successo')
         window.location.reload()
@@ -88,7 +88,7 @@ export class EsamiComponent implements OnInit{
     }
   }
 
-  get exam_codeR() { return this.examRForm.get("exam_code") }
+  get exam_nameR() { return this.examRForm.get("exam_name") }
   get exam_name() { return this.examForm.get("exam_name") }
   get exam_code() { return this.examForm.get("exam_code") }
   get exam_cfu() { return this.examForm.get("exam_cfu") }

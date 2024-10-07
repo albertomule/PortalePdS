@@ -24,7 +24,7 @@
 
 <form [formGroup]="examRForm" #removeForm="ngForm" (ngSubmit)="submitRemove(removeForm)">
     <div class="flex" style="margin-top: 15px;">
-        <input type="text" name="" id="" formControlName="exam_code" [ngClass]="removeForm.submitted && exam_codeR?.invalid ? 'field-error' : ''" placeholder="Codice esame" size="10">
+        <input type="text" name="" id="" formControlName="exam_name" [ngClass]="removeForm.submitted && exam_nameR?.invalid ? 'field-error' : ''" placeholder="Nome esame">
         <button class="delete" type="submit">&times;</button>
     </div>
     <!-- <div class="errorRemove" *ngIf="(exam_code?.touched || exam_code?.dirty || removeForm.submitted) && exam_code?.invalid">

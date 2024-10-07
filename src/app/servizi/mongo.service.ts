@@ -38,8 +38,8 @@ export class MongoService {
     return this.http.get(this.mongoEndPoint + 'insertesame' + str)
   }
 
-  removeEsame(code: string){
-    var str = "?c=" + code
+  removeEsame(name: string){
+    var str = "?n=" + name
     console.log(str)
     return this.http.get(this.mongoEndPoint + 'removeesame' + str)
   }
