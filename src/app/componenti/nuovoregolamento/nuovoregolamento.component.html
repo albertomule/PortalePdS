@@ -91,15 +91,24 @@
     </form>
 </div>
 
+<div class="container">
+    <div style="text-align: center;">
+        <form [formGroup]="cfuForm" #cfumaxForm="ngForm" (ngSubmit)="inviatest(cfumaxForm)">
+            <h2>Massimo numero di CFU consentiti per esami Complementari + Libera scelta: </h2>
+            <input type="text" name="" id="" formControlName="cfumax" placeholder="Max CFU" size="5" [ngClass]="cfumaxForm.submitted && cfumax?.invalid ? 'field-error' : ''">
+            <button type="submit">testsubmit</button>
+        </form>
+    </div>
+    
+</div>
+
 <!-- <pre>{{ exam1Form.value | json }}</pre>
 <pre>{{ exam2Form.value | json }}</pre>
 <pre>{{ exam3Form.value | json }}</pre>
 <pre>{{ exam4Form.value | json }}</pre> -->
 
-<!-- <button id="bottone_commissione_nuovoregolamento_invia" class="Home_button" (click)="getReg()">GET</button>
-<button id="bottone_commissione_nuovoregolamento_invia" class="Home_button" (click)="removeReg()">REMOVE</button> -->
-
 <button id="bottone_commissione_nuovoregolamento_invia" class="Home_button" (click)="invia()">Invia</button>
+
 <a routerLink="/regolamenti">
     <button id="bottone_commissione_nuovoregolamento_indietro" class="Home_button">Indietro</button>
 </a>

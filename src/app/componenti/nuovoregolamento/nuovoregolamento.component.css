@@ -82,3 +82,13 @@
     justify-content: center;
     align-items: center;
 }
+
+.error {
+    font-size: 18px;
+    color: red
+}
+
+.field-error, input.ng-invalid.ng-touched, input.ng-invalid.ng-dirty,
+select.ng-invalid.ng-touched, select.ng-invalid.ng-dirty {
+    outline: 0.1rem solid red
+}

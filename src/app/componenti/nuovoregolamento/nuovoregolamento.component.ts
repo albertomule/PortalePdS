@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild, viewChild } from '@angular/core';
-import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms'
+import {FormArray, FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule, Validators} from '@angular/forms'
 import { MongoService } from '../../servizi/mongo.service';
 import { Router } from '@angular/router';
 
@@ -35,6 +35,11 @@ export class NuovoregolamentoComponent{
   exam4Form: FormGroup = new FormGroup({
     exam4List: new FormArray([this.getExamFields()])
   })
+  cfuForm: FormGroup = new FormGroup({
+    cfumax: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{1,2}$')])
+  })
+
+  get cfumax() { return this.cfuForm.get("cfumax") }
 
   getExamFields(){
     return new FormGroup({
@@ -70,6 +75,21 @@ export class NuovoregolamentoComponent{
     }
   }
 
+  invia(){
+    this.mongo.insertRegolamento(this.selectVal.toString(), [this.exam1Form.value, this.exam2Form.value, this.exam3Form.value, this.exam4Form.value]).subscribe((data: any) => {
+      console.log(data)
+      alert('Il regolamento è stato inserito con successo')
+      this.router.navigate(['/regolamenti'])
+    })
+  }
+
+  inviatest(form: FormGroupDirective){
+    if (form.valid) {
+      console.log(form.value)
+      console.log(this.cfuForm.get("cfumax")!.value)
+    }
+  }
+
   // getAllFormData(){
   //   console.log(this.selectVal)
   //   console.log(JSON.stringify(this.exam1Form.value)) 
@@ -82,14 +102,6 @@ export class NuovoregolamentoComponent{
   //   console.log(this.exam3Form.value)
   //   console.log(this.exam4Form.value)
   // }
-
-  invia(){
-    this.mongo.insertRegolamento(this.selectVal.toString(), [this.exam1Form.value, this.exam2Form.value, this.exam3Form.value, this.exam4Form.value]).subscribe((data: any) => {
-      console.log(data)
-      alert('Il regolamento è stato inserito con successo')
-      this.router.navigate(['/regolamenti'])
-    })
-  }
 
   // getReg(){
   //   this.mongo.getRegolamento(this.selectVal.toString()).subscribe((data: any) => {
