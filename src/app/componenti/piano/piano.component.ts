@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MongoService } from '../../servizi/mongo.service';
+import emailjs from '@emailjs/browser';
 
 @Component({
   selector: 'app-piano',
@@ -18,7 +19,7 @@ export class PianoComponent implements OnInit, OnDestroy{
   approvatoIndex: number = 8
   nomeIndex: number = 9
   cognomeIndex: number = 10
-  // emailIndex: number = 11
+  emailIndex: number = 11
   // freshIndex: number = 12
   datainvioIndex: number = 13
   dataapprovazioneIndex: number = 14
@@ -34,7 +35,7 @@ export class PianoComponent implements OnInit, OnDestroy{
   esami : any[] = []
   nome: string = ""
   cognome: string = ""
-  // email: string = ""
+  email: string = ""
   // fresh: boolean = false
   datainvio: string = ""
   dataapprovazione: string = ""
@@ -77,6 +78,7 @@ export class PianoComponent implements OnInit, OnDestroy{
         this.getEsami()
         this.nome = this.piano[this.nomeIndex]
         this.cognome = this.piano[this.cognomeIndex]
+        this.email = this.piano[this.emailIndex]
         this.datainvio = this.piano[this.datainvioIndex]
         this.dataapprovazione = this.piano[this.dataapprovazioneIndex]
         
@@ -86,6 +88,7 @@ export class PianoComponent implements OnInit, OnDestroy{
         console.log(this.terzo)
         console.log(this.comp)
         console.log(this.esami)
+        console.log(this.generastringa())
       })
     })
     console.log(this.matricola)
@@ -139,8 +142,39 @@ export class PianoComponent implements OnInit, OnDestroy{
       this.mongo.approvaPiano(this.matricola,new Date().toLocaleString()).subscribe((data: any) => {
         console.log(data)
         alert('Il piano è stato approvato con successo')
+        //this.inviamail()
+        //this.inviamailstudente()
         this.router.navigate(['/pianiinsospeso'])
       })
     }
+  }
+
+  async inviamail(){
+    emailjs.init('m0RVEevtmq6kUBfqY')
+    let response = await emailjs.send("service_yd5b4a9","template_8eoalav",{
+      from_name: this.nome + " " + this.cognome,
+      to_name: "Prof X",
+      from_email: "alberto.ml@tiscali.it",
+      subject: this.matricola,
+      message: this.generastringa()
+      });
+  }
+
+  async inviamailstudente(){
+    emailjs.init('m0RVEevtmq6kUBfqY')
+    let response = await emailjs.send("service_yd5b4a9","template_wjrfdrd",{
+      to_name: this.nome + " " + this.cognome,
+      from_email: this.email,
+      subject: "stato approvato",
+      message: "Il suo piano di studi è stato approvato manualmente dalla commissione"
+      });
+  }
+
+  generastringa(){
+    var str = this.nome + " " + this.cognome + " " + this.matricola
+    for(var esame of this.esami[0]){
+      str = str + "\n" + esame.exam_name + " " + esame.exam_code + " " + esame.exam_cfu
+    }
+    return str
   }
 }

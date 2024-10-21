@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MongoService } from '../../servizi/mongo.service';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { DatistudenteService } from '../../servizi/datistudente.service';
+import emailjs from '@emailjs/browser';
 
 @Component({
   selector: 'app-nuovopiano',
@@ -26,6 +27,8 @@ export class NuovopianoComponent {
   submongo: any
 
   matricola: number = 0
+  piano: any
+  approvatoIndex: number = 8
 
   // nome: string = ""
   // cognome: string = ""
@@ -233,8 +236,32 @@ export class NuovopianoComponent {
       this.examForm.value
     ]).subscribe((data: any) => {
       console.log(data)
-      alert('Il piano è stato inviato con successo (Matricola: ' + this.matricola + ')')
-      this.router.navigate(['/start'])
+      this.mongo.getPiano(this.matricola.toString()).subscribe((datax: any) => {
+        console.log("DATA: " + datax)
+        
+        this.piano = Object.values(datax)
+        console.log("PIANO: " + this.piano)
+        alert('Il piano è stato inviato con successo (Matricola: ' + this.matricola + ')')
+        //this.inviamail()
+        this.router.navigate(['/start'])
+
+      })
     })
   }
+
+  async inviamail(){
+    emailjs.init('m0RVEevtmq6kUBfqY')
+    let response = await emailjs.send("service_yd5b4a9","template_wjrfdrd",{
+      //from_name: "Albertox",
+      to_name: this.datistudente.nome + " " + this.datistudente.cognome,
+      from_email: this.datistudente.email,
+      subject: this.piano[this.approvatoIndex] ? 
+      "approvato" : 
+      "in sospeso",
+      message: this.piano[this.approvatoIndex] ? 
+      "Il piano di studi è stato inviato correttamente e approvato automaticamente dal PortalePDS" : 
+      "Il piano di studi è stato inviato correttamente, ma attualmente in sospeso. Attenda un'ulteriore email dal PortalePDS a seguito di una revisione del suo piano da parte della commisione"
+      });
+  }
+
 }
