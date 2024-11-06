@@ -1,5 +1,15 @@
 <h3>Piano di studi: Anno accademico {{anno}}-{{nextYear(anno)}}</h3>
 
+<div class="flexcenter">
+    <button class="add2">&plus;</button>
+    <h2 style="display: inline-block;">&nbsp; = Aggiungi una riga con campi esame</h2>
+</div>
+
+<div class="flexcenter">
+    <button class="delete2">&times;</button>
+    <h2 style="display: inline-block;">&nbsp; = Rimuovi una riga con campi esame</h2>
+</div>
+
 <div class="container">
     <div class="wrap">
         <h2>Esami primo anno</h2>
@@ -83,7 +93,7 @@
 </div>
 <div class="container">
     <div class="wrap">
-        <h2>Esami complementari</h2>
+        <h2>Esami complementari (Max CFU: {{maxcfu}})</h2>
     </div>
     <ul>
         <form [formGroup]="examcForm">
@@ -116,6 +126,34 @@
             </div>
             <div *ngFor="let exam of examListArray().controls; let i = index;">
                 <div [formGroupName]="i" class="flex">
+                    <mat-form-field style="width: 200px; height: 65px;">
+                        <mat-select [(value)]="selectVal">
+                            <mat-option *ngFor="let esame of esami" [value]="esame">{{esame.nome}}</mat-option>
+                            <mat-option value="altro">Altro...</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="selectVal==='altro'">
+                        <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
+                        <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
+                        <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
+                        <button class="delete" (click)="removeExam(i)">&times;</button>
+                    </div>
+                    Superato:
+                    <input type="checkbox" formControlName="conseguito">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- <div class="container">
+    <form [formGroup]="examForm">
+        <div formArrayName="examList">
+            <div class="wrap2">
+                <h2 style="padding-left: 27%">Esami a libera scelta</h2>
+                <button class="add" (click)="addExam()">&plus;</button>
+            </div>
+            <div *ngFor="let exam of examListArray().controls; let i = index;">
+                <div [formGroupName]="i" class="flex">
                     <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
                     <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
                     <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
@@ -126,7 +164,7 @@
             </div>
         </div>
     </form>
-</div>
+</div> -->
 
 <button id="bottone_logout_studente" class="Home_button" (click)="getAllFormData(); invia()">Invia</button>
 

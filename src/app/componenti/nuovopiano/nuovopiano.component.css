@@ -70,3 +70,30 @@
     padding-bottom: 15px;
     border-bottom: 2px solid #e4e1e1;
 }
+
+.delete2{
+    text-decoration: none;
+    background: #f44336;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add2{
+    text-decoration: none;
+    width: 30px;
+    height: 30px;
+    background: #8bc34a;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -5,6 +5,7 @@ import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { DatistudenteService } from '../../servizi/datistudente.service';
 import emailjs from '@emailjs/browser';
 
+
 @Component({
   selector: 'app-nuovopiano',
   templateUrl: './nuovopiano.component.html',
@@ -15,6 +16,7 @@ export class NuovopianoComponent {
   secondoIndex: number = 4
   terzoIndex: number = 5
   compIndex: number = 6
+  maxcfuIndex: number = 7
 
   anno: string = ""
   regolamento: any
@@ -22,6 +24,7 @@ export class NuovopianoComponent {
   secondo : any[] = []
   terzo : any[] = []
   comp : any[] = []
+  maxcfu: number = 0
 
   sottoscrizione: any
   submongo: any
@@ -29,6 +32,9 @@ export class NuovopianoComponent {
   matricola: number = 0
   piano: any
   approvatoIndex: number = 8
+  esami: any
+  selectVal: string = ""
+  //altro: boolean = false
 
   // nome: string = ""
   // cognome: string = ""
@@ -47,6 +53,7 @@ export class NuovopianoComponent {
         this.getSecondo()
         this.getTerzo()
         this.getComp()
+        this.maxcfu = this.regolamento[this.maxcfuIndex]
 
         console.log(this.datistudente.nome)
         console.log(this.datistudente.cognome)
@@ -71,6 +78,14 @@ export class NuovopianoComponent {
         for(let i of this.comp[0]){
           this.addcExam(i.exam_name,i.exam_code,i.exam_cfu)
         }
+
+        this.mongo.getEsami().subscribe((data: any) => {
+          this.esami = Object.keys(data).map((key) => { 
+            data[key]['id'] = key
+            return data[key]
+          })
+          console.log(this.esami)
+        })
 
       })
     })
@@ -263,5 +278,13 @@ export class NuovopianoComponent {
       "Il piano di studi è stato inviato correttamente, ma attualmente in sospeso. Attenda un'ulteriore email dal PortalePDS a seguito di una revisione del suo piano da parte della commisione"
       });
   }
+
+  // setAltro(){
+  //   this.altro = true
+  // }
+  // resetAltro(){
+  //   this.altro = false
+  // }
+
 
 }
