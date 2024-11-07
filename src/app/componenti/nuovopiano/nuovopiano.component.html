@@ -127,12 +127,15 @@
             <div *ngFor="let exam of examListArray().controls; let i = index;">
                 <div [formGroupName]="i" class="flex">
                     <mat-form-field style="width: 200px; height: 65px;">
-                        <mat-select [(value)]="selectVal">
-                            <mat-option *ngFor="let esame of esami" [value]="esame">{{esame.nome}}</mat-option>
+                        <mat-select formControlName="selectVal">
+                            <mat-option *ngFor="let esame of esami" [value]="esame.nome">{{esame.nome}}</mat-option>
                             <mat-option value="altro">Altro...</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <div *ngIf="selectVal==='altro'">
+                    <div>
+                        {{getSelectVal(i)}}
+                    </div>
+                    <div *ngIf="getSelectVal(i)==='altro'">
                         <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
                         <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
                         <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">

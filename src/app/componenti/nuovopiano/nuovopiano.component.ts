@@ -33,7 +33,7 @@ export class NuovopianoComponent {
   piano: any
   approvatoIndex: number = 8
   esami: any
-  selectVal: string = ""
+  //selectVal: string = ""
   //altro: boolean = false
 
   // nome: string = ""
@@ -149,7 +149,8 @@ export class NuovopianoComponent {
       exam_name: new FormControl(''),
       exam_code: new FormControl(''),
       exam_cfu: new FormControl(''),
-      conseguito: new FormControl(false)
+      conseguito: new FormControl(false),
+      selectVal: new FormControl('')
     })
   }
   getFullFields(a: string, b: string, c: string, p: boolean){
@@ -161,6 +162,8 @@ export class NuovopianoComponent {
       conseguito: new FormControl(false)
     })
   }
+
+  get selectVal() { return this.examForm.get("examList.selectVal") }
 
   exam1ListArray(){
     return this.exam1Form.get('exam1List') as FormArray
@@ -198,6 +201,11 @@ export class NuovopianoComponent {
   }
   removeExam(i: number){
     this.examListArray().removeAt(i)
+  }
+
+
+ getSelectVal(i: number){
+    return this.examListArray().at(i).value.selectVal
   }
 
   // invia(){
