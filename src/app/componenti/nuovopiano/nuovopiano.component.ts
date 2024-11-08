@@ -25,6 +25,9 @@ export class NuovopianoComponent {
   terzo : any[] = []
   comp : any[] = []
   maxcfu: number = 0
+  storedvalue: number = 0
+  storedvaluetendina : number = 0
+  inaltro: boolean = false
 
   sottoscrizione: any
   submongo: any
@@ -200,6 +203,7 @@ export class NuovopianoComponent {
     this.examListArray().push(this.getExamFields())
   }
   removeExam(i: number){
+    this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(i).value.exam_cfu-0)
     this.examListArray().removeAt(i)
   }
 
@@ -293,6 +297,52 @@ export class NuovopianoComponent {
   // resetAltro(){
   //   this.altro = false
   // }
+
+  fillDataFromSelectVal(value: any, index: number){
+     console.log(value)
+    console.log(this.examListArray().at(index).value.exam_cfu)
+
+    if(value=='altro'){
+      this.maxcfu = (this.maxcfu-0) + (this.storedvaluetendina-0)
+      this.inaltro = true
+      return
+    } 
+
+    for(let esame of this.esami){
+      if(esame.nome==value){
+        console.log(this.maxcfu)
+        if(!this.inaltro)
+          this.maxcfu = (this.maxcfu-0) + (this.storedvaluetendina-0)
+        else{
+          this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(index).value.exam_cfu-0)
+          this.inaltro = false
+          this.examListArray().at(index).reset()
+          this.storedvalue = 0
+        }
+        this.examListArray().at(index).value.exam_name = esame.nome
+        this.examListArray().at(index).value.exam_code = esame.codice
+        this.examListArray().at(index).value.exam_cfu = esame.cfu
+         console.log(this.examListArray().at(index).value.exam_name)
+         console.log(this.examListArray().at(index).value.exam_code)
+         console.log(this.examListArray().at(index).value.exam_cfu)
+         this.storedvaluetendina = esame.cfu
+        this.maxcfu = (this.maxcfu-0) - (esame.cfu-0)
+        return
+      }
+    }
+  }
+
+  updateMaxCFU(event: Event){
+    console.log(this.storedvalue)
+    this.maxcfu = (this.maxcfu-0) + (this.storedvalue-0)
+    const newValue = (event.target as HTMLInputElement).value
+    var value = parseInt(newValue)
+    console.log(value)
+    if(Number.isNaN(value)) value=0
+    console.log(value)
+    this.maxcfu = (this.maxcfu-0) - (value-0)
+    this.storedvalue = value
+  }
 
 
 }

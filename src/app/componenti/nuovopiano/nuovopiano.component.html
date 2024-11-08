@@ -93,7 +93,7 @@
 </div>
 <div class="container">
     <div class="wrap">
-        <h2>Esami complementari (Max CFU: {{maxcfu}})</h2>
+        <h2>Esami complementari (Max CFU: {{maxcfu-0}})</h2>
     </div>
     <ul>
         <form [formGroup]="examcForm">
@@ -127,22 +127,22 @@
             <div *ngFor="let exam of examListArray().controls; let i = index;">
                 <div [formGroupName]="i" class="flex">
                     <mat-form-field style="width: 200px; height: 65px;">
-                        <mat-select formControlName="selectVal">
+                        <mat-select formControlName="selectVal" placeholder="Scegli esame.." (selectionChange)="fillDataFromSelectVal($event.value, i)">
                             <mat-option *ngFor="let esame of esami" [value]="esame.nome">{{esame.nome}}</mat-option>
                             <mat-option value="altro">Altro...</mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <div>
+                    <!-- <div>
                         {{getSelectVal(i)}}
-                    </div>
+                    </div> -->
                     <div *ngIf="getSelectVal(i)==='altro'">
                         <input type="text" name="" id="" formControlName="exam_name" placeholder="Nome esame">
                         <input type="text" name="" id="" formControlName="exam_code" placeholder="Codice esame" size="10">
-                        <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7">
-                        <button class="delete" (click)="removeExam(i)">&times;</button>
+                        <input type="text" name="" id="" formControlName="exam_cfu" placeholder="CFU esame" size="7" (change)="updateMaxCFU($event)">
                     </div>
                     Superato:
                     <input type="checkbox" formControlName="conseguito">
+                    <button class="delete" (click)="removeExam(i)">&times;</button>
                 </div>
             </div>
         </div>
