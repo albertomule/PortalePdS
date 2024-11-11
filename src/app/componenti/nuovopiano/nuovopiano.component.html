@@ -105,10 +105,10 @@
                                 {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 Pianificato:
-                                <input type="checkbox" formControlName="pianificato" [checked]="pianificatoCheck(i)" (change)="fixConseguito(i)">
+                                <input type="checkbox" formControlName="pianificato" (change)="fixConseguito(i)" [checked]="pianificatoCheck(i)" [ngModel]="pianificatoCheck(i)">
                                 &nbsp;&nbsp;&nbsp;
                                 Superato:
-                                <input type="checkbox" formControlName="conseguito" [checked]="conseguitoCheck(i)" (change)="fixPianificato(i)">
+                                <input type="checkbox" formControlName="conseguito"  (change)="fixPianificato(i)" [checked]="conseguitoCheck(i)" [ngModel]="conseguitoCheck(i)">
                             </p>
                         </li>
                     </div>

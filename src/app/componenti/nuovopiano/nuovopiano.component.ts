@@ -226,15 +226,36 @@ export class NuovopianoComponent {
     console.log(this.examcForm.value)
   }
 
-  fixPianificato(i: number){
-    if(this.examcListArray().at(i).value.conseguito)
+  fixPianificato(i: number){ //conseguito è stato cliccato
+    //se pianificato è true, non mi interessa che conseguito sia stato cliccato
+    console.log(this.examcListArray().at(i).value)
+    if(this.examcListArray().at(i).value.pianificato == true) return
+    //se conseguito è true, devo mettere pianificato a true e sottrarre cfu da maxcfu
+    if(this.examcListArray().at(i).value.conseguito == true){
       this.examcListArray().at(i).value.pianificato = true
-    console.log(this.examcListArray().at(i).value)
+      console.log(this.examcListArray().at(i).value)
+      this.maxcfu = (this.maxcfu-0) - (this.examcListArray().at(i).value.exam_cfu-0)
+    }
   }
-  fixConseguito(i: number){
-    if(!this.examcListArray().at(i).value.pianificato)
-      this.examcListArray().at(i).value.conseguito = false
+  fixConseguito(i: number){ //pianificato è stato cliccato
+    //se conseguito è true, devo checkare
+    if(this.examcListArray().at(i).value.conseguito == true){
+      //se pianificato è false, devo mettere conseguito a false e sommare cfu a maxcfu
+      if(this.examcListArray().at(i).value.pianificato == false){
+        this.examcListArray().at(i).value.conseguito = false
+        console.log(this.examcListArray().at(i).value)
+      } //else non dovrebbe mai verificarsi
+      // else{
+      //   this.maxcfu = (this.maxcfu-0) - (this.examcListArray().at(i).value.exam_cfu-0)
+      // }
+    }
+    //sommo e sottraggo cfu in base a pianificato tickato o no
+    if(this.examcListArray().at(i).value.pianificato == false)
+      this.maxcfu = (this.maxcfu-0) + (this.examcListArray().at(i).value.exam_cfu-0)
+    else
+      this.maxcfu = (this.maxcfu-0) - (this.examcListArray().at(i).value.exam_cfu-0)
     console.log(this.examcListArray().at(i).value)
+    
   }
 
   pianificatoCheck(i: number){
