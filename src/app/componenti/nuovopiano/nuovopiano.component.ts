@@ -25,9 +25,9 @@ export class NuovopianoComponent {
   terzo : any[] = []
   comp : any[] = []
   maxcfu: number = 0
-  storedvalue: number = 0
-  storedvaluetendina : number = 0
-  inaltro: boolean = false
+  //storedvalue: number = 0
+  //storedvaluetendina : number = 0
+  //inaltro: boolean = false
 
   sottoscrizione: any
   submongo: any
@@ -153,7 +153,10 @@ export class NuovopianoComponent {
       exam_code: new FormControl(''),
       exam_cfu: new FormControl(''),
       conseguito: new FormControl(false),
-      selectVal: new FormControl('')
+      selectVal: new FormControl(''),
+      selectValAltro: new FormControl(false),
+      selectValAltroValue: new FormControl(0),
+      selectValValue: new FormControl(0)
     })
   }
   getFullFields(a: string, b: string, c: string, p: boolean){
@@ -203,7 +206,12 @@ export class NuovopianoComponent {
     this.examListArray().push(this.getExamFields())
   }
   removeExam(i: number){
-    this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(i).value.exam_cfu-0)
+    if(this.examListArray().at(i).value.selectValValue > 0){
+      this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(i).value.selectValValue-0)
+    }
+    else{
+      this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(i).value.exam_cfu-0)
+    }
     this.examListArray().removeAt(i)
   }
 
@@ -270,6 +278,15 @@ export class NuovopianoComponent {
   }
 
   invia(){
+    if(this.maxcfu > 0){
+      alert('Impossibile inviare il piano: alcuni CFU previsti per esami complementari / a libera scelta non sono ancora stati allocati')
+      return
+    }
+    else if(this.maxcfu < 0){
+      alert('Impossibile inviare il piano: troppi CFU allocati per esami complementari / a libera scelta')
+      return
+    }
+
     this.mongo.insertPiano(this.randomMatricola().toString(), this.anno, 
     this.datistudente.nome, 
     this.datistudente.cognome,
@@ -321,24 +338,41 @@ export class NuovopianoComponent {
 
   fillDataFromSelectVal(value: any, index: number){
      console.log(value)
-    console.log(this.examListArray().at(index).value.exam_cfu)
+    console.log(this.examListArray().at(index).value)
+    console.log("INIZIO")
 
     if(value=='altro'){
-      this.maxcfu = (this.maxcfu-0) + (this.storedvaluetendina-0)
-      this.inaltro = true
+      this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(index).value.selectValValue-0)
+      //this.examListArray().at(index).value.selectValAltro = true
+      this.examForm.get('examList.'+index+'.selectValAltro')?.setValue(true)
+      this.examForm.get('examList.'+index+'.selectValValue')?.setValue(0)
       return
     } 
 
+    console.log(this.examListArray().at(index).value.selectValValue)
+
     for(let esame of this.esami){
+      console.log(this.examListArray().at(index).value.selectValValue)
       if(esame.nome==value){
         console.log(this.maxcfu)
-        if(!this.inaltro)
-          this.maxcfu = (this.maxcfu-0) + (this.storedvaluetendina-0)
+        console.log(this.examListArray().at(index).value.selectValValue)
+        if(this.examListArray().at(index).value.selectValAltro == false){
+          console.log(this.examListArray().at(index).value.selectValValue)
+          console.log("IF")
+          this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(index).value.selectValValue-0)
+        }
         else{
-          this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(index).value.exam_cfu-0)
-          this.inaltro = false
-          this.examListArray().at(index).reset()
-          this.storedvalue = 0
+          console.log(this.examListArray().at(index).value.exam_cfu)
+          console.log("ELSE")
+          this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(index).value.selectValAltroValue-0)
+          this.examForm.get('examList.'+index+'.selectValAltro')?.setValue(false)
+          //this.examListArray().at(index).value.selectValAltro = false
+          //this.examListArray().at(index).reset()
+          this.examForm.get('examList.'+index+'.exam_name')?.setValue('')
+          this.examForm.get('examList.'+index+'.exam_code')?.setValue('')
+          this.examForm.get('examList.'+index+'.exam_cfu')?.setValue('')
+          //this.examListArray().at(index).value.selectValAltroValue = 0
+          this.examForm.get('examList.'+index+'.selectValAltroValue')?.setValue(0)
         }
         this.examListArray().at(index).value.exam_name = esame.nome
         this.examListArray().at(index).value.exam_code = esame.codice
@@ -346,23 +380,27 @@ export class NuovopianoComponent {
          console.log(this.examListArray().at(index).value.exam_name)
          console.log(this.examListArray().at(index).value.exam_code)
          console.log(this.examListArray().at(index).value.exam_cfu)
-         this.storedvaluetendina = esame.cfu
+        //this.examListArray().at(index).value.selectValValue = this.examListArray().at(index).value.exam_cfu
+        this.examForm.get('examList.'+index+'.selectValValue')?.setValue(esame.cfu)
         this.maxcfu = (this.maxcfu-0) - (esame.cfu-0)
+        console.log(this.examListArray().at(index).value)
+        
         return
       }
     }
   }
 
-  updateMaxCFU(event: Event){
-    console.log(this.storedvalue)
-    this.maxcfu = (this.maxcfu-0) + (this.storedvalue-0)
+  updateMaxCFU(event: Event, index: number){
+    console.log(this.examListArray().at(index).value.selectValAltroValue)
+    this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(index).value.selectValAltroValue-0)
     const newValue = (event.target as HTMLInputElement).value
     var value = parseInt(newValue)
     console.log(value)
     if(Number.isNaN(value)) value=0
     console.log(value)
     this.maxcfu = (this.maxcfu-0) - (value-0)
-    this.storedvalue = value
+    //this.examListArray().at(index).value.selectValAltroValue = value
+    this.examForm.get('examList.'+index+'.selectValAltroValue')?.setValue(value)
   }
 
 
