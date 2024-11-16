@@ -286,7 +286,7 @@ export class NuovopianoComponent {
       alert('Impossibile inviare il piano: troppi CFU allocati per esami complementari / a libera scelta')
       return
     }
-
+    //this.randomMatricola().toString()
     this.mongo.insertPiano(this.randomMatricola().toString(), this.anno, 
     this.datistudente.nome, 
     this.datistudente.cognome,
@@ -329,77 +329,53 @@ export class NuovopianoComponent {
       });
   }
 
-  // setAltro(){
-  //   this.altro = true
-  // }
-  // resetAltro(){
-  //   this.altro = false
-  // }
-
   fillDataFromSelectVal(value: any, index: number){
-     console.log(value)
-    console.log(this.examListArray().at(index).value)
-    console.log("INIZIO")
 
-    if(value=='altro'){
+    if(value=='altro'){//clicco tendina altro
       this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(index).value.selectValValue-0)
-      //this.examListArray().at(index).value.selectValAltro = true
+
       this.examForm.get('examList.'+index+'.selectValAltro')?.setValue(true)
       this.examForm.get('examList.'+index+'.selectValValue')?.setValue(0)
+      this.examForm.get('examList.'+index+'.exam_name')?.setValue('')
+      this.examForm.get('examList.'+index+'.exam_code')?.setValue('')
+      this.examForm.get('examList.'+index+'.exam_cfu')?.setValue('')
       return
     } 
 
-    console.log(this.examListArray().at(index).value.selectValValue)
-
     for(let esame of this.esami){
-      console.log(this.examListArray().at(index).value.selectValValue)
       if(esame.nome==value){
-        console.log(this.maxcfu)
-        console.log(this.examListArray().at(index).value.selectValValue)
-        if(this.examListArray().at(index).value.selectValAltro == false){
-          console.log(this.examListArray().at(index).value.selectValValue)
-          console.log("IF")
+        if(this.examListArray().at(index).value.selectValAltro == false){//provengo da tendina non altro
           this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(index).value.selectValValue-0)
         }
-        else{
-          console.log(this.examListArray().at(index).value.exam_cfu)
-          console.log("ELSE")
+        else{//provengo da tendina altro
           this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(index).value.selectValAltroValue-0)
+
           this.examForm.get('examList.'+index+'.selectValAltro')?.setValue(false)
-          //this.examListArray().at(index).value.selectValAltro = false
-          //this.examListArray().at(index).reset()
-          this.examForm.get('examList.'+index+'.exam_name')?.setValue('')
-          this.examForm.get('examList.'+index+'.exam_code')?.setValue('')
-          this.examForm.get('examList.'+index+'.exam_cfu')?.setValue('')
-          //this.examListArray().at(index).value.selectValAltroValue = 0
           this.examForm.get('examList.'+index+'.selectValAltroValue')?.setValue(0)
         }
-        this.examListArray().at(index).value.exam_name = esame.nome
-        this.examListArray().at(index).value.exam_code = esame.codice
-        this.examListArray().at(index).value.exam_cfu = esame.cfu
-         console.log(this.examListArray().at(index).value.exam_name)
-         console.log(this.examListArray().at(index).value.exam_code)
-         console.log(this.examListArray().at(index).value.exam_cfu)
-        //this.examListArray().at(index).value.selectValValue = this.examListArray().at(index).value.exam_cfu
+        this.examForm.get('examList.'+index+'.exam_name')?.setValue(esame.nome)
+        this.examForm.get('examList.'+index+'.exam_code')?.setValue(esame.codice)
+        this.examForm.get('examList.'+index+'.exam_cfu')?.setValue(esame.cfu)
         this.examForm.get('examList.'+index+'.selectValValue')?.setValue(esame.cfu)
         this.maxcfu = (this.maxcfu-0) - (esame.cfu-0)
-        console.log(this.examListArray().at(index).value)
-        
         return
       }
     }
   }
 
   updateMaxCFU(event: Event, index: number){
-    console.log(this.examListArray().at(index).value.selectValAltroValue)
+    //aggiungo cfu vecchi salvati in altrovalue
     this.maxcfu = (this.maxcfu-0) + (this.examListArray().at(index).value.selectValAltroValue-0)
+
+    //parso cfu nuovi campo altro
     const newValue = (event.target as HTMLInputElement).value
     var value = parseInt(newValue)
-    console.log(value)
     if(Number.isNaN(value)) value=0
-    console.log(value)
+
+    //sottraggo cfu nuovi campo altro
     this.maxcfu = (this.maxcfu-0) - (value-0)
-    //this.examListArray().at(index).value.selectValAltroValue = value
+
+    //salvo nuovo valore cfu in altrovalue
     this.examForm.get('examList.'+index+'.selectValAltroValue')?.setValue(value)
   }
 
