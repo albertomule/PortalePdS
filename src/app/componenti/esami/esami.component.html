@@ -16,7 +16,7 @@
                 <input type="text" name="" id="examName" formControlName="exam_name" [ngClass]="addForm.submitted && exam_name?.invalid ? 'field-error' : ''" placeholder="Nome esame">
                 <input type="text" name="" id="" formControlName="exam_code" [ngClass]="addForm.submitted && exam_code?.invalid ? 'field-error' : ''" placeholder="Codice esame" size="10">
                 <input type="text" name="" id="" formControlName="exam_cfu" [ngClass]="addForm.submitted && exam_cfu?.invalid ? 'field-error' : ''" placeholder="CFU esame" size="7">
-                <button class="add" type="submit">&plus;</button>
+                <button title="Aggiungi esame" class="add" type="submit">&plus;</button>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
 <form [formGroup]="examRForm" #removeForm="ngForm" (ngSubmit)="submitRemove(removeForm)">
     <div class="flex" style="margin-top: 15px;">
         <input type="text" name="" id="" formControlName="exam_name" [ngClass]="removeForm.submitted && exam_nameR?.invalid ? 'field-error' : ''" placeholder="Nome esame">
-        <button class="delete" type="submit">&times;</button>
+        <button title="Rimuovi esame" class="delete" type="submit">&times;</button>
     </div>
     <!-- <div class="errorRemove" *ngIf="(exam_code?.touched || exam_code?.dirty || removeForm.submitted) && exam_code?.invalid">
         <div *ngIf="exam_code?.errors?.['required']">Codice richiesto</div>
