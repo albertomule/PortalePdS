@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Carica</h2>
+<mat-dialog-content>
+  <p>Inserisci l'anno del regolamento da caricare</p>
+  <mat-form-field>
+    <mat-label>Anno..</mat-label>
+    <input matInput [(ngModel)]="loadYear" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Indietro</button>
+  <button mat-button [mat-dialog-close]="loadYear()">Conferma</button>
+</mat-dialog-actions>

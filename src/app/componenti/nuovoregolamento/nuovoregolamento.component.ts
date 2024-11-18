@@ -1,7 +1,19 @@
-import { AfterViewInit, Component, ElementRef, ViewChild, viewChild } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule, Validators} from '@angular/forms'
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, ViewChild, inject, model, signal, viewChild } from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms'
 import { MongoService } from '../../servizi/mongo.service';
 import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-nuovoregolamento',
@@ -15,6 +27,17 @@ export class NuovoregolamentoComponent{
   currentYear: number
   years: number[] = []
   selectVal: number = 0
+
+  primoIndex: number = 3
+  secondoIndex: number = 4
+  terzoIndex: number = 5
+  compIndex: number = 6
+
+  regolamento: any
+  primo : any[] = []
+  secondo : any[] = []
+  terzo : any[] = []
+  comp : any[] = []
 
   constructor(private fb: FormBuilder, private mongo: MongoService, private router: Router){
     this.currentYear = new Date().getFullYear()
@@ -114,5 +137,103 @@ export class NuovoregolamentoComponent{
           //this.router.navigate(['/regolamenti'])
       })
     }
+  }
+
+  readonly loadYear = signal('');
+  readonly dialog = inject(MatDialog);
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      data: {loadYear: this.loadYear()},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        this.loadYear.set(result);
+        console.log(this.loadYear())
+        this.caricaRegolamento(this.loadYear())
+      }
+    });
+  }
+
+  caricaRegolamento(anno: string){
+    this.mongo.getRegolamento(anno).subscribe((data: any) => {
+
+      if(data == null){
+        console.log("Regolamento non trovato")
+        alert('Regolamento per l\'anno specificato non trovato')
+        return
+      }
+
+      this.regolamento = Object.values(data)
+      
+      this.getPrimo()
+      this.getSecondo()
+      this.getTerzo()
+      this.getComp()
+      
+      console.log(this.regolamento)
+      console.log(this.primo)
+      console.log(this.secondo)
+      console.log(this.terzo)
+      console.log(this.comp)
+    })
+  }
+
+  getPrimo(){
+    var str = this.regolamento[this.primoIndex]
+    console.log(str)
+    this.primo = Object.values(JSON.parse(str))
+  }
+  getSecondo(){
+    var str = this.regolamento[this.secondoIndex]
+    console.log(str)
+    this.secondo = Object.values(JSON.parse(str))
+  }
+  getTerzo(){
+    var str = this.regolamento[this.terzoIndex]
+    console.log(str)
+    this.terzo = Object.values(JSON.parse(str))
+  }
+  getComp(){
+    var str = this.regolamento[this.compIndex]
+    console.log(str)
+    this.comp = Object.values(JSON.parse(str))
+  }
+}
+
+
+
+
+
+
+
+export interface DialogData {
+  loadYear: string;
+}
+
+@Component({
+  selector: 'app-nuovoregolamentodialog',
+  templateUrl: './nuovoregolamentodialog.component.html',
+  standalone: true,
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+  ],
+})
+export class DialogOverviewExampleDialog {
+  readonly dialogRef = inject(MatDialogRef<DialogOverviewExampleDialog>);
+  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+  readonly loadYear = model(this.data.loadYear);
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
