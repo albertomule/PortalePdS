@@ -28,10 +28,12 @@ export class NuovoregolamentoComponent{
   years: number[] = []
   selectVal: number = 0
 
+ // annoIndex: number = 1
   primoIndex: number = 3
   secondoIndex: number = 4
   terzoIndex: number = 5
   compIndex: number = 6
+  maxcfuIndex: number = 7
 
   regolamento: any
   primo : any[] = []
@@ -119,7 +121,12 @@ export class NuovoregolamentoComponent{
   }
 
   inviatest(form: FormGroupDirective){
-    if (form.valid && this.selectVal != 0) {
+    if (form.valid) {
+      if(this.selectVal == 0){
+        alert('ERRORE: Anno non selezionato')
+        return
+      }
+
       console.log(this.regolamentoForm.get("cfuForm.cfumax")!.value)
       this.logFormData(1)
       this.logFormData(2)
@@ -178,6 +185,61 @@ export class NuovoregolamentoComponent{
       console.log(this.secondo)
       console.log(this.terzo)
       console.log(this.comp)
+
+      //this.selectVal = this.regolamento[this.annoIndex]
+
+      this.removeExam(1,0)
+      this.removeExam(2,0)
+      this.removeExam(3,0)
+      this.removeExam(4,0)
+
+      for(let esame of this.primo[0]){
+        this.addExam(1)
+       // this.examForm.get('examList.'+index+'.selectValAltroValue')?.setValue(value)
+        var index = this.examListArray(1).length-1
+       // this.regolamentoForm.get('exam1Form')?.get('exam1List.'+index+'.exam_name')?.setValue(esame.exam_name)
+        this.regolamentoForm.get('exam1Form.exam1List.'+index+'.exam_name')?.setValue(esame.exam_name)
+        this.regolamentoForm.get('exam1Form.exam1List.'+index+'.exam_code')?.setValue(esame.exam_code)
+        this.regolamentoForm.get('exam1Form.exam1List.'+index+'.exam_cfu')?.setValue(esame.exam_cfu)
+        // this.examListArray(1).at(index).value.exam_name = esame.exam_name
+        // this.examListArray(1).at(index).value.exam_code = esame.exam_code
+        // this.examListArray(1).at(index).value.exam_cfu = esame.exam_cfu
+        // console.log(esame[0].exam_name)
+        // console.log(this.examListArray(1).at(index).value.exam_name)
+        // console.log(this.regolamentoForm.get('exam1Form.exam1List.'+index+'.exam_name')?.value)
+      }
+      for(let esame of this.secondo[0]){
+        this.addExam(2)
+        var index = this.examListArray(2).length-1
+       // console.log(index)
+        this.regolamentoForm.get('exam2Form')?.get('exam2List.'+index+'.exam_name')?.setValue(esame.exam_name)
+        //this.regolamentoForm.get('exam2Form.exam2List.'+index+'.exam_name')?.setValue(esame[0].exam_name)
+        this.regolamentoForm.get('exam2Form.exam2List.'+index+'.exam_code')?.setValue(esame.exam_code)
+        this.regolamentoForm.get('exam2Form.exam2List.'+index+'.exam_cfu')?.setValue(esame.exam_cfu)
+      }
+      for(let esame of this.terzo[0]){
+        this.addExam(3)
+        var index = this.examListArray(3).length-1
+        //console.log(index)
+        this.regolamentoForm.get('exam3Form.exam3List.'+index+'.exam_name')?.setValue(esame.exam_name)
+        this.regolamentoForm.get('exam3Form.exam3List.'+index+'.exam_code')?.setValue(esame.exam_code)
+        this.regolamentoForm.get('exam3Form.exam3List.'+index+'.exam_cfu')?.setValue(esame.exam_cfu)
+      }
+      for(let esame of this.comp[0]){
+        this.addExam(4)
+        var index = this.examListArray(4).length-1
+        this.regolamentoForm.get('exam4Form.exam4List.'+index+'.exam_name')?.setValue(esame.exam_name)
+        this.regolamentoForm.get('exam4Form.exam4List.'+index+'.exam_code')?.setValue(esame.exam_code)
+        this.regolamentoForm.get('exam4Form.exam4List.'+index+'.exam_cfu')?.setValue(esame.exam_cfu)
+      }
+
+      this.regolamentoForm.get('cfuForm.cfumax')?.setValue(this.regolamento[this.maxcfuIndex])
+
+      // console.log(this.secondo)
+      // console.log(this.terzo)
+      // this.logFormData(2)
+      // this.logFormData(3)
+
     })
   }
 
@@ -201,6 +263,7 @@ export class NuovoregolamentoComponent{
     console.log(str)
     this.comp = Object.values(JSON.parse(str))
   }
+
 }
 
 
