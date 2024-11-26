@@ -14,6 +14,7 @@ export class RegolamentoComponent implements OnInit, OnDestroy{
   secondoIndex: number = 4
   terzoIndex: number = 5
   compIndex: number = 6
+  maxcfuIndex: number = 7
 
   anno: string = ""
   regolamento: any
@@ -21,6 +22,7 @@ export class RegolamentoComponent implements OnInit, OnDestroy{
   secondo : any[] = []
   terzo : any[] = []
   comp : any[] = []
+  maxcfu: string = ""
 
   sottoscrizione: any
   submongo: any
@@ -37,6 +39,7 @@ export class RegolamentoComponent implements OnInit, OnDestroy{
         this.getSecondo()
         this.getTerzo()
         this.getComp()
+        this.maxcfu = this.regolamento[this.maxcfuIndex] 
         
         console.log(this.regolamento)
         console.log(this.primo)
@@ -89,4 +92,6 @@ export class RegolamentoComponent implements OnInit, OnDestroy{
       })
     }
   }
+
+  get cfumax() { return this.maxcfu}
 }

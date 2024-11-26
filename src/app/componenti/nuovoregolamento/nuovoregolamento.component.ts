@@ -41,11 +41,23 @@ export class NuovoregolamentoComponent{
   terzo : any[] = []
   comp : any[] = []
 
+  regolamenti: any
+
   constructor(private fb: FormBuilder, private mongo: MongoService, private router: Router){
     this.currentYear = new Date().getFullYear()
     for(let year = this.yearStart; year <= this.currentYear + this.yearsAfter; year++) {
       this.years.push(year);
     }
+  }
+
+  ngOnInit(): void {
+    this.mongo.getRegolamenti().subscribe((data: any) => {
+      this.regolamenti = Object.keys(data).map((key) => { 
+        data[key]['id'] = key
+        return data[key]
+      })
+      console.log(this.regolamenti)
+    })
   }
 
   regolamentoForm: FormGroup = this.fb.group({
@@ -71,7 +83,7 @@ export class NuovoregolamentoComponent{
 
   getExamFields(){
     return this.fb.group({
-      exam_name: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9 ]{1,}$')]],
+      exam_name: ['',[Validators.required, Validators.pattern('^[^±!@£$%^&*_+§¡€#¢§¶•ªº«\\/<>?:;|=.,]{1,}$')]],
       exam_code: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9]{5}$')]],
       exam_cfu: ['',[Validators.required, Validators.pattern('^[0-9]{1,2}$')]]
     })
@@ -126,6 +138,11 @@ export class NuovoregolamentoComponent{
         alert('ERRORE: Anno non selezionato')
         return
       }
+      if(this.regolamentoExists(this.selectVal.toString())){
+        if(!confirm('Esiste già un regolamento per l\'anno '+this.selectVal.toString()+'. Sovrascriverlo?')){
+          return
+        }
+      }
 
       console.log(this.regolamentoForm.get("cfuForm.cfumax")!.value)
       this.logFormData(1)
@@ -144,6 +161,10 @@ export class NuovoregolamentoComponent{
           //this.router.navigate(['/regolamenti'])
       })
     }
+    else{
+      alert('ERRORE: Alcuni campi non sono stati riempiti')
+    }
+    
   }
 
   readonly loadYear = signal('');
@@ -262,6 +283,16 @@ export class NuovoregolamentoComponent{
     var str = this.regolamento[this.compIndex]
     console.log(str)
     this.comp = Object.values(JSON.parse(str))
+  }
+
+  regolamentoExists(anno: string){
+    for(let reg of this.regolamenti){
+      //console.log(reg.anno)
+      if(reg.anno == anno){
+        return true
+      }
+    }
+    return false
   }
 
 }

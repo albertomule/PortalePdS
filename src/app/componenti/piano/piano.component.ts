@@ -154,7 +154,7 @@ export class PianoComponent implements OnInit, OnDestroy{
     let response = await emailjs.send("service_yd5b4a9","template_8eoalav",{
       from_name: this.nome + " " + this.cognome,
       to_name: "Prof X",
-      from_email: "alberto.ml@tiscali.it",
+      from_email: "alberto.ml@tiscali.it", //mail commissione
       subject: this.matricola,
       message: this.generastringa()
       });
