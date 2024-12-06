@@ -1,6 +1,6 @@
 <h3>Piano di studi: Anno accademico {{anno}}-{{nextYear(anno)}}</h3>
 
-<div class="flexcenter">
+<!-- <div class="flexcenter">
     <button class="add2">&plus;</button>
     <h2 style="display: inline-block;">&nbsp; = Aggiungi una riga con campi esame</h2>
 </div>
@@ -8,7 +8,7 @@
 <div class="flexcenter">
     <button class="delete2">&times;</button>
     <h2 style="display: inline-block;">&nbsp; = Rimuovi una riga con campi esame</h2>
-</div>
+</div> -->
 
 <div class="container">
     <div class="wrap">
@@ -93,7 +93,7 @@
 </div>
 <div class="container">
     <div class="wrap">
-        <h2>Esami complementari (Max CFU: {{maxcfu-0}})</h2>
+        <h2 style="font-size: 22px;">Esami complementari (Min CFU: {{mincfu}}, N. CFU: {{maxcfu-0}})</h2>
     </div>
     <ul>
         <form [formGroup]="examcForm">
@@ -120,9 +120,14 @@
 <div class="container">
     <form [formGroup]="examForm">
         <div formArrayName="examList">
-            <div class="wrap2">
-                <h2>Esami a libera scelta (Max CFU: {{maxcfu-0}}) &nbsp;&nbsp;&nbsp;</h2>
-                <button class="add" (click)="addExam()">&plus;</button>
+            <div class="wrap3">
+                <h2 style="font-size: 22px;">Esami a libera scelta pianificati (N. CFU: {{maxcfu-0}}) &nbsp;&nbsp;&nbsp;</h2>
+                <button title="Aggiungi riga" class="add" (click)="addExam()">&plus;</button>
+                <!-- <hr> -->
+                <div class="wrap4">
+                    <button class="delete3">&times;</button>
+                    <h5>&nbsp; = Rimuovi una riga con campi esame</h5>
+                </div>
             </div>
             <div *ngFor="let exam of examListArray().controls; let i = index;">
                 <div [formGroupName]="i" class="flex">
@@ -142,7 +147,7 @@
                     </div>
                     Superato:
                     <input type="checkbox" formControlName="conseguito">
-                    <button class="delete" (click)="removeExam(i)">&times;</button>
+                    <button title="Rimuovi riga" class="delete" (click)="removeExam(i)">&times;</button>
                 </div>
             </div>
         </div>

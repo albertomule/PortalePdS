@@ -15,8 +15,8 @@ export class MongoService {
     return this.http.post(this.mongoEndPoint + 'insertpiano' + str, JSON.stringify(body))
   }
 
-  insertRegolamento(anno: string, maxcfu: string, body: {}){
-    var str = "?a=" + anno + "&c=" + maxcfu
+  insertRegolamento(anno: string, maxcfu: string, mincfu: string, body: {}){
+    var str = "?a=" + anno + "&c=" + maxcfu + "&cc=" + mincfu
     return this.http.post(this.mongoEndPoint + 'insertregolamento' + str, JSON.stringify(body))
   }
 

@@ -95,8 +95,17 @@
     <div class="container">
         <div style="text-align: center;">
             <div formGroupName="cfuForm">
-                <h2>Massimo numero di CFU consentiti per esami Complementari + Libera scelta: </h2>
-                <input type="text" name="" id="" formControlName="cfumax" placeholder="Max CFU" size="5">
+                <h2>Numero minimo di CFU per esami Complementari: </h2>
+                <input type="text" name="" id="" formControlName="cfumin" placeholder="N. CFU" size="5">
+                <!-- [ngClass]="regForm.submitted && cfumax?.invalid ? 'field-error' : ''" -->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div style="text-align: center;">
+            <div formGroupName="cfuForm">
+                <h2>Numero di CFU per esami Complementari + Libera scelta: </h2>
+                <input type="text" name="" id="" formControlName="cfumax" placeholder="N. CFU" size="5">
                 <!-- [ngClass]="regForm.submitted && cfumax?.invalid ? 'field-error' : ''" -->
             </div>
         </div>

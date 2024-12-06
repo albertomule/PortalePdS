@@ -34,6 +34,7 @@ export class NuovoregolamentoComponent{
   terzoIndex: number = 5
   compIndex: number = 6
   maxcfuIndex: number = 7
+  mincfuIndex: number = 8
 
   regolamento: any
   primo : any[] = []
@@ -74,12 +75,14 @@ export class NuovoregolamentoComponent{
       exam4List: this.fb.array([this.getExamFields()])
     }),
     cfuForm: this.fb.group({
+      cfumin: ['', [Validators.required, Validators.pattern('^[0-9]{1,2}$')]],
       cfumax: ['', [Validators.required, Validators.pattern('^[0-9]{1,2}$')]]
     })
   })
   
-
+  get cfumin() { return this.regolamentoForm.get("cfuForm.cfumin") }
   get cfumax() { return this.regolamentoForm.get("cfuForm.cfumax") }
+
 
   getExamFields(){
     return this.fb.group({
@@ -152,6 +155,7 @@ export class NuovoregolamentoComponent{
       this.mongo.insertRegolamento(
         this.selectVal.toString(), 
         this.regolamentoForm.get("cfuForm.cfumax")!.value.toString(),
+        this.regolamentoForm.get("cfuForm.cfumin")!.value.toString(),
         [this.getFormData(1), 
         this.getFormData(2), 
         this.getFormData(3), 
@@ -255,6 +259,8 @@ export class NuovoregolamentoComponent{
       }
 
       this.regolamentoForm.get('cfuForm.cfumax')?.setValue(this.regolamento[this.maxcfuIndex])
+
+      this.regolamentoForm.get('cfuForm.cfumin')?.setValue(this.regolamento[this.mincfuIndex])
 
       // console.log(this.secondo)
       // console.log(this.terzo)

@@ -17,6 +17,7 @@ export class NuovopianoComponent {
   terzoIndex: number = 5
   compIndex: number = 6
   maxcfuIndex: number = 7
+  mincfuIndex: number = 8
 
   anno: string = ""
   regolamento: any
@@ -25,6 +26,7 @@ export class NuovopianoComponent {
   terzo : any[] = []
   comp : any[] = []
   maxcfu: number = 0
+  mincfu: number = 0
   //storedvalue: number = 0
   //storedvaluetendina : number = 0
   //inaltro: boolean = false
@@ -57,6 +59,7 @@ export class NuovopianoComponent {
         this.getTerzo()
         this.getComp()
         this.maxcfu = this.regolamento[this.maxcfuIndex]
+        this.mincfu = this.regolamento[this.mincfuIndex]
 
         console.log(this.datistudente.nome)
         console.log(this.datistudente.cognome)
@@ -286,6 +289,7 @@ export class NuovopianoComponent {
       alert('Impossibile inviare il piano: troppi CFU allocati per esami complementari / a libera scelta')
       return
     }
+    //if(cfu allocati ai complementari < mincfu) errore ******************
     //this.randomMatricola().toString()
     this.mongo.insertPiano(this.randomMatricola().toString(), this.anno, 
     this.datistudente.nome, 

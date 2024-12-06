@@ -6,8 +6,8 @@
 
 <form [formGroup]="form" #signupForm="ngForm" (ngSubmit)="submit(signupForm)">
   <div>
-      <input type="radio" name="fresh" [value]=true formControlName="fresh" (click)="test()"> <label style="font-size: 20px;"> Sì</label>
-      <input type="radio" name="fresh" [value]=false formControlName="fresh" (click)="test()"> <label style="font-size: 20px;"> No</label>
+      <input type="radio" name="fresh" [value]=true formControlName="fresh" (click)="test()"> <label style="font-size: 20px;"> Senza riconoscimenti</label>
+      <input type="radio" name="fresh" [value]=false formControlName="fresh" (click)="test()"> <label style="font-size: 20px;"> Con riconoscimenti</label>
   </div>
     <div *ngIf="isFresh()">
       <div><p style="font-size: 20px;">Anno accademico di immatricolazione: </p></div>

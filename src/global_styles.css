@@ -12,6 +12,10 @@ h3{
 h4{
   font-size: 25px;
 }
+h5{
+  color: rgb(0, 0, 0);
+  font-size: 15px;
+}
   
   /* Definisco style container */
   .container {

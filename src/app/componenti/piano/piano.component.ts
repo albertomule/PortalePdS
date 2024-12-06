@@ -166,7 +166,7 @@ export class PianoComponent implements OnInit, OnDestroy{
       to_name: this.nome + " " + this.cognome,
       from_email: this.email,
       subject: "stato approvato",
-      message: "Il suo piano di studi è stato approvato manualmente dalla commissione"
+      message: "Il suo piano di studi è stato approvato dalla commissione"
       });
   }
 
