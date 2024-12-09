@@ -149,6 +149,18 @@ export class PianoComponent implements OnInit, OnDestroy{
     }
   }
 
+  rifiuta(){
+    // if(confirm('Sei sicuro di voler rifiutare questo piano?')){
+    //   this.mongo.approvaPiano(this.matricola,new Date().toLocaleString()).subscribe((data: any) => {
+    //     console.log(data)
+    //     alert('Il piano è stato approvato con successo')
+    //     //this.inviamail()
+    //     //this.inviamailstudente()
+    //     this.router.navigate(['/pianiinsospeso'])
+    //   })
+    // }
+  }
+
   async inviamail(){
     emailjs.init('m0RVEevtmq6kUBfqY')
     let response = await emailjs.send("service_yd5b4a9","template_8eoalav",{

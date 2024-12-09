@@ -120,10 +120,14 @@
 <div class="container">
     <form [formGroup]="examForm">
         <div formArrayName="examList">
-            <div class="wrap3">
+            <div class="wrap2">
                 <h2 style="font-size: 22px;">Esami a libera scelta pianificati (N. CFU: {{maxcfu-0}}) &nbsp;&nbsp;&nbsp;</h2>
                 <button title="Aggiungi riga" class="add" (click)="addExam()">&plus;</button>
                 <!-- <hr> -->
+                <div class="wrap3">
+                    <button class="add3">&plus;</button>
+                    <h5>&nbsp; = Aggiungi una riga con campi esame</h5>
+                </div>
                 <div class="wrap4">
                     <button class="delete3">&times;</button>
                     <h5>&nbsp; = Rimuovi una riga con campi esame</h5>

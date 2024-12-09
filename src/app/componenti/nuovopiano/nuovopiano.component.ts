@@ -246,6 +246,7 @@ export class NuovopianoComponent {
       this.examcListArray().at(i).value.pianificato = true
       console.log(this.examcListArray().at(i).value)
       this.maxcfu = (this.maxcfu-0) - (this.examcListArray().at(i).value.exam_cfu-0)
+      this.mincfu = (this.mincfu-0) - (this.examcListArray().at(i).value.exam_cfu-0)
     }
   }
   fixConseguito(i: number){ //pianificato è stato cliccato
@@ -261,10 +262,14 @@ export class NuovopianoComponent {
       // }
     }
     //sommo e sottraggo cfu in base a pianificato tickato o no
-    if(this.examcListArray().at(i).value.pianificato == false)
+    if(this.examcListArray().at(i).value.pianificato == false){
       this.maxcfu = (this.maxcfu-0) + (this.examcListArray().at(i).value.exam_cfu-0)
-    else
+      this.mincfu = (this.mincfu-0) + (this.examcListArray().at(i).value.exam_cfu-0)
+    }
+    else{
       this.maxcfu = (this.maxcfu-0) - (this.examcListArray().at(i).value.exam_cfu-0)
+      this.mincfu = (this.mincfu-0) - (this.examcListArray().at(i).value.exam_cfu-0)
+    }
     console.log(this.examcListArray().at(i).value)
     
   }
@@ -289,7 +294,10 @@ export class NuovopianoComponent {
       alert('Impossibile inviare il piano: troppi CFU allocati per esami complementari / a libera scelta')
       return
     }
-    //if(cfu allocati ai complementari < mincfu) errore ******************
+    else if(this.mincfu > 0){
+      alert('Impossibile inviare il piano: non abbastanza CFU allocati per esami complementari')
+      return
+    }
     //this.randomMatricola().toString()
     this.mongo.insertPiano(this.randomMatricola().toString(), this.anno, 
     this.datistudente.nome, 
