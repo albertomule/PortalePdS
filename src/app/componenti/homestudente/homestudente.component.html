@@ -37,19 +37,19 @@
         <input type="text" formControlName="nome" [ngClass]="signupForm.submitted && nome?.invalid ? 'field-error' : ''">
         <div class="error" *ngIf="(nome?.touched || nome?.dirty || signupForm.submitted) && nome?.invalid">
             <div *ngIf="nome?.errors?.['required']">Nome richiesto</div>
-            <div *ngIf="nome?.errors?.['pattern']">Formato nome invalido</div>
+            <div *ngIf="nome?.errors?.['pattern']">Formato nome non valido</div>
         </div>
       <div><p style="font-size: 20px;">Cognome: </p></div>
         <input type="text" formControlName="cognome" [ngClass]="signupForm.submitted && cognome?.invalid ? 'field-error' : ''">
         <div class="error" *ngIf="(cognome?.touched || cognome?.dirty || signupForm.submitted) && cognome?.invalid">
             <div *ngIf="cognome?.errors?.['required']">Cognome richiesto</div>
-            <div *ngIf="cognome?.errors?.['pattern']">Formato cognome invalido</div>
+            <div *ngIf="cognome?.errors?.['pattern']">Formato cognome non valido</div>
         </div>
       <div><p style="font-size: 20px;">Email: </p></div>
         <input type="text" formControlName="email" [ngClass]="signupForm.submitted && email?.invalid ? 'field-error' : ''">
         <div class="error" *ngIf="(email?.touched || email?.dirty || signupForm.submitted) && email?.invalid">
             <div *ngIf="email?.errors?.['required']">Email richiesta</div>
-            <div *ngIf="email?.errors?.['pattern']">Formato email invalido</div>
+            <div *ngIf="email?.errors?.['pattern']">Formato email non valido</div>
         </div>
         <button type="submit" id="bottone_studente_avanti" class="Home_button">Avanti</button>
     </div>

@@ -147,7 +147,7 @@ export class PianoComponent implements OnInit, OnDestroy{
       this.mongo.approvaPiano(this.matricola,new Date().toLocaleString()).subscribe((data: any) => {
         console.log(data)
         alert('Il piano è stato approvato con successo')
-        //this.inviamail(this.generastringa(), "un nuovo piano è stato approvato", "Stringa completa")
+        //this.inviamail(this.generastringa(), "nuovo piano è stato approvato", "Stringa completa")
         //this.inviamailstudente("stato approvato", "Il suo piano di studi è stato approvato dalla commissione")
         this.router.navigate(['/pianiinsospeso'])
       })
@@ -159,7 +159,7 @@ export class PianoComponent implements OnInit, OnDestroy{
       this.mongo.rifiutaPiano(this.matricola).subscribe((data: any) => {
         console.log(data)
         alert('Il piano è stato rifiutato con successo')
-        //this.inviamail(motivazione, "un piano è stato rifiutato", "Motivazione")
+        //this.inviamail(motivazione, "piano è stato rifiutato", "Motivazione")
         //this.inviamailstudente("stato rifiutato", motivazione)
         this.router.navigate(['/pianiinsospeso'])
       })
