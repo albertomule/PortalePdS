@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Rifiuta piano</h2>
+<mat-dialog-content>
+  <p>Motivare il rifiuto del piano di studi</p>
+  <mat-form-field>
+    <mat-label>Motivazione..</mat-label>
+    <input matInput [(ngModel)]="rifiutaMessaggio" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Indietro</button>
+  <button mat-button [mat-dialog-close]="rifiutaMessaggio()">Conferma</button>
+</mat-dialog-actions>

@@ -67,4 +67,10 @@ export class MongoService {
     console.log(str)
     return this.http.get(this.mongoEndPoint + 'approvapiano' + str)
   }
+
+  rifiutaPiano(matricola: string){
+    var str = "?m=" + matricola
+    console.log(str)
+    return this.http.get(this.mongoEndPoint + 'rifiutapiano' + str)
+  }
 }

@@ -1,7 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, model, signal } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MongoService } from '../../servizi/mongo.service';
 import emailjs from '@emailjs/browser';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-piano',
@@ -142,43 +147,45 @@ export class PianoComponent implements OnInit, OnDestroy{
       this.mongo.approvaPiano(this.matricola,new Date().toLocaleString()).subscribe((data: any) => {
         console.log(data)
         alert('Il piano è stato approvato con successo')
-        //this.inviamail()
-        //this.inviamailstudente()
+        //this.inviamail(this.generastringa(), "un nuovo piano è stato approvato", "Stringa completa")
+        //this.inviamailstudente("stato approvato", "Il suo piano di studi è stato approvato dalla commissione")
         this.router.navigate(['/pianiinsospeso'])
       })
     }
   }
 
-  rifiuta(){
-    // if(confirm('Sei sicuro di voler rifiutare questo piano?')){
-    //   this.mongo.approvaPiano(this.matricola,new Date().toLocaleString()).subscribe((data: any) => {
-    //     console.log(data)
-    //     alert('Il piano è stato approvato con successo')
-    //     //this.inviamail()
-    //     //this.inviamailstudente()
-    //     this.router.navigate(['/pianiinsospeso'])
-    //   })
-    // }
+  rifiuta(motivazione: string){
+    if(confirm('Sei sicuro di voler rifiutare questo piano?')){
+      this.mongo.rifiutaPiano(this.matricola).subscribe((data: any) => {
+        console.log(data)
+        alert('Il piano è stato rifiutato con successo')
+        //this.inviamail(motivazione, "un piano è stato rifiutato", "Motivazione")
+        //this.inviamailstudente("stato rifiutato", motivazione)
+        this.router.navigate(['/pianiinsospeso'])
+      })
+    }
   }
 
-  async inviamail(){
+  async inviamail(messaggio: string, stato: string, seguito: string){ //per la commissione
     emailjs.init('m0RVEevtmq6kUBfqY')
     let response = await emailjs.send("service_yd5b4a9","template_8eoalav",{
-      from_name: this.nome + " " + this.cognome,
-      to_name: "Prof X",
+      from_name: this.nome + " " + this.cognome, //nome+cognome studente
+      to_name: "Prof X", //nome membro di commissione
       from_email: "alberto.ml@tiscali.it", //mail commissione
-      subject: this.matricola,
-      message: this.generastringa()
+      subject: this.matricola, //matricola
+      message: messaggio, //messaggio = stringa
+      status: stato, //"un nuovo piano è stato approvato/rifiutato"
+      followup: seguito //"Stringa completa" / "Motivazione"
       });
   }
 
-  async inviamailstudente(){
+  async inviamailstudente(soggetto: string, messaggio: string){ //per lo studente
     emailjs.init('m0RVEevtmq6kUBfqY')
     let response = await emailjs.send("service_yd5b4a9","template_wjrfdrd",{
-      to_name: this.nome + " " + this.cognome,
-      from_email: this.email,
-      subject: "stato approvato",
-      message: "Il suo piano di studi è stato approvato dalla commissione"
+      to_name: this.nome + " " + this.cognome, //nome+cognome studente
+      from_email: this.email, //mail studente
+      subject: soggetto, //stato approvato/rifiutato
+      message: messaggio //messaggio
       });
   }
 
@@ -188,5 +195,52 @@ export class PianoComponent implements OnInit, OnDestroy{
       str = str + "\n" + esame.exam_name + " " + esame.exam_code + " " + esame.exam_cfu
     }
     return str
+  }
+
+  readonly rifiutaMessaggio = signal('');
+  readonly dialog = inject(MatDialog);
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      data: {rifiutaMessaggio: this.rifiutaMessaggio()},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        this.rifiutaMessaggio.set(result);
+        console.log(this.rifiutaMessaggio())
+        this.rifiuta(this.rifiutaMessaggio())
+      }
+    });
+  }
+}
+
+export interface DialogData {
+  rifiutaMessaggio: string;
+}
+
+@Component({
+  selector: 'app-pianorifiutadialog',
+  templateUrl: './pianorifiutadialog.component.html',
+  standalone: true,
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+  ],
+})
+export class DialogOverviewExampleDialog {
+  readonly dialogRef = inject(MatDialogRef<DialogOverviewExampleDialog>);
+  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+  readonly rifiutaMessaggio = model(this.data.rifiutaMessaggio);
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
