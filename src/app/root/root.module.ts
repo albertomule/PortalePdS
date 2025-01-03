@@ -21,6 +21,8 @@ import { PianiapprovatiComponent } from '../componenti/pianiapprovati/pianiappro
 import { PianiinsospesoComponent } from '../componenti/pianiinsospeso/pianiinsospeso.component';
 import { PianoComponent } from '../componenti/piano/piano.component';
 import { AuthComponent } from '../componenti/auth/auth.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,11 @@ import { AuthComponent } from '../componenti/auth/auth.component';
     HttpClientModule
   ],
   bootstrap: [RootComponent],
+  providers: [
+    provideHttpClient(),
+    provideOAuthClient(),
+    provideAnimationsAsync()
+  ]
 })
 
 export class RootModule {}
