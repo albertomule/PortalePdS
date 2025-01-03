@@ -12,13 +12,15 @@ export class AuthService {
 
   initConfiguration(){
     const authConfig: AuthConfig = {
-      issuer: 'https://iam.unipi.it/oauth2/authorize',
-      strictDiscoveryDocumentValidation: false,
+      loginUrl: 'https://iam.unipi.it/oauth2/authorize',
+      //strictDiscoveryDocumentValidation: false,
       clientId: 'Wbws32kf9AffowqIo8_yFZWfljIa',
-      redirectUri: window.location.origin + '/auth',
-      scope: 'openid',
+      // redirectUri: window.location.origin + '/auth',
+      redirectUri: 'https://pds.di.unipi.it/auth',
+      scope: 'openid profile',
       userinfoEndpoint: 'https://iam.unipi.it/oauth2/userinfo',
-      tokenEndpoint: 'https://iam.unipi.it/oauth2/token'
+      tokenEndpoint: 'https://iam.unipi.it/oauth2/token',
+      //requireHttps: false
       // "Claims": [
       //   "principal",
       //   "sub",
@@ -34,10 +36,11 @@ export class AuthService {
 
     this.oAuthService.configure(authConfig)
     this.oAuthService.setupAutomaticSilentRefresh()
-    this.oAuthService.loadDiscoveryDocumentAndTryLogin()
+    //this.oAuthService.loadDiscoveryDocumentAndTryLogin()
   }
   login(){
     this.oAuthService.initImplicitFlow()
+    //this.oAuthService.initLoginFlow()
   }
   logout(){
     this.oAuthService.revokeTokenAndLogout()
