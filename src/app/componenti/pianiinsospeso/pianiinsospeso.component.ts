@@ -4,7 +4,8 @@ import { MongoService } from '../../servizi/mongo.service';
 @Component({
   selector: 'app-pianiinsospeso',
   templateUrl: './pianiinsospeso.component.html',
-  styleUrl: './pianiinsospeso.component.css'
+  styleUrl: './pianiinsospeso.component.css',
+  standalone: false
 })
 export class PianiinsospesoComponent implements OnInit{
   

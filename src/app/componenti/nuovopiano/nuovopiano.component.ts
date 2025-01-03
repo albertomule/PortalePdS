@@ -9,7 +9,8 @@ import emailjs from '@emailjs/browser';
 @Component({
   selector: 'app-nuovopiano',
   templateUrl: './nuovopiano.component.html',
-  styleUrl: './nuovopiano.component.css'
+  styleUrl: './nuovopiano.component.css',
+  standalone: false
 })
 export class NuovopianoComponent {
   primoIndex: number = 3

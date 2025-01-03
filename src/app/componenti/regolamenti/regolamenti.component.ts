@@ -4,7 +4,8 @@ import { MongoService } from '../../servizi/mongo.service';
 @Component({
   selector: 'app-regolamenti',
   templateUrl: './regolamenti.component.html',
-  styleUrl: './regolamenti.component.css'
+  styleUrl: './regolamenti.component.css',
+  standalone: false
 })
 export class RegolamentiComponent implements OnInit{
 

@@ -5,7 +5,8 @@ import { MongoService } from '../../servizi/mongo.service';
 @Component({
   selector: 'app-esami',
   templateUrl: './esami.component.html',
-  styleUrl: './esami.component.css'
+  styleUrl: './esami.component.css',
+  standalone: false
 })
 export class EsamiComponent implements OnInit{
 

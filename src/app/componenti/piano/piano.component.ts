@@ -11,7 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-piano',
   templateUrl: './piano.component.html',
-  styleUrl: './piano.component.css'
+  styleUrl: './piano.component.css',
+  standalone: false
 })
 export class PianoComponent implements OnInit, OnDestroy{
 

@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-pianiapprovati',
   templateUrl: './pianiapprovati.component.html',
-  styleUrl: './pianiapprovati.component.css'
+  styleUrl: './pianiapprovati.component.css',
+  standalone: false
 })
 export class PianiapprovatiComponent {
   

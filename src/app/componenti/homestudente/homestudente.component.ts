@@ -7,7 +7,8 @@ import { DatistudenteService } from '../../servizi/datistudente.service';
 @Component({
   selector: 'app-homestudente',
   templateUrl: './homestudente.component.html',
-  styleUrl: './homestudente.component.css'
+  styleUrl: './homestudente.component.css',
+  standalone: false
 })
 export class HomestudenteComponent {
 

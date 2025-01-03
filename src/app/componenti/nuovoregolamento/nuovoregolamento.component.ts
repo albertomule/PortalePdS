@@ -18,7 +18,8 @@ import {MatInputModule} from '@angular/material/input';
 @Component({
   selector: 'app-nuovoregolamento',
   templateUrl: './nuovoregolamento.component.html',
-  styleUrl: './nuovoregolamento.component.css'
+  styleUrl: './nuovoregolamento.component.css',
+  standalone: false
 })
 export class NuovoregolamentoComponent{
 

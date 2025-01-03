@@ -6,7 +6,8 @@ import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/sign
 @Component({
   selector: 'app-regolamento',
   templateUrl: './regolamento.component.html',
-  styleUrl: './regolamento.component.css'
+  styleUrl: './regolamento.component.css',
+  standalone: false
 })
 export class RegolamentoComponent implements OnInit, OnDestroy{
 
