@@ -20,6 +20,7 @@ import { NuovopianoComponent } from '../componenti/nuovopiano/nuovopiano.compone
 import { PianiapprovatiComponent } from '../componenti/pianiapprovati/pianiapprovati.component';
 import { PianiinsospesoComponent } from '../componenti/pianiinsospeso/pianiinsospeso.component';
 import { PianoComponent } from '../componenti/piano/piano.component';
+import { AuthComponent } from '../componenti/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PianoComponent } from '../componenti/piano/piano.component';
     NuovopianoComponent,
     PianiapprovatiComponent,
     PianiinsospesoComponent,
-    PianoComponent
+    PianoComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ import { NuovopianoComponent } from './componenti/nuovopiano/nuovopiano.componen
 import { PianiapprovatiComponent } from './componenti/pianiapprovati/pianiapprovati.component';
 import { PianiinsospesoComponent } from './componenti/pianiinsospeso/pianiinsospeso.component';
 import { PianoComponent } from './componenti/piano/piano.component';
+import { AuthComponent } from './componenti/auth/auth.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/start'},
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'nuovopiano/:id', component: NuovopianoComponent},
   { path: 'pianiapprovati', component: PianiapprovatiComponent},
   { path: 'pianiinsospeso', component: PianiinsospesoComponent},
-  { path: 'piano/:id', component: PianoComponent}
+  { path: 'piano/:id', component: PianoComponent},
+  { path: 'auth', component: AuthComponent},
    
   // { path: '404', component: NotfoundComponent},
   // { path: '**', redirectTo: '/404'}
