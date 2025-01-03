@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
   title = "Benvenuto nel portale Piani di Studio. Per continuare è richiesta l'autenticazione."
+  //private authService = inject(AuthService)
+
+  auth(){
+    
+  }
 }
