@@ -27,4 +27,8 @@ export class AuthComponent implements OnInit{
     this.router.navigate(['/start'])
   }
 
+  auth(){
+    this.authService.login()
+  }
+
 }
