@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MailService } from '../../servizi/mail.service';
 
 @Component({
   selector: 'app-piano',
@@ -49,7 +50,7 @@ export class PianoComponent implements OnInit, OnDestroy{
   sottoscrizione: any
   submongo: any
 
-  constructor(private route: ActivatedRoute, private mongo: MongoService, private router: Router){}
+  constructor(private route: ActivatedRoute, private mongo: MongoService, private router: Router, private mail: MailService){}
 
   ngOnInit(): void {
     this.sottoscrizione = this.route.paramMap.subscribe((params: ParamMap)=>{
@@ -150,6 +151,21 @@ export class PianoComponent implements OnInit, OnDestroy{
         alert('Il piano è stato approvato con successo')
         //this.inviamail(this.generastringa(), "nuovo piano è stato approvato", "Stringa completa")
         //this.inviamailstudente("stato approvato", "Il suo piano di studi è stato approvato dalla commissione")
+        this.mail.inviaMailCommissione(
+          "Prof X",
+          this.nome + " " + this.cognome,
+          "alberto.ml@tiscali.it",
+          this.matricola,
+          this.generastringa(),
+          "nuovo piano è stato approvato", 
+          "Stringa completa"
+        )
+        this.mail.inviaMailStudente(
+          this.nome + " " + this.cognome,
+          this.email,
+          "stato approvato", 
+          "Il suo piano di studi è stato approvato dalla commissione"
+        )
         this.router.navigate(['/pianiinsospeso'])
       })
     }
@@ -162,33 +178,48 @@ export class PianoComponent implements OnInit, OnDestroy{
         alert('Il piano è stato rifiutato con successo')
         //this.inviamail(motivazione, "piano è stato rifiutato", "Motivazione")
         //this.inviamailstudente("stato rifiutato", motivazione)
+        this.mail.inviaMailCommissione(
+          "Prof X",
+          this.nome + " " + this.cognome,
+          "alberto.ml@tiscali.it",
+          this.matricola,
+          motivazione, 
+          "piano è stato rifiutato", 
+          "Motivazione"
+        )
+        this.mail.inviaMailStudente(
+          this.nome + " " + this.cognome,
+          this.email,
+          "stato rifiutato", 
+          motivazione
+        )
         this.router.navigate(['/pianiinsospeso'])
       })
     }
   }
 
-  async inviamail(messaggio: string, stato: string, seguito: string){ //per la commissione
-    emailjs.init('m0RVEevtmq6kUBfqY')
-    let response = await emailjs.send("service_yd5b4a9","template_8eoalav",{
-      from_name: this.nome + " " + this.cognome, //nome+cognome studente
-      to_name: "Prof X", //nome membro di commissione
-      from_email: "alberto.ml@tiscali.it", //mail commissione
-      subject: this.matricola, //matricola
-      message: messaggio, //messaggio = stringa
-      status: stato, //"un nuovo piano è stato approvato/rifiutato"
-      followup: seguito //"Stringa completa" / "Motivazione"
-      });
-  }
+  // async inviamail(messaggio: string, stato: string, seguito: string){ //per la commissione
+  //   emailjs.init('m0RVEevtmq6kUBfqY')
+  //   let response = await emailjs.send("service_yd5b4a9","template_8eoalav",{
+  //     from_name: this.nome + " " + this.cognome, //nome+cognome studente
+  //     to_name: "Prof X", //nome membro di commissione
+  //     from_email: "alberto.ml@tiscali.it", //mail commissione
+  //     subject: this.matricola, //matricola
+  //     message: messaggio, //messaggio = stringa
+  //     status: stato, //"un nuovo piano è stato approvato/rifiutato"
+  //     followup: seguito //"Stringa completa" / "Motivazione"
+  //     });
+  // }
 
-  async inviamailstudente(soggetto: string, messaggio: string){ //per lo studente
-    emailjs.init('m0RVEevtmq6kUBfqY')
-    let response = await emailjs.send("service_yd5b4a9","template_wjrfdrd",{
-      to_name: this.nome + " " + this.cognome, //nome+cognome studente
-      from_email: this.email, //mail studente
-      subject: soggetto, //stato approvato/rifiutato
-      message: messaggio //messaggio
-      });
-  }
+  // async inviamailstudente(soggetto: string, messaggio: string){ //per lo studente
+  //   emailjs.init('m0RVEevtmq6kUBfqY')
+  //   let response = await emailjs.send("service_yd5b4a9","template_wjrfdrd",{
+  //     to_name: this.nome + " " + this.cognome, //nome+cognome studente
+  //     from_email: this.email, //mail studente
+  //     subject: soggetto, //stato approvato/rifiutato
+  //     message: messaggio //messaggio
+  //     });
+  // }
 
   generastringa(){
     var str = this.nome + " " + this.cognome + " " + this.matricola

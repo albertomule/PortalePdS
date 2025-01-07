@@ -18,7 +18,7 @@ h5{
 }
   
   /* Definisco style container */
-  .container {
+  .containerbase {
     background-color: rgb(219, 239, 255);
     border: 1px solid #ccc;
     border-radius: 10px;

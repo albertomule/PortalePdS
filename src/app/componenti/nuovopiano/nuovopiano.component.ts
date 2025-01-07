@@ -4,6 +4,7 @@ import { MongoService } from '../../servizi/mongo.service';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { DatistudenteService } from '../../servizi/datistudente.service';
 import emailjs from '@emailjs/browser';
+import { MailService } from '../../servizi/mail.service';
 
 
 @Component({
@@ -47,7 +48,7 @@ export class NuovopianoComponent {
   // email: string = ""
   // fresh: boolean = false
 
-  constructor(private route: ActivatedRoute, private mongo: MongoService, private router: Router, private datistudente: DatistudenteService){}
+  constructor(private route: ActivatedRoute, private mongo: MongoService, private router: Router, private datistudente: DatistudenteService, private mail: MailService){}
 
   ngOnInit(): void {
     this.sottoscrizione = this.route.paramMap.subscribe((params: ParamMap)=>{
@@ -321,26 +322,34 @@ export class NuovopianoComponent {
         console.log("PIANO: " + this.piano)
         alert('Il piano è stato inviato con successo (Matricola: ' + this.matricola + ')')
         //this.inviamail()
+        this.mail.inviaMailStudente(
+          this.datistudente.nome + " " + this.datistudente.cognome,
+          this.datistudente.email,
+          this.piano[this.approvatoIndex] ? "approvato" : "in sospeso",
+          this.piano[this.approvatoIndex] ? 
+          "Il piano di studi è stato inviato correttamente e approvato automaticamente dal PortalePDS" : 
+          "Il piano di studi è stato inviato correttamente, ma attualmente in sospeso. Attenda un'ulteriore email dal PortalePDS a seguito di una revisione del suo piano da parte della commisione"
+        )
         this.router.navigate(['/start'])
 
       })
     })
   }
 
-  async inviamail(){
-    emailjs.init('m0RVEevtmq6kUBfqY')
-    let response = await emailjs.send("service_yd5b4a9","template_wjrfdrd",{
-      //from_name: "Albertox",
-      to_name: this.datistudente.nome + " " + this.datistudente.cognome,
-      from_email: this.datistudente.email,
-      subject: this.piano[this.approvatoIndex] ? 
-      "approvato" : 
-      "in sospeso",
-      message: this.piano[this.approvatoIndex] ? 
-      "Il piano di studi è stato inviato correttamente e approvato automaticamente dal PortalePDS" : 
-      "Il piano di studi è stato inviato correttamente, ma attualmente in sospeso. Attenda un'ulteriore email dal PortalePDS a seguito di una revisione del suo piano da parte della commisione"
-      });
-  }
+  // async inviamail(){
+  //   emailjs.init('m0RVEevtmq6kUBfqY')
+  //   let response = await emailjs.send("service_yd5b4a9","template_wjrfdrd",{
+  //     //from_name: "Albertox",
+  //     to_name: this.datistudente.nome + " " + this.datistudente.cognome,
+  //     from_email: this.datistudente.email,
+  //     subject: this.piano[this.approvatoIndex] ? 
+  //     "approvato" : 
+  //     "in sospeso",
+  //     message: this.piano[this.approvatoIndex] ? 
+  //     "Il piano di studi è stato inviato correttamente e approvato automaticamente dal PortalePDS" : 
+  //     "Il piano di studi è stato inviato correttamente, ma attualmente in sospeso. Attenda un'ulteriore email dal PortalePDS a seguito di una revisione del suo piano da parte della commisione"
+  //     });
+  // }
 
   fillDataFromSelectVal(value: any, index: number){
 
