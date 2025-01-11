@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 
@@ -8,7 +9,7 @@ export class AuthService {
 
   private oAuthService = inject(OAuthService)
 
-  constructor() { this.initConfiguration() }
+  constructor(private http: HttpClient) { this.initConfiguration() }
 
   initConfiguration(){
     const authConfig: AuthConfig = {
@@ -16,11 +17,12 @@ export class AuthService {
       //strictDiscoveryDocumentValidation: false,
       clientId: 'Wbws32kf9AffowqIo8_yFZWfljIa',
       // redirectUri: window.location.origin + '/auth',
-      redirectUri: 'https://pds.di.unipi.it/auth',
-      scope: 'openid profile',
+      redirectUri: 'http://pds.di.unipi.it/auth',
+      logoutUrl: 'http://pds.di.unipi.it/start',
+      scope: 'openid profile email',
       userinfoEndpoint: 'https://iam.unipi.it/oauth2/userinfo',
       tokenEndpoint: 'https://iam.unipi.it/oauth2/token',
-      //requireHttps: false
+      requireHttps: false
       // "Claims": [
       //   "principal",
       //   "sub",
@@ -46,10 +48,30 @@ export class AuthService {
     this.oAuthService.revokeTokenAndLogout()
     this.oAuthService.logOut()
   }
-  getProfile(){
-    this.oAuthService.getIdentityClaims()
+  getIdentityClaims(){
+    return this.oAuthService.getIdentityClaims()
   }
-  getToken(){
-    this.oAuthService.getAccessToken()
+  getAccessToken(){
+    return this.oAuthService.getAccessToken()
+  }
+  loadUserProfile(){
+    this.oAuthService.loadUserProfile().then((userProfile) => {
+      console.log(JSON.stringify(userProfile))
+    })
+  }
+  getIdToken(){
+    return this.oAuthService.getIdToken()
+  }
+  get getUserProfile(){
+    const url = "https://iam.unipi.it/oauth2/userinfo"
+
+    return this.http.get(url, {
+      headers:{
+        Authorization: `Bearer ${this.getAccessToken()}`
+      }
+    })
+  }
+  isLoggedIn(){
+    return this.oAuthService.hasValidAccessToken()
   }
 }
