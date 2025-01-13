@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../servizi/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
 
 @Component({
@@ -12,12 +12,23 @@ import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/sign
 export class AuthComponent implements OnInit{
   
   private authService = inject(AuthService)
-  private router = inject(Router)
+  //private router = inject(Router)
   profile: any
   uProfile: any
+  aToken: any
+  iToken: any
+
+  constructor(private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
     //this.showData()
+    this.route.queryParams.subscribe(params => {
+      console.log(params)
+      this.aToken = params['access_token']
+      this.iToken = params['id_token']
+      console.log(this.aToken)
+      console.log(this.iToken)
+    })
   }
 
   claims(){

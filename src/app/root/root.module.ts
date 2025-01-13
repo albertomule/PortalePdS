@@ -23,6 +23,7 @@ import { PianoComponent } from '../componenti/piano/piano.component';
 import { AuthComponent } from '../componenti/auth/auth.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { provideOAuthClient } from 'angular-oauth2-oidc';
     BrowserAnimationsModule, 
     MatPaginatorModule,
     MatRadioModule,
-    HttpClientModule
+    HttpClientModule,
+    OAuthModule.forRoot()
   ],
   bootstrap: [RootComponent],
   providers: [
