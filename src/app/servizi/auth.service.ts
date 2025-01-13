@@ -40,22 +40,21 @@ export class AuthService {
     this.oAuthService.configure(authConfig)
     this.oAuthService.setupAutomaticSilentRefresh()
     //this.oAuthService.loadDiscoveryDocumentAndTryLogin()
-    this.oAuthService.tokenValidationHandler = new JwksValidationHandler()
-    this.oAuthService.setupAutomaticSilentRefresh();
+    //this.oAuthService.tokenValidationHandler = new JwksValidationHandler()
     
   }
   login(){
-    //this.oAuthService.initImplicitFlow()
+    this.oAuthService.initImplicitFlow()
     //this.oAuthService.initLoginFlow()
-    this.oAuthService.loadDiscoveryDocument().then((doc) => {
-      this.oAuthService.tryLogin().catch(err => {
-        console.error(err);
-      }).then(() => {
-        if (!this.oAuthService.hasValidAccessToken()) {
-          this.oAuthService.initImplicitFlow()
-        }
-      });
-    });
+    // this.oAuthService.loadDiscoveryDocument().then((doc) => {
+    //   this.oAuthService.tryLogin().catch(err => {
+    //     console.error(err);
+    //   }).then(() => {
+    //     if (!this.oAuthService.hasValidAccessToken()) {
+    //       this.oAuthService.initImplicitFlow()
+    //     }
+    //   });
+    // });
   }
   logout(){
     this.oAuthService.revokeTokenAndLogout()
