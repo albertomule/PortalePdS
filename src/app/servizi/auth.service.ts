@@ -13,6 +13,7 @@ export class AuthService {
 
   initConfiguration(){
     const authConfig: AuthConfig = {
+      issuer: 'https://iam.unipi.it',
       loginUrl: 'https://iam.unipi.it/oauth2/authorize',
       //strictDiscoveryDocumentValidation: false,
       clientId: 'Wbws32kf9AffowqIo8_yFZWfljIa',
@@ -23,7 +24,9 @@ export class AuthService {
       userinfoEndpoint: 'https://iam.unipi.it/oauth2/userinfo',
       tokenEndpoint: 'https://iam.unipi.it/oauth2/token',
       requireHttps: false,
-      oidc: false
+      oidc: false,
+      responseType: 'code',
+      showDebugInformation: true
       // "Claims": [
       //   "principal",
       //   "sub",
@@ -39,12 +42,13 @@ export class AuthService {
 
     this.oAuthService.configure(authConfig)
     this.oAuthService.setupAutomaticSilentRefresh()
-    //this.oAuthService.loadDiscoveryDocumentAndTryLogin()
+    this.oAuthService.loadDiscoveryDocumentAndTryLogin()
     //this.oAuthService.tokenValidationHandler = new JwksValidationHandler()
     
   }
   login(){
-    this.oAuthService.initImplicitFlow()
+    this.oAuthService.initCodeFlow()
+    //this.oAuthService.initImplicitFlow()
     //this.oAuthService.initLoginFlow()
     // this.oAuthService.loadDiscoveryDocument().then((doc) => {
     //   this.oAuthService.tryLogin().catch(err => {
