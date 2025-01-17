@@ -14,18 +14,17 @@ export class AuthService {
   initConfiguration(){
     const authConfig: AuthConfig = {
       issuer: 'https://iam.unipi.it',
-      loginUrl: 'https://iam.unipi.it/oauth2/authorize',
-      //strictDiscoveryDocumentValidation: false,
       clientId: 'Wbws32kf9AffowqIo8_yFZWfljIa',
-      // redirectUri: window.location.origin + '/auth',
+      loginUrl: 'https://iam.unipi.it/oauth2/authorize',
       redirectUri: 'http://pds.di.unipi.it:4200/auth',
       logoutUrl: 'http://pds.di.unipi.it/start',
       scope: 'openid profile email',
       userinfoEndpoint: 'https://iam.unipi.it/oauth2/userinfo',
       tokenEndpoint: 'https://iam.unipi.it/oauth2/token',
       requireHttps: false,
-      oidc: false,
-      responseType: 'code',
+      oidc: true,
+      strictDiscoveryDocumentValidation: false,
+      responseType: 'id_token token',
       showDebugInformation: true
       // "Claims": [
       //   "principal",
@@ -37,20 +36,16 @@ export class AuthService {
       //   "email",
       //   "tenant"
       // ]
-      
     }
 
     this.oAuthService.configure(authConfig)
     this.oAuthService.setupAutomaticSilentRefresh()
-    this.oAuthService.loadDiscoveryDocumentAndTryLogin()
-    //this.oAuthService.tokenValidationHandler = new JwksValidationHandler()
-    
+    this.oAuthService.tryLogin()
   }
   login(){
-    this.oAuthService.initCodeFlow()
-    //this.oAuthService.initImplicitFlow()
+    //this.oAuthService.initCodeFlow()
+    this.oAuthService.initImplicitFlow()
     //this.oAuthService.initLoginFlow()
-    // this.oAuthService.loadDiscoveryDocument().then((doc) => {
     //   this.oAuthService.tryLogin().catch(err => {
     //     console.error(err);
     //   }).then(() => {
@@ -58,7 +53,6 @@ export class AuthService {
     //       this.oAuthService.initImplicitFlow()
     //     }
     //   });
-    // });
   }
   logout(){
     this.oAuthService.revokeTokenAndLogout()
