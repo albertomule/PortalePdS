@@ -13,18 +13,20 @@ export class AuthService {
 
   initConfiguration(){
     const authConfig: AuthConfig = {
-      issuer: 'https://iam.unipi.it',
+      issuer: 'https://iam.unipi.it/oauth2',
       clientId: 'Wbws32kf9AffowqIo8_yFZWfljIa',
       loginUrl: 'https://iam.unipi.it/oauth2/authorize',
       redirectUri: 'http://pds.di.unipi.it:4200/auth',
-      logoutUrl: 'http://pds.di.unipi.it/start',
-      scope: 'openid profile email',
+      logoutUrl: 'http://pds.di.unipi.it:4200/start',
+      scope: 'openid profile email Wbws32kf9AffowqIo8_yFZWfljIa',
       userinfoEndpoint: 'https://iam.unipi.it/oauth2/userinfo',
       tokenEndpoint: 'https://iam.unipi.it/oauth2/token',
       requireHttps: false,
       oidc: true,
       strictDiscoveryDocumentValidation: false,
       responseType: 'id_token token',
+      requestAccessToken: true,
+      skipIssuerCheck: true,
       showDebugInformation: true
       // "Claims": [
       //   "principal",
@@ -44,15 +46,15 @@ export class AuthService {
   }
   login(){
     //this.oAuthService.initCodeFlow()
-    this.oAuthService.initImplicitFlow()
+    //this.oAuthService.initImplicitFlow()
     //this.oAuthService.initLoginFlow()
-    //   this.oAuthService.tryLogin().catch(err => {
-    //     console.error(err);
-    //   }).then(() => {
-    //     if (!this.oAuthService.hasValidAccessToken()) {
-    //       this.oAuthService.initImplicitFlow()
-    //     }
-    //   });
+    this.oAuthService.tryLogin().catch(err => {
+      console.error(err);
+    }).then(() => {
+      if (!this.oAuthService.hasValidAccessToken()) {
+        this.oAuthService.initImplicitFlow()
+      }
+    });
   }
   logout(){
     this.oAuthService.revokeTokenAndLogout()

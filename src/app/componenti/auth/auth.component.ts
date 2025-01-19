@@ -22,13 +22,13 @@ export class AuthComponent implements OnInit{
 
   ngOnInit(): void {
     //this.showData()
-    this.route.queryParams.subscribe(params => {
-      console.log(params)
-      this.aToken = params['access_token']
-      this.iToken = params['id_token']
-      console.log(this.aToken)
-      console.log(this.iToken)
-    })
+    // this.route.queryParams.subscribe(params => {
+    //   console.log(params)
+    //   this.aToken = params['access_token']
+    //   this.iToken = params['id_token']
+    //   console.log(this.aToken)
+    //   console.log(this.iToken)
+    // })
   }
 
   claims(){
