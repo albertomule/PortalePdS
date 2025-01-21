@@ -79,11 +79,30 @@ export class AuthService {
 
     return this.http.get(url, {
       headers:{
-        Authorization: `Bearer ${this.getAccessToken()}`
+        Authorization: `Bearer ${this.oAuthService.getAccessToken()}`
       }
     })
   }
   isLoggedIn(){
     return this.oAuthService.hasValidAccessToken()
+  }
+  decode(token: string){
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+  
+      return JSON.parse(jsonPayload);
+  }
+  // decode2(token: string){
+  //   return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString())
+  // }
+  processIdToken(){
+    var ptoken = this.oAuthService.processIdToken(this.oAuthService.getIdToken(), this.oAuthService.getAccessToken(), true)
+    console.log(ptoken)
+  }
+  grantedScopes(){
+    console.log(this.oAuthService.getGrantedScopes())
   }
 }

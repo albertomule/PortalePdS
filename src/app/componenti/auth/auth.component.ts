@@ -86,5 +86,19 @@ export class AuthComponent implements OnInit{
   isLoggedIn(){
     console.log(this.authService.isLoggedIn())
   }
+  decodeAT(){
+    var res = this.authService.decode(this.authService.getAccessToken())
+    console.log(res)
+  }
+  decodeIT(){
+    var res = this.authService.decode(this.authService.getIdToken())
+    console.log(res)
+  }
+  processIdToken(){
+    this.authService.processIdToken()
+  }
+  grantedScopes(){
+    this.authService.grantedScopes()
+  }
 
 }
