@@ -1,8 +1,15 @@
 <h2>AUTH TEST PANEL</h2>
 
-<p>
-    {{ profile }} {{ profile.sub }}
-</p>
+<div *ngIf="profile != undefined">
+    <p>
+        {{ profile }} <br>
+        {{ profile.sub }} <br> 
+        {{ profile.given_name }} <br>
+        {{ profile.family_name }} <br>
+        {{ profile.email }} <br>
+        {{ profile.fiscalNumber }}
+    </p>
+</div>
 
 <button (click)="auth()">Auth test</button>
 
@@ -29,6 +36,8 @@
 <button (click)="processIdToken()">processIdToken</button>
 
 <button (click)="grantedScopes()">grantedScopes</button>
+
+<button (click)="redirect()">redirect</button>
 
 <a routerLink="/start">
     <button id="bottone_login_studente" class="Home_button">Indietro</button>

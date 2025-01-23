@@ -15,20 +15,12 @@ export class AuthComponent implements OnInit{
   //private router = inject(Router)
   profile: any
   uProfile: any
-  aToken: any
-  iToken: any
 
   constructor(private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
-    //this.showData()
-    // this.route.queryParams.subscribe(params => {
-    //   console.log(params)
-    //   this.aToken = params['access_token']
-    //   this.iToken = params['id_token']
-    //   console.log(this.aToken)
-    //   console.log(this.iToken)
-    // })
+    this.claims()
+    //this.redirect()
   }
 
   claims(){
@@ -99,6 +91,15 @@ export class AuthComponent implements OnInit{
   }
   grantedScopes(){
     this.authService.grantedScopes()
+  }
+  
+  redirect(){
+    if((this.profile.email).includes('studenti')){
+      this.router.navigate(['/homes'])
+    }
+    else{
+      this.router.navigate(['/homec'])
+    }
   }
 
 }
