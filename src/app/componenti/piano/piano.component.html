@@ -100,31 +100,35 @@
     </div>
     <ul>
         <ng-container *ngFor="let esame of comp[0]; index as i" class="content">
-            <li>
+            <!-- <li> -->
                 <div *ngIf="piano != undefined">
                     <div *ngIf="!piano[approvatoIndex]">
-                        {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Pianificato:
-                        <input *ngIf="esame.pianificato" type="checkbox" name="option" value="{{esame.pianificato}}" disabled="disabled" checked="checked">
-                        <input *ngIf="!esame.pianificato" type="checkbox" name="option" value="{{esame.pianificato}}" disabled="disabled" [checked]="esame.pianificato == 'true'">
-                        <input type="hidden" name="option" value="{{esame.pianificato}}">
-                        &nbsp;&nbsp;&nbsp;
-                        Superato:
-                        <input *ngIf="esame.conseguito" type="checkbox" name="option" value="{{esame.conseguito}}" disabled="disabled" checked="checked">
-                        <input *ngIf="!esame.conseguito" type="checkbox" name="option" value="{{esame.conseguito}}" disabled="disabled" [checked]="esame.conseguito == 'true'">
-                        <input type="hidden" name="option" value="{{esame.conseguito}}">
+                        <li>
+                            {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Pianificato:
+                            <input *ngIf="esame.pianificato" type="checkbox" name="option" value="{{esame.pianificato}}" disabled="disabled" checked="checked">
+                            <input *ngIf="!esame.pianificato" type="checkbox" name="option" value="{{esame.pianificato}}" disabled="disabled" [checked]="esame.pianificato == 'true'">
+                            <input type="hidden" name="option" value="{{esame.pianificato}}">
+                            &nbsp;&nbsp;&nbsp;
+                            Superato:
+                            <input *ngIf="esame.conseguito" type="checkbox" name="option" value="{{esame.conseguito}}" disabled="disabled" checked="checked">
+                            <input *ngIf="!esame.conseguito" type="checkbox" name="option" value="{{esame.conseguito}}" disabled="disabled" [checked]="esame.conseguito == 'true'">
+                            <input type="hidden" name="option" value="{{esame.conseguito}}">
+                        </li>
                     </div>
                     <div *ngIf="piano[approvatoIndex] && esame.pianificato">
-                        {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Pianificato:
-                        <input type="checkbox" name="option" value="{{esame.pianificato}}" disabled="disabled" checked="checked">
-                        <input type="hidden" name="option" value="{{esame.pianificato}}">
-                        &nbsp;&nbsp;&nbsp;
+                        <li>
+                            {{ esame.exam_name }} {{ esame.exam_code }} {{ esame.exam_cfu }}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Pianificato:
+                            <input type="checkbox" name="option" value="{{esame.pianificato}}" disabled="disabled" checked="checked">
+                            <input type="hidden" name="option" value="{{esame.pianificato}}">
+                            &nbsp;&nbsp;&nbsp;
+                        </li>
                     </div>
                 </div> 
-            </li>
+            <!-- </li> -->
         </ng-container>
     </ul>
 </div>

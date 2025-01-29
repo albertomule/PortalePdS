@@ -51,6 +51,12 @@
             <div *ngIf="email?.errors?.['required']">Email richiesta</div>
             <div *ngIf="email?.errors?.['pattern']">Formato email non valido</div>
         </div>
+      <div><p style="font-size: 20px;">Matricola: </p></div>
+        <input type="text" formControlName="matricola" [ngClass]="signupForm.submitted && matricola?.invalid ? 'field-error' : ''">
+        <div class="error" *ngIf="(matricola?.touched || matricola?.dirty || signupForm.submitted) && matricola?.invalid">
+            <div *ngIf="matricola?.errors?.['required']">Numero matricola richiesto</div>
+            <div *ngIf="matricola?.errors?.['pattern']">Formato matricola non valido</div>
+        </div>
         <button type="submit" id="bottone_studente_avanti" class="Home_button">Avanti</button>
     </div>
 </form>

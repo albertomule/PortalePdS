@@ -3,10 +3,17 @@
 <h2 class="title">Esami a libera scelta automaticamente approvati:</h2>
 
 <div class="container">
+    <ul>
+        <!-- <br/><br/>
+        <br/><br/> -->
     <ng-container *ngFor="let esame of esami; index as i">
-        {{ esame.nome }} {{ esame.codice }} {{ esame.cfu }}
-        <br/>
+        <li>
+            {{ esame.nome }} {{ esame.codice }} {{ esame.cfu }}
+            <br/>
+        </li>
+        
     </ng-container>
+    </ul>
 </div>
 
 <form [formGroup]="examForm" #addForm="ngForm" (ngSubmit)="submitAdd(addForm)">

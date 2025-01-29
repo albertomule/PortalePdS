@@ -95,9 +95,11 @@ export class AuthComponent implements OnInit{
   
   redirect(){
     if((this.profile.email).includes('studenti')){
+      this.authService.rank = 1
       this.router.navigate(['/homes'])
     }
     else{
+      this.authService.rank = 2
       this.router.navigate(['/homec'])
     }
   }

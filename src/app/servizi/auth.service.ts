@@ -9,6 +9,12 @@ export class AuthService {
 
   private oAuthService = inject(OAuthService)
 
+  //0 = user non loggato
+  //1 = studente
+  //2 = commissione
+  //3 = sysadmin
+  rank = 3
+
   constructor(private http: HttpClient) { this.initConfiguration() }
 
   initConfiguration(){
@@ -104,5 +110,12 @@ export class AuthService {
   }
   grantedScopes(){
     console.log(this.oAuthService.getGrantedScopes())
+  }
+
+  isStudente(){
+    return(this.rank === 1 || this.rank === 3)
+  }
+  isCommissione(){
+    return(this.rank === 2 || this.rank === 3)
   }
 }

@@ -15,24 +15,25 @@ import { PianiapprovatiComponent } from './componenti/pianiapprovati/pianiapprov
 import { PianiinsospesoComponent } from './componenti/pianiinsospeso/pianiinsospeso.component';
 import { PianoComponent } from './componenti/piano/piano.component';
 import { AuthComponent } from './componenti/auth/auth.component';
+import { studenteGuard, commissioneGuard } from './servizi/auth.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/start'},
   { path: 'start', component: LoginComponent},
-  { path: 'homes', component: HomestudenteComponent},
-  { path: 'homec', component: HomecommissioneComponent},
-  { path: 'pds', component: PdsComponent},
+  { path: 'homes', component: HomestudenteComponent, canActivate: [studenteGuard]},
+  { path: 'homec', component: HomecommissioneComponent, canActivate: [commissioneGuard]},
+  { path: 'pds', component: PdsComponent, canActivate: [commissioneGuard]},
   // { path: 'regolamenti', component: RegolamentiComponent, children: [
   //   { path: ':id', component: RegolamentoComponent}
   // ]},
-  { path: 'regolamenti', component: RegolamentiComponent},
-  { path: 'esami', component: EsamiComponent},
-  { path: 'nuovoregolamento', component: NuovoregolamentoComponent},
-  { path: 'regolamento/:id', component: RegolamentoComponent},
-  { path: 'nuovopiano/:id', component: NuovopianoComponent},
-  { path: 'pianiapprovati', component: PianiapprovatiComponent},
-  { path: 'pianiinsospeso', component: PianiinsospesoComponent},
-  { path: 'piano/:id', component: PianoComponent},
+  { path: 'regolamenti', component: RegolamentiComponent, canActivate: [commissioneGuard]},
+  { path: 'esami', component: EsamiComponent, canActivate: [commissioneGuard]},
+  { path: 'nuovoregolamento', component: NuovoregolamentoComponent, canActivate: [commissioneGuard]},
+  { path: 'regolamento/:id', component: RegolamentoComponent, canActivate: [commissioneGuard]},
+  { path: 'nuovopiano/:id', component: NuovopianoComponent, canActivate: [studenteGuard]},
+  { path: 'pianiapprovati', component: PianiapprovatiComponent, canActivate: [commissioneGuard]},
+  { path: 'pianiinsospeso', component: PianiinsospesoComponent, canActivate: [commissioneGuard]},
+  { path: 'piano/:id', component: PianoComponent, canActivate: [commissioneGuard]},
   { path: 'auth', component: AuthComponent},
    
   // { path: '404', component: NotfoundComponent},

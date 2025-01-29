@@ -21,7 +21,8 @@ export class HomestudenteComponent {
     cognome: ['', [Validators.required, Validators.pattern('^[^0-9±!@£$%^&*_+§¡€#¢§¶•ªº«\\/<>?:;|=.,]{1,20}$')]],
     email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     // email: ['', [Validators.required, Validators.pattern('^[a-zA-Z]{1,}$')]],
-    anno: ['', [Validators.required, Validators.pattern('^[0-9]{4}$')]]
+    anno: ['', [Validators.required, Validators.pattern('^[0-9]{4}$')]],
+    matricola: ['', [Validators.required, Validators.pattern('^[0-9]{6}$')]]
   })
 
   constructor(private fb: FormBuilder, private router: Router, private datistudente: DatistudenteService) {}
@@ -30,6 +31,7 @@ export class HomestudenteComponent {
   get cognome() { return this.form.get("cognome") }
   get email() { return this.form.get("email") }
   get anno() { return this.form.get("anno") }
+  get matricola() { return this.form.get("matricola") }
 
   getAnno(){
     return this.form.get("anno")!.value
@@ -51,6 +53,7 @@ export class HomestudenteComponent {
       this.datistudente.nome = this.form.get("nome")!.value
       this.datistudente.cognome = this.form.get("cognome")!.value
       this.datistudente.email = this.form.get("email")!.value
+      this.datistudente.matricola = this.form.get("matricola")!.value
       
       this.router.navigate(['/nuovopiano/' + this.getAnno()])
     }

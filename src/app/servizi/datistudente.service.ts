@@ -9,6 +9,7 @@ export class DatistudenteService {
   public cognome: string = ""
   public email: string = ""
   public fresh: boolean = false
+  public matricola: string = ""
 
   constructor() { }
 }

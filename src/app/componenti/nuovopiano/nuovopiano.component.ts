@@ -36,7 +36,7 @@ export class NuovopianoComponent {
   sottoscrizione: any
   submongo: any
 
-  matricola: number = 0
+  // matricola: number = 0
   piano: any
   approvatoIndex: number = 8
   esami: any
@@ -282,10 +282,10 @@ export class NuovopianoComponent {
   conseguitoCheck(i: number){
     return this.examcListArray().at(i).value.conseguito
   }
-  randomMatricola(){
-    this.matricola = Math.floor(Math.random() * 999999)
-    return this.matricola
-  }
+  // randomMatricola(){
+  //   this.matricola = Math.floor(Math.random() * 999999)
+  //   return this.matricola
+  // }
 
   invia(){
     if(this.maxcfu > 0){
@@ -301,7 +301,7 @@ export class NuovopianoComponent {
       return
     }
     //this.randomMatricola().toString()
-    this.mongo.insertPiano(this.randomMatricola().toString(), this.anno, 
+    this.mongo.insertPiano(this.datistudente.matricola, this.anno, 
     this.datistudente.nome, 
     this.datistudente.cognome,
     this.datistudente.email,
@@ -315,12 +315,12 @@ export class NuovopianoComponent {
       this.examForm.value
     ]).subscribe((data: any) => {
       console.log(data)
-      this.mongo.getPiano(this.matricola.toString()).subscribe((datax: any) => {
+      this.mongo.getPiano(this.datistudente.matricola).subscribe((datax: any) => {
         console.log("DATA: " + datax)
         
         this.piano = Object.values(datax)
         console.log("PIANO: " + this.piano)
-        alert('Il piano è stato inviato con successo (Matricola: ' + this.matricola + ')')
+        alert('Il piano è stato inviato con successo (Matricola: ' + this.datistudente.matricola + ')')
         //this.inviamail()
         this.mail.inviaMailStudente(
           this.datistudente.nome + " " + this.datistudente.cognome,
