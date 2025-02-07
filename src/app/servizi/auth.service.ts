@@ -13,7 +13,7 @@ export class AuthService {
   //1 = studente
   //2 = commissione
   //3 = sysadmin
-  rank = 3
+  rank = 0
 
   constructor(private http: HttpClient) { this.initConfiguration() }
 
@@ -117,5 +117,8 @@ export class AuthService {
   }
   isCommissione(){
     return(this.rank === 2 || this.rank === 3)
+  }
+  setRank(i: number){
+    this.rank = i
   }
 }

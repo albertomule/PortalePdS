@@ -19,13 +19,16 @@ export class AuthComponent implements OnInit{
   constructor(private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
-    this.claims()
+    setTimeout(() => {
+      this.claims()
+    }, 5000);
     //this.redirect()
   }
 
   claims(){
     this.profile = this.authService.getIdentityClaims()
     console.log(this.profile)
+    
   }
 
   logOut(){
@@ -95,11 +98,11 @@ export class AuthComponent implements OnInit{
   
   redirect(){
     if((this.profile.email).includes('studenti')){
-      this.authService.rank = 1
+      this.authService.setRank(1)
       this.router.navigate(['/homes'])
     }
     else{
-      this.authService.rank = 2
+      this.authService.setRank(2)
       this.router.navigate(['/homec'])
     }
   }

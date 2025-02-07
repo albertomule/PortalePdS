@@ -1,10 +1,10 @@
 <h3 class="title">{{title}}</h3>
 
 <a routerLink="/homes">
-    <button id="bottone_login_studente" class="Home_button">Login studente</button>
+    <button id="bottone_login_studente" class="Home_button" (click)="setrank(3)">Login studente</button>
 </a>
 <a routerLink="/homec">
-    <button id="bottone_login_commissione" class="Home_button">Login commissione</button>
+    <button id="bottone_login_commissione" class="Home_button" (click)="setrank(3)">Login commissione</button>
 </a>
 
 <button id="bottone_login_commissione" class="Home_button" (click)="auth()">Auth test</button>

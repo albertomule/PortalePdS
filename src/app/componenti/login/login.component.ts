@@ -14,4 +14,7 @@ export class LoginComponent {
   auth(){
     this.authService.login()
   }
+  setrank(i: number){
+    this.authService.setRank(i)
+  }
 }
