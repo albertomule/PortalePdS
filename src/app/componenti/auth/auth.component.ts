@@ -22,13 +22,12 @@ export class AuthComponent implements OnInit{
     setTimeout(() => {
       this.claims()
     }, 5000);
-    //this.redirect()
   }
 
   claims(){
     this.profile = this.authService.getIdentityClaims()
     console.log(this.profile)
-    
+    this.redirect()
   }
 
   logOut(){
