@@ -327,8 +327,8 @@ export class NuovopianoComponent {
           this.datistudente.email,
           this.piano[this.approvatoIndex] ? "approvato" : "in sospeso",
           this.piano[this.approvatoIndex] ? 
-          "Il piano di studi è stato inviato correttamente e approvato automaticamente dal PortalePDS" : 
-          "Il piano di studi è stato inviato correttamente, ma attualmente in sospeso. Attenda un'ulteriore email dal PortalePDS a seguito di una revisione del suo piano da parte della commisione"
+          "Il piano di studi è stato analizzato correttamente e approvato automaticamente dal PortalePDS" : 
+          "Il piano di studi è sospeso per approvazione da parte della commissione PdS. Attenda una mail di risposta"
         )
         this.router.navigate(['/start'])
 
