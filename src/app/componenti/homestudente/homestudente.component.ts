@@ -15,6 +15,10 @@ export class HomestudenteComponent {
   // date1 : Date = new Date()
   // localdate: String = new Date().toLocaleString()
 
+  ngOnInit(): void {
+    this.loadData()
+  }
+
   form: FormGroup = this.fb.group({
     fresh: null,
     nome: ['', [Validators.required, Validators.pattern('^[^0-9±!@£$%^&*_+§¡€#¢§¶•ªº«\\/<>?:;|=.,]{1,20}$')]],
@@ -57,5 +61,11 @@ export class HomestudenteComponent {
       
       this.router.navigate(['/nuovopiano/' + this.getAnno()])
     }
+  }
+
+  loadData(){
+    this.form.get("nome")?.setValue(this.datistudente.nome)
+    this.form.get("cognome")?.setValue(this.datistudente.cognome)
+    this.form.get("email")?.setValue(this.datistudente.email)
   }
 }

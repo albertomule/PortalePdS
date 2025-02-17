@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../servizi/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
+import { DatistudenteService } from '../../servizi/datistudente.service';
 
 @Component({
   selector: 'app-auth',
@@ -16,7 +17,7 @@ export class AuthComponent implements OnInit{
   profile: any
   uProfile: any
 
-  constructor(private route: ActivatedRoute, private router: Router){}
+  constructor(private route: ActivatedRoute, private router: Router, private datistudente: DatistudenteService){}
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -27,6 +28,7 @@ export class AuthComponent implements OnInit{
   claims(){
     this.profile = this.authService.getIdentityClaims()
     console.log(this.profile)
+    this.saveData()
     this.redirect()
   }
 
@@ -104,6 +106,12 @@ export class AuthComponent implements OnInit{
       this.authService.setRank(2)
       this.router.navigate(['/homec'])
     }
+  }
+
+  saveData(){
+    this.datistudente.nome = this.profile.given_name
+    this.datistudente.cognome = this.profile.family_name
+    this.datistudente.email = this.profile.email
   }
 
 }
