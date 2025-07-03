@@ -27,7 +27,7 @@ const routes: Routes = [
   //   { path: ':id', component: RegolamentoComponent}
   // ]},
   { path: 'regolamenti', component: RegolamentiComponent, canActivate: [commissioneGuard]},
-  { path: 'esami', component: EsamiComponent, canActivate: [commissioneGuard]},
+  { path: 'esami', component: EsamiComponent},
   { path: 'nuovoregolamento', component: NuovoregolamentoComponent, canActivate: [commissioneGuard]},
   { path: 'regolamento/:id', component: RegolamentoComponent, canActivate: [commissioneGuard]},
   { path: 'nuovopiano/:id', component: NuovopianoComponent, canActivate: [studenteGuard]},
